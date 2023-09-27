@@ -33,12 +33,22 @@ typedef struct s_img
 	char	*ea;
 }	t_img;
 
+typedef struct s_vector
+{
+	double	plane;
+	double	dir;
+	double	x_pos;
+	double	y_pos;
+}	t_vector;
+
+
 typedef struct s_game
 {
 	int		map_size;
-	int		r_width;
-	int		r_height;
 	char	*dir;
+	int		floor[3];
+	int		ceiling[3];
+	char	**map;
 	t_img	img;
 }	t_game;
 
