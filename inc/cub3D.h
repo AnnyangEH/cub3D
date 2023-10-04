@@ -2,6 +2,8 @@
 # define CUB3D_H
 
 # include "../mlx/mlx.h"
+# include "fcntl.h"
+# include "stdlib.h"
 
 enum e_key {
 	KEY_ESC = 53,
@@ -35,21 +37,28 @@ typedef struct s_img
 
 typedef struct s_vector
 {
-	double	plane;
-	double	dir;
 	double	x_pos;
 	double	y_pos;
+	double	plane;
+	double	dir;
+	double	b_spot;
+	double	r_b_spot;
+	double	l_b_spot;
+	double	ray_dir;
+	double	fov;
 }	t_vector;
 
 
 typedef struct s_game
 {
-	int		map_size;
-	char	*dir;
-	int		floor[3];
-	int		ceiling[3];
-	char	**map;
-	t_img	img;
+	int			map_size;
+	char		*dir;
+	int			floor[3];
+	int			ceiling[3];
+	char		**map;
+	int			err;
+	t_img		img;
+	t_vector	vector;
 }	t_game;
 
 #endif

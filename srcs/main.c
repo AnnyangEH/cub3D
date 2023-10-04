@@ -6,5 +6,6 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		exit(ft_error(USAGE_ERROR));
-	init_game(&game, av);
+	if (init_game(&game, av))
+		exit(ft_error(game.err));
 }
