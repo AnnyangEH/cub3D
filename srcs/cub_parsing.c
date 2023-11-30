@@ -12,8 +12,6 @@ static int	cub_parsing_init(t_game *game)
 	game->win_height = 480;
 	game->map_width = 0;
 	game->map_height = 0;
-	game->map = NULL;
-	game->mapfile = NULL;
 	game->token[0] = "NO ";
 	game->token[1] = "SO ";
 	game->token[2] = "WE ";
@@ -27,21 +25,24 @@ static int	cub_parsing_init(t_game *game)
 int	cub_check_map_line(t_game *game, char *line)
 {
 	if (ft_strncmp(game->token[0], line, 3))
-		return (ft_error(TEXTURE_ERROR));
+		game->flags[0]++;
 	else if (ft_strncmp(game->token[1], line, 3))
-		return (ft_error(TEXTURE_ERROR));
+		game->flags[1]++;
 	else if (ft_strncmp(game->token[2], line, 3))
-		return (ft_error(TEXTURE_ERROR));
+		game->flags[2]++;
 	else if (ft_strncmp(game->token[3], line, 3))
-		return (ft_error(TEXTURE_ERROR));
+		game->flags[3]++;
 	else if (ft_strncmp(game->token[4], line, 3))
-		return (ft_error(TEXTURE_ERROR));
+		game->flags[4]++;
 	else if (ft_strncmp(game->token[5], line, 2))
-		return (ft_error(COLOR_ERROR));
+		game->flags[5]++;
 	else if (ft_strncmp(game->token[6], line, 2))
-		return (ft_error(COLOR_ERROR));
-	else if (line[0] == '\n')
+		game->flags[6]++;
+	else if (ft_strncmp('\n', line, 1))
 		return (SUCCESS);
+	else
+		return (ft_error(FORMAT_ERROR));
+	return (SUCCESS);
 }
 
 int	cub_check_map(t_game *game, int fd)
@@ -52,7 +53,9 @@ int	cub_check_map(t_game *game, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
+		{
 			break ;
+		}
 		if (cub_check_map_line(game, line))
 			exit(FAILURE);
 		free(line);
