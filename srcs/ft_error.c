@@ -3,25 +3,24 @@
 int	ft_error(int error)
 {
 	if (error == USAGE_ERROR)
-		ft_putstr_fd("Error\nInvalid argument count.", 2);
+		perror("Error\nInvalid argument count.");
 	else if (error == OPEN_ERROR)
-		ft_putstr_fd("Error\nFailed to open the file", 2);
+		perror("Error\nFailed to open the file");
 	else if (error == READ_ERROR)
-		ft_putstr_fd("Error\nFailed to read the map from the file.", 2);
+		perror("Error\nFailed to read the map from the file.");
 	else if (error == CLOSE_ERROR)
-		ft_putstr_fd("Error\nFailed to close the file descriptor.", 2);
+		perror("Error\nFailed to close the file descriptor.");
 	else if (error == MALLOC_ERROR)
-		ft_putstr_fd("Error\nFailed to allocate memory.", 2);
+		perror("Error\nFailed to allocate memory.");
 	else if (error == MAP_ERROR)
-		ft_putstr_fd("Error\nInvalid map.", 2);
+		perror("Error\nInvalid map.");
 	else if (error == FORMAT_ERROR)
-		ft_putstr_fd("Error\nInvalid file format.", 2);
+		perror("Error\nInvalid file format.");
 	else if (error == RESOLUTION_ERROR)
-		ft_putstr_fd("Error\nInvalid resolution.", 2);
+		perror("Error\nInvalid resolution.");
 	else if (error == TEXTURE_ERROR)
-		ft_putstr_fd("Error\nInvalid texture.", 2);
+		perror("Error\nInvalid texture.");
 	else if (error == COLOR_ERROR)
-		ft_putstr_fd("Error\nInvalid color.", 2);
-	else
-		exit(error);
+		perror("Error\nInvalid color.");
+	return (error);
 }

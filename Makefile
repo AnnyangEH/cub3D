@@ -6,20 +6,23 @@
 #    By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 18:41:44 by eunhcho           #+#    #+#              #
-#    Updated: 2023/10/04 12:42:53 by eunhcho          ###   ########.fr        #
+#    Updated: 2023/11/30 13:49:17 by eunhcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror -g -fsanitize=address
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
 DIR = ./srcs/
 
-SRCS =	main.c		\
+SRCS =	$(DIR)main.c		\
+		$(DIR)cub_parsing.c	\
+		$(DIR)cub_utils.c	\
+		$(DIR)ft_error.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -33,11 +36,9 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAG) -c $< -o $@
 
 clean:
-	$(MAKE) -C ./mlx/ clean
 	rm -f $(OBJS)
 
 fclean: clean
-	$(MAKE) -C ./mlx/ fclean
 	rm -f $(NAME)
 
 re:

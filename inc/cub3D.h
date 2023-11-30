@@ -2,14 +2,15 @@
 # define CUB3D_H
 
 # include "../mlx/mlx.h"
+# include "get_next_line.h"
 # include "fcntl.h"
 # include "stdlib.h"
 # include "unistd.h"
 # include "stdio.h"
 # include "math.h"
 
-# define SUCCESS 1
-# define FAILURE 0
+# define SUCCESS 0
+# define FAILURE 1
 
 # define TRUE 1
 # define FALSE 0
@@ -38,14 +39,35 @@ enum e_error {
 	MAP_ERROR,
 };
 
+typedef struct s_flags
+{
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
+
+}				t_flags;
+
 typedef struct s_game
 {
+	char	**map;
+	char	*token[6];
 	void	*mlx;
 	void	*win;
 	int		win_width;
 	int		win_height;
 	int		map_width;
 	int		map_height;
+	s_flags	flags;
 }				t_game;
+
+int		ft_strlen(char *s);
+int		ft_strncmp(char *s1, char *s2, int n);
+int		cub_parsing(t_game *game, char **av);
+char	*ft_strdup(char *str);
+char	*ft_strjoin(char *s1, char *s2);
+int		ft_error(int error);
 
 #endif
