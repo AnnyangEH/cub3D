@@ -50,18 +50,25 @@ typedef struct s_game
 	int		map_width;
 	int		map_height;
 	int		file_height;
-	int		flags[6];
+	int		token_flags[6];
+	int		token_flag;
+	int		error_code; // 전부 이거로 exit할때 쓰고 싶음.
 }				t_game;
 
+//libft functions
 int		ft_strlen(char *s);
 int		ft_strncmp(char *s1, char *s2, int n);
-int		cub_parsing(t_game *game, char **av);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, int len);
 void	ft_memset(void *b, int c, size_t len);
 char	*ft_strchr(char *s, int c);
+
+//error handling function
 int		ft_error(int error);
 
+//cub_parsing functions
+int		cub_parsing(t_game *game, char **av);
+int		cub_parsing_init(t_game *game);
 #endif

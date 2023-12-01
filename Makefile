@@ -6,7 +6,7 @@
 #    By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/27 18:41:44 by eunhcho           #+#    #+#              #
-#    Updated: 2023/12/01 20:34:08 by eunhcho          ###   ########.fr        #
+#    Updated: 2023/12/01 22:22:28 by eunhcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =	$(DIR)main.c		\
 		$(DIR)cub_utils.c	\
 		$(DIR)ft_error.c \
 		$(DIR)get_next_line.c	\
+		$(DIR)cub_init.c \
 
 OBJS = $(SRCS:.c=.o)
 

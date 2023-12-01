@@ -13,7 +13,7 @@ int	ft_error(int error)
 	else if (error == MALLOC_ERROR)
 		ft_putstr_fd("Error\nFailed to allocate memory.", 2);
 	else if (error == MAP_ERROR)
-		ft_putstr_fd("Error\nInvalid map.", 2);
+		ft_putstr_fd("Error\nInvalid map characters.", 2);
 	else if (error == FORMAT_ERROR)
 		ft_putstr_fd("Error\nInvalid file format.", 2);
 	else if (error == RESOLUTION_ERROR)
