@@ -10,71 +10,71 @@ static int	cub_parsing_init(t_game *game)
 		return (ft_error(MALLOC_ERROR));
 	game->win_width = 640;
 	game->win_height = 480;
-	game->map_width = 0;
-	game->map_height = 0;
+	ft_memset(game, 0, sizeof(t_game));
 	game->token[0] = "NO ";
 	game->token[1] = "SO ";
 	game->token[2] = "WE ";
 	game->token[3] = "EA ";
-	game->token[4] = "S ";
+	game->token[4] = "C ";
 	game->token[5] = "F ";
-	game->token[6] = "C ";
 	return (SUCCESS);
 }
 
-int	cub_check_map_line(t_game *game, char *line)
+
+
+void	cub_token_count(t_game *game, char *line)
 {
-	if (ft_strncmp(game->token[0], line, 3))
+	if (!ft_strncmp(game->token[0], line, 3))
 		game->flags[0]++;
-	else if (ft_strncmp(game->token[1], line, 3))
+	else if (!ft_strncmp(game->token[1], line, 3))
 		game->flags[1]++;
-	else if (ft_strncmp(game->token[2], line, 3))
+	else if (!ft_strncmp(game->token[2], line, 3))
 		game->flags[2]++;
-	else if (ft_strncmp(game->token[3], line, 3))
+	else if (!ft_strncmp(game->token[3], line, 3))
 		game->flags[3]++;
-	else if (ft_strncmp(game->token[4], line, 3))
+	else if (!ft_strncmp(game->token[4], line, 2))
 		game->flags[4]++;
-	else if (ft_strncmp(game->token[5], line, 2))
+	else if (!ft_strncmp(game->token[5], line, 2))
 		game->flags[5]++;
-	else if (ft_strncmp(game->token[6], line, 2))
-		game->flags[6]++;
-	else if (ft_strncmp('\n', line, 1))
-		return (SUCCESS);
 	else
-		return (ft_error(FORMAT_ERROR));
-	return (SUCCESS);
+		return ;
 }
 
-int	cub_check_map(t_game *game, int fd)
+int	cub_parsing_file(t_game *game, int fd)
 {
 	char	*line;
 
 	while (1)
 	{
 		line = get_next_line(fd);
+		cub_token_count(game, line);
 		if (!line)
 		{
+			if (close(fd) == -1)
+				return (ft_error(CLOSE_ERROR));
+			if (game->flags[0] != 1 || game->flags[1] != 1 || game->flags[2] != 1
+				|| game->flags[3] != 1 || game->flags[4] != 1 || game->flags[5] != 1)
+				return (ft_error(FORMAT_ERROR));
 			break ;
 		}
-		if (cub_check_map_line(game, line))
-			exit(FAILURE);
 		free(line);
+		game->file_height++;
 	}
+	return (SUCCESS);
 }
 
 static int cub_parsing_map(t_game *game, char *path)
 {
 	int		fd;
 
-	if (ft_strncmp(path + ft_strlen(path) - 4, ".cub", 4) != 0)
+	if (ft_strncmp(path + ft_strlen(path) - 4, ".cub", 4) != 0) // .cub로 끝나지 않으면
 		return (ft_error(FORMAT_ERROR));
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (ft_error(OPEN_ERROR));
-	if (cub_check_map(game, fd))
+	if (cub_parsing_file(game, fd))
 		return (FAILURE);
-	if (close(fd) == -1)
-		return (ft_error(CLOSE_ERROR));
+
 	return (SUCCESS);
 }
 

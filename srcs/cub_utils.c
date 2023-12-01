@@ -5,6 +5,8 @@ int	ft_strncmp(char *s1, char *s2, int n)
 	int	i;
 
 	i = 0;
+	if (!s1 || !s2)
+		return (FAILURE);
 	while (i < n && (s1[i] || s2[i]))
 	{
 		if ((s1[i] - s2[i]) != 0)
@@ -97,4 +99,20 @@ char	*ft_strchr(char *s, int c)
 		s++;
 	}
 	return ((char *)s);
+}
+
+void	ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*ptr;
+
+	ptr = b;
+	while (len--)
+		*ptr++ = (unsigned char)c;
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
 }

@@ -39,17 +39,6 @@ enum e_error {
 	MAP_ERROR,
 };
 
-typedef struct s_flags
-{
-	int		no;
-	int		so;
-	int		we;
-	int		ea;
-	int		f;
-	int		c;
-
-}				t_flags;
-
 typedef struct s_game
 {
 	char	**map;
@@ -60,14 +49,19 @@ typedef struct s_game
 	int		win_height;
 	int		map_width;
 	int		map_height;
-	s_flags	flags;
+	int		file_height;
+	int		flags[6];
 }				t_game;
 
 int		ft_strlen(char *s);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		cub_parsing(t_game *game, char **av);
+void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substr(char *s, unsigned int start, int len);
+void	ft_memset(void *b, int c, size_t len);
+char	*ft_strchr(char *s, int c);
 int		ft_error(int error);
 
 #endif
