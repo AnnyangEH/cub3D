@@ -37,6 +37,7 @@ enum e_error {
 	TEXTURE_ERROR,
 	COLOR_ERROR,
 	MAP_ERROR,
+	EXTENSION_ERROR,
 };
 
 typedef struct s_game
