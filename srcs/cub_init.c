@@ -2,12 +2,6 @@
 
 int	cub_parsing_init(t_game *game)
 {
-	game->mlx = mlx_init();
-	if (!game->mlx)
-		return (ft_error(MALLOC_ERROR));
-	game->win = mlx_new_window(game->mlx, 640, 480, "cub3D");
-	if (!game->win)
-		return (ft_error(MALLOC_ERROR));
 	game->win_width = 640;
 	game->win_height = 480;
 	ft_memset(game, 0, sizeof(t_game));
@@ -17,5 +11,6 @@ int	cub_parsing_init(t_game *game)
 	game->token[3] = "EA ";
 	game->token[4] = "C ";
 	game->token[5] = "F ";
+	game->token_flag = FALSE;
 	return (SUCCESS);
 }

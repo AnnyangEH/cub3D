@@ -24,5 +24,7 @@ int	ft_error(int error)
 		ft_putstr_fd("Error\nInvalid color.", 2);
 	else if (error == EXTENSION_ERROR)
 		ft_putstr_fd("Error\nInvalid file extension.", 2);
+	else if (error == CHAR_ERROR)
+		ft_putstr_fd("Error\nInvalid character.", 2);
 	return (error);
 }

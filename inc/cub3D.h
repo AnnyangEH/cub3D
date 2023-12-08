@@ -38,22 +38,37 @@ enum e_error {
 	COLOR_ERROR,
 	MAP_ERROR,
 	EXTENSION_ERROR,
+	CHAR_ERROR,
 };
+
+typedef struct s_token_ptr
+{
+	char	*ptr[6];
+}				t_token_ptr;
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dir;
+}				t_player;
 
 typedef struct s_game
 {
-	char	**map;
-	char	*token[6];
-	void	*mlx;
-	void	*win;
-	int		win_width;
-	int		win_height;
-	int		map_width;
-	int		map_height;
-	int		file_height;
-	int		token_flags[6];
-	int		token_flag;
-	int		error_code; // 전부 이거로 exit할때 쓰고 싶음.
+	char		**map;
+	char		*token[6];
+	void		*mlx;
+	void		*win;
+	int			win_width;
+	int			win_height;
+	int			map_width;
+	int			map_height;
+	int			file_height;
+	int			token_flags[6];
+	int			token_flag;
+	int			error_code; // 전부 이거로 exit할때 쓰고 싶음.
+	t_token_ptr	token_ptr;
+	t_player	player;
 }				t_game;
 
 //libft functions
