@@ -116,3 +116,13 @@ void	ft_putstr_fd(char *s, int fd)
 		return ;
 	write(fd, s, ft_strlen(s));
 }
+
+int	ft_iswhitespace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f')
+}
+
+int	ft_isdigit(char c)
+{
+	return (c >= '0' && c <= '9')
+}

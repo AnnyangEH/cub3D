@@ -15,6 +15,9 @@
 # define TRUE 1
 # define FALSE 0
 
+# define FLOOR 0
+# define CEILING 1
+
 enum e_key {
 	KEY_W = 13,
 	KEY_A = 0,
@@ -41,10 +44,17 @@ enum e_error {
 	CHAR_ERROR,
 };
 
-typedef struct s_token_ptr
+typedef struct s_color
 {
-	char	*ptr[6];
-}				t_token_ptr;
+	int		r;
+	int		g;
+	int		b;
+}				t_color;
+
+typedef struct s_token_addr
+{
+	char	*addr[4];
+}				t_token_addr;
 
 typedef struct s_player
 {
@@ -53,25 +63,38 @@ typedef struct s_player
 	double	dir;
 }				t_player;
 
-typedef struct s_game
+typedef struct s_map
 {
 	char		**map;
-	char		*token[6];
-	void		*mlx;
-	void		*win;
-	int			win_width;
-	int			win_height;
-	int			map_width;
-	int			map_height;
-	int			file_height;
-	int			token_flags[6];
-	int			token_flag;
-	int			error_code; // 전부 이거로 exit할때 쓰고 싶음.
-	t_token_ptr	token_ptr;
-	t_player	player;
-}				t_game;
+	int			width;
+	int			height;
+	int				token_flags[6];
+}				t_map;
 
-//libft functions
+typedef struct s_img
+{
+	void	*img;	//image identifier
+	char	*addr;	//image address
+	int		bpp;	//bit per pixel
+	int		size_l;
+	int		endian;
+}				t_img;
+
+typedef struct s_game
+{
+	void			*mlx;
+	void			*win;
+	int				win_width;
+	int				win_height;
+	int				error_code;
+	t_color			color[2];
+	t_map			map;
+	t_token_addr	addr;
+	t_player		player;
+	t_img			img;
+}					t_game;
+
+//util functions
 int		ft_strlen(char *s);
 int		ft_strncmp(char *s1, char *s2, int n);
 void	ft_putstr_fd(char *s, int fd);
@@ -80,11 +103,12 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, int len);
 void	ft_memset(void *b, int c, size_t len);
 char	*ft_strchr(char *s, int c);
+int		ft_iswhitespace(char c)
+int		ft_isdigit(int c);
 
 //error handling function
-int		ft_error(int error);
+int	ft_error_exit(char *s, int error_code);
 
-//cub_parsing functions
-int		cub_parsing(t_game *game, char **av);
-int		cub_parsing_init(t_game *game);
+//parsing functions
+
 #endif
