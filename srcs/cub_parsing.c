@@ -4,36 +4,55 @@ static void	get_token_addr(t_game *game, char *line, int i, int flag)
 {
 	while (ft_iswhitespace(line[i]) && line[i])
 		i++;
-	if (flag < 5)
-		game->map->token_addr[flag] = ft_strdup(line + i);
-	else if (flag == 5)
-		game->map->color[0].r = ft_atoi(line + i);
-	else
+	if (line[i] == '\n')
+		return ;
+	ft_strdup(line + i, game->map->token_addr[flag]);
+	if (!game->map->token_addr[flag])
+		ft_exit_error("Error\nFailed to get img address\n", IMG_ADDR_ERROR);
 }
-//////// need more work
+
+static void	get_token_color(t_game *game, char *line, int i, int flag)
+{
+	char	**temp;
+
+	while (ft_iswhitespace(line[i]) && line[i])
+		i++;
+	if (line[i] == '\n')
+		return ;
+	temp = ft_split(line + i, ',');
+	if (!temp)
+		ft_exit_error("Error\nFailed to split string\n", SPLIT_ERROR);
+	while (temp[j] && j < 3)
+	{
+		while (temp[j][k])
+		{
+			if (!ft_isdigit(temp[j][k]) || k > 3)
+				ft_exit_error("Error\nInvalid color character\n", C_C_ERROR);
+			k++;
+		}
+		game->color[flag][j] = ft_atoi(temp[j]); // need to modify ft_atoi
+		if (game->color[flag][j] < 0 || game->color[flag][j] > 255)
+			ft_exit_error("Error\nInvalid color range\n", C_R_ERROR);
+		j++;
+	}
+	if (line[i] != '\n')
+		ft_exit_error("Error\nInvalid color format\n", C_F_ERROR);
+}
 
 static void	check_token_data(t_game *game, char *line, int i)
 {
 	if (line[i] == 'N' && line[i + 1] == 'O')
 		get_token_addr(game, line, i, 0);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
+		get_token_addr(game, line, i, 1);
 	else if (line[i] == 'W' && line[i + 1] == 'E')
+		get_token_addr(game, line, i, 2);
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		game->map->token_addr[3] = line + i + 2;
-	else if (line[i] == 'S')
-		game->map->token_addr[4] = line + i + 1;
-	else if (line[i] == 'C')
-		game->map->token_addr[5] = line + i + 1;
+		get_token_addr(game, line, i, 3);
 	else if (line[i] == 'F')
-		game->map->token_addr[6] = line + i + 1;
-}
-
-static void	get_token_color(t_game *game, char c)
-{
-	if (c == 'F')
-		game->map->token_color[0] = TRUE;
-	else if (c == 'C')
-		game->map->token_color[1] = TRUE;
+		get_token_color(game, line, i, FLOOR);
+	else if (line[i] == 'C')
+		get_token_color(game, line, i, CEILING);
 }
 
 static int check_token(t_game *game, char *line)

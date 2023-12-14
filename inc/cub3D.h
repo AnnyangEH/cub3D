@@ -18,6 +18,11 @@
 # define FLOOR 0
 # define CEILING 1
 
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
+
 enum e_key {
 	KEY_W = 13,
 	KEY_A = 0,
@@ -42,14 +47,12 @@ enum e_error {
 	MAP_ERROR,
 	EXTENSION_ERROR,
 	CHAR_ERROR,
+	SPLIT_ERROR,
+	C_C_ERROR,
+	C_F_ERROR,
+	C_R_ERROR,
+	IMG_ADDR_ERROR,
 };
-
-typedef struct s_color
-{
-	int		r;
-	int		g;
-	int		b;
-}				t_color;
 
 typedef struct s_token_addr
 {
@@ -87,7 +90,7 @@ typedef struct s_game
 	int				win_width;
 	int				win_height;
 	int				error_code;
-	t_color			color[2];
+	int				color[2][3];
 	t_map			map;
 	t_token_addr	addr;
 	t_player		player;
@@ -105,6 +108,7 @@ void	ft_memset(void *b, int c, size_t len);
 char	*ft_strchr(char *s, int c);
 int		ft_iswhitespace(char c)
 int		ft_isdigit(int c);
+char	**ft_split(char const *s, char c);
 
 //error handling function
 int	ft_error_exit(char *s, int error_code);
