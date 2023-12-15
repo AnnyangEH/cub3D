@@ -11,6 +11,16 @@ static void	get_token_addr(t_game *game, char *line, int i, int flag)
 		ft_exit_error("Error\nFailed to get img address\n", IMG_ADDR_ERROR);
 }
 
+void	free_split(void **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}
+
 static void	get_token_color(t_game *game, char *line, int i, int flag)
 {
 	char	**temp;
@@ -30,13 +40,12 @@ static void	get_token_color(t_game *game, char *line, int i, int flag)
 				ft_exit_error("Error\nInvalid color character\n", C_C_ERROR);
 			k++;
 		}
-		game->color[flag][j] = ft_atoi(temp[j]); // need to modify ft_atoi
-		if (game->color[flag][j] < 0 || game->color[flag][j] > 255)
-			ft_exit_error("Error\nInvalid color range\n", C_R_ERROR);
+		game->map.color[flag][j] = ft_catoi(temp[j]);
 		j++;
 	}
 	if (line[i] != '\n')
-		ft_exit_error("Error\nInvalid color format\n", C_F_ERROR);
+		ft_exit_error("Error\nInvalid color range\n", C_R_ERROR);
+	split_free(temp);
 }
 
 static void	check_token_data(t_game *game, char *line, int i)
@@ -77,14 +86,11 @@ static int check_token(t_game *game, char *line)
 	return (FALSE);
 }
 
-static int parse_token(t_game *game, char *file)
+static void parse(t_game *game, char *file, int fd)
 {
-	int		fd;
 	char	*line;
+	int		i;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (FAILURE);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -92,13 +98,30 @@ static int parse_token(t_game *game, char *file)
 			ft_exit_error("Error\nFailed to read file\n", READ_ERROR);
 		if (check_token(game, line))
 			break ;
+		free(line);
 	}
-	close(fd);
+	i = -1;
+	while (++i < 4)
+		if (game->map->token_addr[i] == NULL)
+			exit_error("Invalid scene", info);
+	i = -1;
+	while (++i < 2)
+	{
+		j = -1;
+		while (++j < 3)
+			if (game->map->color[i][j] == -1)
+				exit_error("Invalid scene", info);
+	}
 	return (SUCCESS);
 }
 
 void	parsing(t_game *game, char **av)
 {
-	if (parse_token(game, av[1]))
-		ft_error_exit("Error\nFailed to parse token\n", TOKEN_ERROR);
+	int	fd;
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (FAILURE);
+	parse(game, av[1], fd);
+	if (close(fd) == -1)
+		ft_error_exit("Error\nFailed to close file\n", TOKEN_ERROR);
 }

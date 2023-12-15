@@ -51,13 +51,9 @@ enum e_error {
 	C_C_ERROR,
 	C_F_ERROR,
 	C_R_ERROR,
+	C_N_ERROR,
 	IMG_ADDR_ERROR,
 };
-
-typedef struct s_token_addr
-{
-	char	*addr[4];
-}				t_token_addr;
 
 typedef struct s_player
 {
@@ -69,15 +65,15 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**map;
+	int			color[2][3];
 	int			width;
 	int			height;
-	int				token_flags[6];
 }				t_map;
 
 typedef struct s_img
 {
 	void	*img;	//image identifier
-	char	*addr;	//image address
+	char	*path;	//image address
 	int		bpp;	//bit per pixel
 	int		size_l;
 	int		endian;
@@ -90,9 +86,8 @@ typedef struct s_game
 	int				win_width;
 	int				win_height;
 	int				error_code;
-	int				color[2][3];
+	char			*token_addr[4];
 	t_map			map;
-	t_token_addr	addr;
 	t_player		player;
 	t_img			img;
 }					t_game;
@@ -109,6 +104,7 @@ char	*ft_strchr(char *s, int c);
 int		ft_iswhitespace(char c)
 int		ft_isdigit(int c);
 char	**ft_split(char const *s, char c);
+int		ft_catoi(const char *str);
 
 //error handling function
 int	ft_error_exit(char *s, int error_code);

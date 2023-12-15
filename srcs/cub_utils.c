@@ -126,3 +126,32 @@ int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9')
 }
+
+int	ft_catoi(const char *str)
+{
+	long long	next;
+	long long	temp;
+	int			sign;
+
+	sign = 1;
+	temp = 0;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			ft_error_exit("Error\nInvalid color range\n", C_R_ERROR);
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		next = temp * 10 + sign * (*str - '0');
+		if (!ft_isint(next))
+			ft_error_exit("Error\nInvalid color range\n", C_R_ERROR);
+		temp = next;
+		str++;
+	}
+	if (*str != '\0' || temp < 0 || temp > 255)
+		ft_error_exit("Error\nInvalid color range\n", C_R_ERROR);
+	return ((int)temp);
+}
