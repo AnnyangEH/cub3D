@@ -48,11 +48,7 @@ enum e_error {
 	EXTENSION_ERROR,
 	CHAR_ERROR,
 	SPLIT_ERROR,
-	C_C_ERROR,
-	C_F_ERROR,
-	C_R_ERROR,
-	C_N_ERROR,
-	IMG_ADDR_ERROR,
+	TOKEN_ERROR,
 };
 
 typedef struct s_player

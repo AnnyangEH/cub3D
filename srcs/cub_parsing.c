@@ -8,7 +8,7 @@ static void	get_token_addr(t_game *game, char *line, int i, int flag)
 		return ;
 	ft_strdup(line + i, game->map->token_addr[flag]);
 	if (!game->map->token_addr[flag])
-		ft_exit_error("Error\nFailed to get img address\n", IMG_ADDR_ERROR);
+		ft_exit_error("Error\nFailed to get img address\n", TOKEN_ERROR);
 }
 
 void	free_split(void **split)
@@ -37,14 +37,14 @@ static void	get_token_color(t_game *game, char *line, int i, int flag)
 		while (temp[j][k])
 		{
 			if (!ft_isdigit(temp[j][k]) || k > 3)
-				ft_exit_error("Error\nInvalid color character\n", C_C_ERROR);
+				ft_exit_error("Error\nInvalid color character\n", COLOR_ERROR);
 			k++;
 		}
 		game->map.color[flag][j] = ft_catoi(temp[j]);
 		j++;
 	}
 	if (line[i] != '\n')
-		ft_exit_error("Error\nInvalid color range\n", C_R_ERROR);
+		ft_exit_error("Error\nInvalid color range\n", COLOR_ERROR);
 	split_free(temp);
 }
 
@@ -103,14 +103,14 @@ static void parse(t_game *game, char *file, int fd)
 	i = -1;
 	while (++i < 4)
 		if (game->map->token_addr[i] == NULL)
-			exit_error("Invalid scene", info);
+			ft_exit_error("Error\nFailed to get token address\n", TOKEN_ERROR);
 	i = -1;
 	while (++i < 2)
 	{
 		j = -1;
 		while (++j < 3)
 			if (game->map->color[i][j] == -1)
-				exit_error("Invalid scene", info);
+				ft_exit_error("Error\nFailed to get token color\n", TOKEN_ERROR);
 	}
 	return (SUCCESS);
 }
