@@ -34,23 +34,6 @@ enum e_key {
 	EVENT_KEY_PRESS = 2,
 };
 
-enum e_error {
-	USAGE_ERROR = 1,
-	OPEN_ERROR,
-	READ_ERROR,
-	CLOSE_ERROR,
-	MALLOC_ERROR,
-	FORMAT_ERROR,
-	RESOLUTION_ERROR,
-	TEXTURE_ERROR,
-	COLOR_ERROR,
-	MAP_ERROR,
-	EXTENSION_ERROR,
-	CHAR_ERROR,
-	SPLIT_ERROR,
-	TOKEN_ERROR,
-};
-
 typedef struct s_player
 {
 	double	x;
@@ -61,9 +44,14 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**map;
+	char		*path;
+	char		*line;
 	int			color[2][3];
-	int			width;
+	int			*width;
 	int			height;
+	int			player_cnt;
+	int			height_cnt;
+	int			fd;
 }				t_map;
 
 typedef struct s_img
@@ -75,7 +63,7 @@ typedef struct s_img
 	int		endian;
 }				t_img;
 
-typedef struct s_game
+typedef struct s_gamedd
 {
 	void			*mlx;
 	void			*win;
@@ -83,7 +71,7 @@ typedef struct s_game
 	int				win_height;
 	int				error_code;
 	char			*token_addr[4];
-	t_map			map;
+	t_map			*map;
 	t_player		player;
 	t_img			img;
 }					t_game;
@@ -96,15 +84,22 @@ char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, int len);
 void	ft_memset(void *b, int c, size_t len);
-char	*ft_strchr(char *s, int c);
-int		ft_iswhitespace(char c)
+int		ft_strchr(char *s, int c);
+int		ft_iswhitespace(char c);
 int		ft_isdigit(int c);
 char	**ft_split(char const *s, char c);
 int		ft_catoi(const char *str);
+int		ft_isempty(char *line);
+
+//init functions
+void	init_game(int ac, char **av, t_game *game);
 
 //error handling function
-int	ft_error_exit(char *s, int error_code);
+void	ft_error(char *str, t_game *game);
+void	ft_error_exit(char *str, t_game *game);
+void	free_game(t_game *game);
 
 //parsing functions
+void	parse(t_game *game);
 
 #endif

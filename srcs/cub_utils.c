@@ -90,7 +90,7 @@ char	*ft_substr(char *s, unsigned int start, int len)
 	return (new);
 }
 
-char	*ft_strchr(char *s, int c)
+int	ft_strchr(char *s, int c)
 {
 	while (*s != (char)c)
 	{
@@ -98,7 +98,7 @@ char	*ft_strchr(char *s, int c)
 			return (0);
 		s++;
 	}
-	return ((char *)s);
+	return (1);
 }
 
 void	ft_memset(void *b, int c, size_t len)
@@ -119,12 +119,17 @@ void	ft_putstr_fd(char *s, int fd)
 
 int	ft_iswhitespace(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f')
+	return (c == ' ' || c == '\t');
 }
 
-int	ft_isdigit(char c)
+int	ft_isdigit(int c)
 {
-	return (c >= '0' && c <= '9')
+	return (c >= '0' && c <= '9');
+}
+
+int	ft_isint(long long n)
+{
+	return (n >= -2147483648 && n <= 2147483647);
 }
 
 int	ft_catoi(const char *str)
@@ -135,23 +140,33 @@ int	ft_catoi(const char *str)
 
 	sign = 1;
 	temp = 0;
-	while (ft_isspace(*str))
+
+	while (ft_iswhitespace(*str))
 		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			ft_error_exit("Error\nInvalid color range\n", C_R_ERROR);
-		str++;
-	}
+	if (!ft_isdigit(*str))
+		return (-1);
 	while (ft_isdigit(*str))
 	{
 		next = temp * 10 + sign * (*str - '0');
 		if (!ft_isint(next))
-			ft_error_exit("Error\nInvalid color range\n", C_R_ERROR);
+			return (-1);
 		temp = next;
 		str++;
 	}
-	if (*str != '\0' || temp < 0 || temp > 255)
-		ft_error_exit("Error\nInvalid color range\n", C_R_ERROR);
+	if (*str == '\n')
+		return ((int)temp);
+	else if (temp < 0 || temp > 255)
+		return (-1);
 	return ((int)temp);
+}
+
+int	ft_isempty(char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i] && line[i] != '\n')
+		if (!ft_iswhitespace(line[i]))
+			return (0);
+	return (1);
 }

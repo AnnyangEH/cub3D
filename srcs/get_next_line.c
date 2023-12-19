@@ -1,74 +1,66 @@
 #include "../inc/cub3D.h"
 
-static char	*ft_read(int fd, char *buffer, char *backup)
+static char	*ft_util(t_info *info)
 {
-	int		byte;
-	char	*temp;
-
-	while (1)
+	info->idx = 0;
+	while (info->line[info->idx] != '\n' && info->line[info->idx] != '\0')
+		info->idx++;
+	if (info->line[info->idx] == '\0')
+		return (NULL);
+	info->ret = ft_substr(info->line, info->idx + 1, \
+				ft_strlen(info->line) - info->idx);
+	if (!info->ret)
+		return (NULL);
+	if (!info->ret[0])
 	{
-		byte = read(fd, buffer, BUFFER_SIZE);
-		if (byte == -1)
-			return (0);
-		else if (byte == 0)
-			break ;
-		buffer[byte] = '\0';
-		if (!backup)
-			backup = ft_strdup("");
-		temp = backup;
-		backup = ft_strjoin(temp, buffer);
-		free(temp);
-		if (!backup)
-			return (NULL);
-		if (ft_strchr(backup, '\n'))
-			break ;
+		free(info->ret);
+		info->ret = NULL;
+		return (NULL);
 	}
-	return (backup);
+	info->line[info->idx + 1] = '\0';
+	return (info->ret);
 }
 
-static char	*ft_extract(char *line)
+static char	*ft_read_line(t_info *info)
 {
-	int		i;
-	char	*output;
-
-	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-		i++;
-	if (line[i] == '\0')
-		return (NULL);
-	output = ft_substr(line, i + 1, ft_strlen(line) - i);
-	if (!output)
-		return (NULL);
-	if (output[0] == '\0')
+	info->idx = 1;
+	while (info->idx)
 	{
-		free(output);
-		output = NULL;
+		info->idx = read(info->fd, info->buf, BUFFER_SIZE);
+		if (info->idx == -1)
+			return (NULL);
+		else if (info->idx == 0)
+			break ;
+		info->buf[info->idx] = '\0';
+		if (!info->save)
+			info->save = ft_strdup("");
+		info->ret = info->save;
+		info->save = ft_strjoin(info->ret, info->buf);
+		if (!info->save)
+			return (NULL);
+		free(info->ret);
+		info->ret = NULL;
+		if (ft_strchr(info->buf, '\n'))
+			break ;
 	}
-	line[i + 1] = '\0';
-	return (output);
+	return (info->save);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*line;
-	char		*buffer;
-	static char	*backup;
+	static t_info	info;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	info.fd = fd;
+	if (read(fd, NULL, 0) == -1)
 		return (NULL);
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!buffer)
+	info.buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!info.buf)
 		return (NULL);
-	line = ft_read(fd, buffer, backup);
-	free(buffer);
-	buffer = NULL;
-	if (!line)
-	{
-		if (backup)
-			free(backup);
-		backup = NULL;
+	info.line = ft_read_line(&info);
+	free(info.buf);
+	info.buf = NULL;
+	if (!info.line)
 		return (NULL);
-	}
-	backup = ft_extract(line);
-	return (line);
+	info.save = ft_util(&info);
+	return (info.line);
 }

@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../inc/cub3D.h"
 
 static char	*im_free(char **new, size_t idx)
 {

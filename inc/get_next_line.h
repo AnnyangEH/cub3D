@@ -14,11 +14,18 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
-# include <stdlib.h>
-# include <unistd.h>
 
-char		*get_next_line(int fd);
+typedef struct s_info {
+	char	*buf;
+	char	*save;
+	char	*line;
+	char	*ret;
+	int		fd;
+	int		idx;
+}				t_info;
+
+char	*get_next_line(int fd);
 
 #endif
