@@ -50,7 +50,6 @@ typedef struct s_map
 	int			*width;
 	int			height;
 	int			player_cnt;
-	int			height_cnt;
 	int			fd;
 }				t_map;
 
@@ -63,7 +62,7 @@ typedef struct s_img
 	int		endian;
 }				t_img;
 
-typedef struct s_gamedd
+typedef struct s_game
 {
 	void			*mlx;
 	void			*win;

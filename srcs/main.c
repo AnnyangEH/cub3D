@@ -9,15 +9,12 @@ int	main(int ac, char **av)
 		ft_error_exit("Error\nFailed to allocate game\n", game);
 	init_game(ac, av, game);
 	parse(game);
-	for (int i = 0; i < game->map->height; i++)
-		printf("%s\n", game->map->map[i]);
-	printf("--------------------------------------------\n");
-	printf("game->height : %d\n" , game->map->height);
-	printf("--------------------------------------------\n");
-	printf("game->height_cnt : %d\n" , game->map->height_cnt);
-	printf("--------------------------------------------\n");
-	for (int i = 0; i < game->map->height; i++)
-		printf("%d width : %d\n", i, game->map->width[i]);
+	printf("addr[%d] : %s\n", 0, game->token_addr[0]);
+	printf("addr[%d] : %s\n", 1, game->token_addr[1]);
+	printf("addr[%d] : %s\n", 2, game->token_addr[2]);
+	printf("addr[%d] : %s\n", 3, game->token_addr[3]);
+	printf("color[%d] : %d %d %d\n", 0, game->map->color[0][0], game->map->color[0][1], game->map->color[0][2]);
+	printf("color[%d] : %d %d %d\n", 1, game->map->color[1][0], game->map->color[1][1], game->map->color[1][2]);
 	free_game(game);
 	return (SUCCESS);
 }

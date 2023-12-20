@@ -95,10 +95,10 @@ int	ft_strchr(char *s, int c)
 	while (*s != (char)c)
 	{
 		if (!*s)
-			return (0);
+			return (FALSE);
 		s++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 void	ft_memset(void *b, int c, size_t len)

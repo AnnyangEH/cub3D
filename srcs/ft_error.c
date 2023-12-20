@@ -20,6 +20,8 @@ void	free_game(t_game *game)
 	int	i;
 
 	i = -1;
+	if (game->map->line)
+		free(game->map->line);
 	if (game->map->path)
 		free(game->map->path);
 	if (game->map->width)
