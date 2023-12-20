@@ -44,35 +44,39 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**map;
-	char		*path;
+	char		*path; //map file path
 	char		*line;
-	int			color[2][3];
-	int			*width;
-	int			height;
+	int			color[2][3]; //floor, color rgb
+	int			*width; //map width
+	int			height; //map height
 	int			player_cnt;
 	int			fd;
 }				t_map;
 
-typedef struct s_img
+typedef struct s_token
 {
-	void	*img;	//image identifier
-	char	*path;	//image address
+	void	*ptr;	//image identifier
+	void	*addr;	//image address
+	char	*path;	//image path(file name)
 	int		bpp;	//bit per pixel
-	int		size_l;
+	int		width;
+	int		height;
+	int		*size_l;
 	int		endian;
-}				t_img;
+}				t_token;
 
 typedef struct s_game
 {
 	void			*mlx;
 	void			*win;
-	int				win_width;
-	int				win_height;
-	int				error_code;
-	char			*token_addr[4];
+	void			*img;
+	char			*ptr;
+	int				bit_per_pixel;
+	int				endian;
+	int				size_l;
 	t_map			*map;
 	t_player		player;
-	t_img			img;
+	t_token			token[4];
 }					t_game;
 
 //util functions
@@ -91,7 +95,7 @@ int		ft_catoi(const char *str);
 int		ft_isempty(char *line);
 
 //init functions
-void	init_game(int ac, char **av, t_game *game);
+void	ft_init(int ac, char **av, t_game *game);
 
 //error handling function
 void	ft_error(char *str, t_game *game);

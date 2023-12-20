@@ -1,17 +1,17 @@
 #include "../inc/cub3D.h"
 
-void	get_token_addr(t_game *game, char *line, int *i, int flag)
+void	get_token_path(t_game *game, char *line, int *i, int flag)
 {
-	(*i) += 3;
-	while (ft_iswhitespace(line[*i]) && line[*i])
+	(*i) += 3; // skip token
+	while (ft_iswhitespace(line[*i]) && line[*i]) // skip whitespace
 		(*i)++;
 	if (line[*i] == '\n')
 		return ;
-	game->token_addr[flag] = ft_strdup(line + *i);
-	if (game->token_addr[flag][ft_strlen(line + *i) - 1] == '\n')
-		game->token_addr[flag][ft_strlen(line + *i) - 1] = '\0';
-	if (!game->token_addr[flag])
-		ft_error("Error\nFailed to get img address\n", game);
+	game->token[flag].path = ft_strdup(line + *i);
+	if (game->token[flag].path[ft_strlen(line + *i) - 1] == '\n') // remove '\n'
+		game->token[flag].path[ft_strlen(line + *i) - 1] = '\0';
+	if (!game->token[flag].path)
+		ft_error("Error\nFailed to get img path\n", game);
 }
 
 void	free_split(char **split)
@@ -45,19 +45,21 @@ void	get_token_color(t_game *game, char *line, int *i, int flag)
 			ft_error("Error\nInvalid color value\n", game);
 		j++;
 	}
+	if (temp[j])
+		ft_error("Error\nInvalid color count it must be three\n", game);
 	free_split(temp);
 }
 
 void	check_token_data(t_game *game, char *line, int *i)
 {
 	if (ft_strncmp(line + *i, "NO ", 3) == 0)
-		get_token_addr(game, line, i, 0);
+		get_token_path(game, line, i, 0);
 	else if (ft_strncmp(line + *i, "SO ", 3) == 0)
-		get_token_addr(game, line, i, 1);
+		get_token_path(game, line, i, 1);
 	else if (ft_strncmp(line + *i, "WE ", 3) == 0)
-		get_token_addr(game, line, i, 2);
+		get_token_path(game, line, i, 2);
 	else if (ft_strncmp(line + *i, "EA ", 3) == 0)
-		get_token_addr(game, line, i, 3);
+		get_token_path(game, line, i, 3);
 	else if (ft_strncmp(line + *i, "F ", 2) == 0)
 		get_token_color(game, line, i, FLOOR);
 	else if (ft_strncmp(line + *i, "C ", 2) == 0)
@@ -100,7 +102,7 @@ void	parse_token(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		if (!game->token_addr[i])
+		if (!game->token[i].addr)
 			ft_error("Error\nFailed to get img address\n", game);
 		i++;
 	}
@@ -198,6 +200,23 @@ void	parse_map(t_game *game)
 	game->map->map[height] = NULL;
 }
 
+void get_img(t_game *game)
+{
+    int i;
+
+    i = 0;
+    while (i < 4)
+    {
+        game->token[i].ptr = mlx_xpm_file_to_image(game->mlx, game->token[i].path, &(game->token[i].width), &(game->token[i].height));
+        if (!game->token[i].ptr)
+            ft_error("Error\nFailed to load texture\n", game);
+        game->token[i].addr = mlx_get_data_addr(game->token[i].ptr, &game->token[i].bpp, game->token[i].size_l, &(game->token[i].endian));
+        if (!game->token[i].addr)
+            ft_error("Error\nFailed to get texture data\n", game);
+        i++;
+    }
+}
+
 void	parse(t_game *game)
 {
 	game->map->fd = open(game->map->path, O_RDONLY);
@@ -206,7 +225,7 @@ void	parse(t_game *game)
 	parse_token(game);
 	parse_map(game);
 	// valid_map(game);
-	// draw_map(game);
+	get_img(game);
 	if (close(game->map->fd) == -1)
 		ft_error("Error\nFailed to close file\n", game);
 }

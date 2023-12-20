@@ -26,11 +26,11 @@ void	free_game(t_game *game)
 		free(game->map->path);
 	if (game->map->width)
 		free(game->map->width);
-	if (game->token_addr)
+	if (game->token->addr)
 	{
 		while (++i < 4)
-			if (game->token_addr[i])
-				free(game->token_addr[i]);
+			if (game->token[i].addr)
+				free(game->token[i].addr);
 	}
 	if (game->map->map)
 	{

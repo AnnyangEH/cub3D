@@ -3,7 +3,7 @@ NAME = cub3D
 CC = cc
 CFLAG = -Wall -Wextra -Werror -g -fsanitize=address
 
-#MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
+MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
 DIR = ./srcs/
 
@@ -21,8 +21,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./mlx/
-	$(CC) $(CFLAG) -I./inc $(OBJS) -o $(NAME) 
-#(MLX_FLAG)
+	$(CC) $(CFLAG) -I./inc $(OBJS) -o $(NAME) $(MLX_FLAG)
 
 %.o: %.c
 	$(CC) $(CFLAG) -c $< -o $@
