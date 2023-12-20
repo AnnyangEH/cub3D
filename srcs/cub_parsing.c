@@ -8,6 +8,8 @@ void	get_token_addr(t_game *game, char *line, int *i, int flag)
 	if (line[*i] == '\n')
 		return ;
 	game->token_addr[flag] = ft_strdup(line + *i);
+	if (game->token_addr[flag][ft_strlen(line + *i) - 1] == '\n')
+		game->token_addr[flag][ft_strlen(line + *i) - 1] = '\0';
 	if (!game->token_addr[flag])
 		ft_error("Error\nFailed to get img address\n", game);
 }
