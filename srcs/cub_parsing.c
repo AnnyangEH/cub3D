@@ -123,8 +123,8 @@ static int	count_height(t_game *game)
 		i = 0;
 		while (line[i] == ' ')
 			++i;
-		if (line[i] == '\0' || line[i] == '\n' || ft_isdigit(line[i]))
-			++height;
+		if (ft_isdigit(line[i]))
+			height++;
 		free(line);
 	}
 	if (close(fd) == -1)
