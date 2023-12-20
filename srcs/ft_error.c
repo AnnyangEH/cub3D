@@ -1,5 +1,7 @@
 #include "../inc/cub3D.h"
 
+static void	free_game_two(t_game *game, int i);
+
 void	ft_error_exit(char *str, t_game *game)
 {
 	ft_putstr_fd(str, 2);
@@ -11,26 +13,29 @@ void	ft_error_exit(char *str, t_game *game)
 void	ft_error(char *str, t_game *game)
 {
 	ft_putstr_fd(str, 2);
-	free_game(game);
+	free_game_one(game);
 	exit(FAILURE);
 }
 
-void	free_game(t_game *game)
+void	free_game_one(t_game *game)
 {
-	int	i;
-
-	i = -1;
 	if (game->map->line)
 		free(game->map->line);
 	if (game->map->path)
 		free(game->map->path);
 	if (game->map->width)
 		free(game->map->width);
-	if (game->token->addr)
+	free_game_two(game, -1);
+}
+
+static void	free_game_two(t_game *game, int i)
+{
+	while (++i < 4)
 	{
-		while (++i < 4)
-			if (game->token[i].addr)
-				free(game->token[i].addr);
+		if (game->token[i].path)
+			free(game->token[i].path);
+		//if (game->token[i].ptr)
+		//	mlx_destroy_image(game->mlx, game->token[i].ptr);
 	}
 	if (game->map->map)
 	{
@@ -40,14 +45,6 @@ void	free_game(t_game *game)
 				free(game->map->map[i]);
 		free(game->map->map);
 	}
-	if (game->map)
-		free(game->map);
-	if (game)
-		free(game);
-	// if (game->img.img)
-	// 	mlx_destroy_image(game->mlx, game->img.img);
-	// if (game->win)
-	// 	mlx_destroy_window(game->mlx, game->win);
-	// if (game->mlx)
-	// 	free(game->mlx); 
+	free(game->map);
+	free(game);
 }

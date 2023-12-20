@@ -100,9 +100,11 @@ void	ft_init(int ac, char **av, t_game *game);
 //error handling function
 void	ft_error(char *str, t_game *game);
 void	ft_error_exit(char *str, t_game *game);
-void	free_game(t_game *game);
+void	free_game_one(t_game *game);
 
 //parsing functions
 void	parse(t_game *game);
 
+//checking functions
+void	check_map(t_game *game);
 #endif

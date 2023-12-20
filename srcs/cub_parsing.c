@@ -8,10 +8,10 @@ void	get_token_path(t_game *game, char *line, int *i, int flag)
 	if (line[*i] == '\n')
 		return ;
 	game->token[flag].path = ft_strdup(line + *i);
-	if (game->token[flag].path[ft_strlen(line + *i) - 1] == '\n') // remove '\n'
-		game->token[flag].path[ft_strlen(line + *i) - 1] = '\0';
 	if (!game->token[flag].path)
-		ft_error("Error\nFailed to get img path\n", game);
+		ft_error("Error\nFailed to allocate token path\n", game);
+	if (game->token[flag].path[ft_strlen(game->token[flag].path) - 1] == '\n')
+		game->token[flag].path[ft_strlen(game->token[flag].path) - 1] = '\0';
 }
 
 void	free_split(char **split)
@@ -102,7 +102,7 @@ void	parse_token(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		if (!game->token[i].addr)
+		if (!game->token[i].path)
 			ft_error("Error\nFailed to get img address\n", game);
 		i++;
 	}
@@ -200,22 +200,22 @@ void	parse_map(t_game *game)
 	game->map->map[height] = NULL;
 }
 
-void get_img(t_game *game)
-{
-    int i;
+// void	get_img(t_game *game)
+// {
+// 	int i;
 
-    i = 0;
-    while (i < 4)
-    {
-        game->token[i].ptr = mlx_xpm_file_to_image(game->mlx, game->token[i].path, &(game->token[i].width), &(game->token[i].height));
-        if (!game->token[i].ptr)
-            ft_error("Error\nFailed to load texture\n", game);
-        game->token[i].addr = mlx_get_data_addr(game->token[i].ptr, &game->token[i].bpp, game->token[i].size_l, &(game->token[i].endian));
-        if (!game->token[i].addr)
-            ft_error("Error\nFailed to get texture data\n", game);
-        i++;
-    }
-}
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		game->token[i].ptr = mlx_xpm_file_to_image(game->mlx, game->token[i].path, &(game->token[i].width), &(game->token[i].height));
+// 		if (!game->token[i].ptr)
+// 			ft_error("Error\nFailed to load texture\n", game);
+// 		game->token[i].addr = mlx_get_data_addr(game->token[i].ptr, &game->token[i].bpp, game->token[i].size_l, &(game->token[i].endian));
+// 		if (!game->token[i].addr)
+// 			ft_error("Error\nFailed to get texture data\n", game);
+// 		i++;
+// 	}
+// }
 
 void	parse(t_game *game)
 {
@@ -224,8 +224,8 @@ void	parse(t_game *game)
 		ft_error("Error\nFailed to open file\n", game);
 	parse_token(game);
 	parse_map(game);
-	// valid_map(game);
-	get_img(game);
+	check_map(game);
+	// get_img(game);
 	if (close(game->map->fd) == -1)
 		ft_error("Error\nFailed to close file\n", game);
 }
