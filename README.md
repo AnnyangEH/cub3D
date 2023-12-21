@@ -30,4 +30,4 @@
 
 ## 2023.12.21
 > 유효성 검사 완료
-> mlx, player init, 파싱 억까 테스트
+> mlx, player init, 파싱 억까 테스트, norm 맞추기

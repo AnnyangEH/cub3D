@@ -129,6 +129,8 @@ static int	count_height(t_game *game)
 			++i;
 		if (ft_isdigit(line[i]))
 			height++;
+		if (height > 0 && ft_isdigit(line[i]) == 0)
+			ft_error("Error\nInvalid map character\n", game);
 		free(line);
 	}
 	if (close(fd) == -1)
