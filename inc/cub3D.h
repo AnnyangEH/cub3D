@@ -107,4 +107,5 @@ void	parse(t_game *game);
 
 //checking functions
 void	check_map(t_game *game);
+
 #endif
