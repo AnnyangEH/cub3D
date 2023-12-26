@@ -39,14 +39,16 @@ static void	is_valid_color(t_game *game, int flag)
 
 static void	count_comma(t_game *game, char *line, int *i)
 {
+	int	j;
 	int	cnt;
 
 	cnt = 0;
-	while (line[*i])
+	j = *i;
+	while (line[j])
 	{
-		if (line[*i] == ',')
+		if (line[j] == ',')
 			cnt++;
-		(*i)++;
+		j++;
 	}
 	if (cnt != 2)
 		ft_error("Error\nInvalid color count\n", game);
@@ -61,7 +63,7 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	(*i)++;
 	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
-	count_comma(game, i);
+	count_comma(game, line, i);
 	if (line[*i] == '\n')
 		return ;
 	temp = ft_split(line + *i, ',');

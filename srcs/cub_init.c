@@ -27,8 +27,8 @@ static int	init_game(t_game *game, char *path)
 	game->map = malloc(sizeof(t_map));
 	ft_memset(game->map, 0, sizeof(t_map));
 	ft_memset(game->map->color, -1, sizeof(int) * 6);
-	game->time.curr_time = get_time();
-	game->time.old_time = game->time.curr_time;
+	//game->time.curr_time = get_time();
+	//game->time.old_time = game->time.curr_time;
 	if (!game->map)
 		return (FAILURE);
 	game->map->path = ft_strdup(path);

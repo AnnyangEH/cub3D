@@ -153,6 +153,8 @@ int	ft_catoi(const char *str)
 		temp = next;
 		str++;
 	}
+	while (ft_iswhitespace(*str))
+		str++;
 	if (*str && (*str != '\n' && ft_isdigit(*str) == FALSE))
 		return (-1);
 	return ((int)temp);
