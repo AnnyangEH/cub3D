@@ -153,9 +153,7 @@ int	ft_catoi(const char *str)
 		temp = next;
 		str++;
 	}
-	if (*str == '\n')
-		return ((int)temp);
-	else if (temp < 0 || temp > 255)
+	if (*str && (*str != '\n' && ft_isdigit(*str) == FALSE))
 		return (-1);
 	return ((int)temp);
 }

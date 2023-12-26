@@ -31,7 +31,7 @@ enum e_key {
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
 	KEY_ESC = 53,
-	EVENT_KEY_PRESS = 2,
+	KEY_PRESS = 2,
 };
 
 typedef struct s_player

@@ -1,6 +1,7 @@
 #include "../inc/cub3D.h"
 
 static void	free_game_two(t_game *game, int i);
+static void	free_mlx(t_game *game);
 
 void	ft_error_exit(char *str, t_game *game)
 {
@@ -26,6 +27,8 @@ void	free_game_one(t_game *game)
 	if (game->map->width)
 		free(game->map->width);
 	free_game_two(game, -1);
+	free_mlx(game);
+	free(game);
 }
 
 static void	free_game_two(t_game *game, int i)
@@ -34,8 +37,8 @@ static void	free_game_two(t_game *game, int i)
 	{
 		if (game->imgs[i].path)
 			free(game->imgs[i].path);
-		//if (game->imgs[i].ptr)
-		//	mlx_destroy_image(game->mlx, game->imgs[i].ptr);
+		if (game->imgs[i].ptr)
+			mlx_destroy_image(game->mlx, game->imgs[i].ptr);
 	}
 	if (game->map->map)
 	{
@@ -46,5 +49,15 @@ static void	free_game_two(t_game *game, int i)
 		free(game->map->map);
 	}
 	free(game->map);
-	free(game);
+}
+
+static void	free_mlx(t_game *game)
+{
+	if (game->mlx)
+	{
+		if (game->win)
+			mlx_destroy_window(game->mlx, game->win);
+		mlx_destroy_image(game->mlx, game->img.ptr);
+		free(game->mlx);
+	}
 }
