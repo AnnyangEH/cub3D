@@ -53,30 +53,28 @@ typedef struct s_map
 	int			fd;
 }				t_map;
 
-typedef struct s_token
+typedef struct s_imgs
 {
 	void	*ptr;	//image identifier
 	void	*addr;	//image address
 	char	*path;	//image path(file name)
 	int		bpp;	//bit per pixel
-	int		width;
-	int		height;
-	int		*size_l;
+	int		size_l;
 	int		endian;
-}				t_token;
+}				t_imgs;
 
 typedef struct s_game
 {
 	void			*mlx;
 	void			*win;
-	void			*img;
 	char			*ptr;
 	int				bit_per_pixel;
 	int				endian;
 	int				size_l;
 	t_map			*map;
 	t_player		player;
-	t_token			token[4];
+	t_imgs			imgs[4];
+	t_imgs			img;
 }					t_game;
 
 //util functions

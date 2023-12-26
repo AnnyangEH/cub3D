@@ -32,10 +32,10 @@ static void	free_game_two(t_game *game, int i)
 {
 	while (++i < 4)
 	{
-		if (game->token[i].path)
-			free(game->token[i].path);
-		//if (game->token[i].ptr)
-		//	mlx_destroy_image(game->mlx, game->token[i].ptr);
+		if (game->imgs[i].path)
+			free(game->imgs[i].path);
+		//if (game->imgs[i].ptr)
+		//	mlx_destroy_image(game->mlx, game->imgs[i].ptr);
 	}
 	if (game->map->map)
 	{

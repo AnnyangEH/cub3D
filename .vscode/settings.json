@@ -1,6 +1,17 @@
 {
 	"files.associations": {
 		"cub3d.h": "c",
-		"get_next_line.h": "c"
+		"get_next_line.h": "c",
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"__hash_table": "c",
+		"__split_buffer": "c",
+		"bitset": "c",
+		"initializer_list": "c",
+		"unordered_map": "c",
+		"utility": "c"
 	}
 }
