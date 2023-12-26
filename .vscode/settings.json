@@ -13,6 +13,7 @@
 		"initializer_list": "c",
 		"unordered_map": "c",
 		"utility": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"locale": "c"
 	}
 }

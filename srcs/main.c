@@ -30,6 +30,7 @@ int	main(int ac, char **av)
 	ft_init(ac, av, game);
 	parse(game);
 	//print_all(game); // for debug
+	//loop
 	free_game_one(game); // free all
 	return (SUCCESS);
 }

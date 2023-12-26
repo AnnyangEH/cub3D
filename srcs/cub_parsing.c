@@ -24,6 +24,34 @@ void	free_split(char **split)
 	free(split);
 }
 
+static void	is_valid_color(t_game *game, int flag)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (game->map->color[flag][i] < 0 || game->map->color[flag][i] > 255)
+			ft_error("Error\nInvalid color value\n", game);
+		i++;
+	}
+}
+
+static void	count_comma(t_game *game, char *line, int *i)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (line[*i])
+	{
+		if (line[*i] == ',')
+			cnt++;
+		(*i)++;
+	}
+	if (cnt != 2)
+		ft_error("Error\nInvalid color count\n", game);
+}
+
 void	get_img_color(t_game *game, char *line, int *i, int flag)
 {
 	int		j;
@@ -33,6 +61,7 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	(*i)++;
 	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
+	count_comma(game, i);
 	if (line[*i] == '\n')
 		return ;
 	temp = ft_split(line + *i, ',');
@@ -41,12 +70,9 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	while (temp[j] && j < 3)
 	{
 		game->map->color[flag][j] = ft_catoi(temp[j]);
-		if ((ft_catoi(temp[j]) == -1) || (ft_catoi(temp[j]) > 255 || ft_catoi(temp[j]) < 0))
-			ft_error("Error\nInvalid color value\n", game);
 		j++;
 	}
-	if (temp[j])
-		ft_error("Error\nInvalid color count it must be three\n", game);
+	is_valid_color(game, flag);
 	free_split(temp);
 }
 
@@ -86,7 +112,7 @@ int check_imgs(t_game *game, char *line)
 	return (FALSE);
 }
 
-void	parse_imgs(t_game *game)
+void	parse_token(t_game *game)
 {
 	int i;
 
@@ -207,7 +233,7 @@ void	parse(t_game *game)
 	game->map->fd = open(game->map->path, O_RDONLY);
 	if (game->map->fd == -1)
 		ft_error("Error\nFailed to open file\n", game);
-	parse_imgs(game);
+	parse_token(game);
 	parse_map(game);
 	check_map(game);
 	if (close(game->map->fd) == -1)

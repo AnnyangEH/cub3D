@@ -3,6 +3,7 @@
 
 # include "../mlx/mlx.h"
 # include "get_next_line.h"
+# include "time.h"
 # include "fcntl.h"
 # include "stdlib.h"
 # include "unistd.h"
@@ -33,6 +34,12 @@ enum e_key {
 	KEY_ESC = 53,
 	KEY_PRESS = 2,
 };
+
+typedef struct s_time
+{
+	long long	curr_time;
+	long long	old_time;
+}				t_time;
 
 typedef struct s_player
 {
@@ -75,6 +82,7 @@ typedef struct s_game
 	t_player		player;
 	t_imgs			imgs[4];
 	t_imgs			img;
+	t_time			time;
 }					t_game;
 
 //util functions
