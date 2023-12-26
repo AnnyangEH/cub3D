@@ -2,6 +2,9 @@
 
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
+	int	size;
+
+	size = 64;
 	(*i) += 3; // skip imgs
 	while (ft_iswhitespace(line[*i]) && line[*i]) // skip whitespace
 		(*i)++;
@@ -12,6 +15,14 @@ void	get_img_path(t_game *game, char *line, int *i, int flag)
 		ft_error("Error\nFailed to allocate imgs path\n", game);
 	if (game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] == '\n')
 		game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] = '\0';
+	game->imgs[flag].ptr = mlx_xpm_file_to_image(game->mlx, game->imgs[flag].path,
+			&size, &size);
+	if (!game->imgs[flag].ptr)
+		ft_error("Error\nFailed to get imgs address\n", game);
+	game->imgs[flag].addr = mlx_get_data_addr(game->imgs[flag].ptr,
+			&game->imgs[flag].bpp, &game->imgs[flag].size_l, &game->imgs[flag].endian);
+	if (!game->imgs[flag].addr)
+		ft_error("Error\nFailed to get imgs address\n", game);
 }
 
 void	free_split(char **split)
