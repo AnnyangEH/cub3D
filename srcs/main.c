@@ -30,6 +30,21 @@ int	main(int ac, char **av)
 	ft_init(ac, av, game);
 	parse(game);
 	//print_all(game); // for debug
+	game->player = malloc(sizeof(t_player));
+	game->player->x = 22;
+	game->player->y = 12;
+	game->player->dir_x = -1;
+	game->player->dir_y = 0;
+	game->player->plane_x = 0;
+	game->player->plane_y = 0.66;
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, 1000, 1000, "cub3D");
+	game->img.ptr = mlx_new_image(game->mlx, 1000, 1000);
+	game->img.addr = mlx_get_data_addr(game->img.ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
+	mlx_hook(game->win, 17, 0, exit_hook, game);
+	mlx_key_hook(game->win, press_key, game);
+	mlx_loop_hook(game->win, exec, game);
+	mlx_loop(game->mlx);
 	free_game_one(game); // free all
 	return (SUCCESS);
 }
