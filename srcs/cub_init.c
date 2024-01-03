@@ -3,6 +3,7 @@
 static int	init_game(t_game *game, char *path);
 static int	init_mlx(t_game *game);
 static int	init_img(t_game *game, t_imgs *img, int width, int height);
+static int	init_time(t_game *game);
 // static int	init_cast(t_game *game);
 
 void	ft_init(int ac, char **av, t_game *game)
@@ -15,6 +16,8 @@ void	ft_init(int ac, char **av, t_game *game)
 		ft_error("Error\nFailed to initialize map\n", game);
 	if (init_mlx(game))
 		ft_error_exit("Error\nFailed to initialize mlx\n", game);
+	if (init_time(game))
+		ft_error_exit("Error\nFailed to initalize time\n", game);
 }
 
 static int	init_game(t_game *game, char *path)
@@ -58,6 +61,16 @@ static int	init_img(t_game *game, t_imgs *img, int width, int height)
 	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->size_l,
 			&img->endian);
 	if (!img->addr)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+static int	init_time(t_game *game)
+{
+	game->time = malloc(sizeof(t_time));
+	game->time->curr_time = get_time();
+	game->time->old_time = game->time->old_time;
+	if (!game->time || !game->time->curr_time || !game->time->old_time)
 		return (FAILURE);
 	return (SUCCESS);
 }

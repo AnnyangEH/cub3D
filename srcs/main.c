@@ -30,9 +30,7 @@ int	main(int ac, char **av)
 	ft_init(ac, av, game);
 	parse(game);
 	//print_all(game); // for debug
-	game->time = malloc(sizeof(t_time));
-	game->time->curr_time = get_time();
-	game->time->old_time = game->time->old_time;
+
 	mlx_hook(game->win, 17, 0, exit_hook, game);
 	mlx_key_hook(game->win, press_key, game);
 	mlx_loop_hook(game->win, exec, game);
