@@ -152,9 +152,33 @@ void init_map_two(t_game *game)
 	ft_memset(game->map->map, 0, sizeof(char *) * (game->map->height + 1));
 }
 
-// void	parse_player(t_game *game, char c, int height, int width)
-// {
-// }
+void	parse_player(t_game *game, char c, int height, int width)
+{
+	if (c == 'N')
+	{
+		game->player->dir_x = 0;
+		game->player->dir_y = 1;
+	}
+	else if (c == 'S')
+	{
+		game->player->dir_x = 0;
+		game->player->dir_y = -1;
+	}
+	else if (c == 'E')
+	{
+		game->player->dir_x = 1;
+		game->player->dir_y = 0;
+	}
+	else if (c == 'W')
+	{
+		game->player->dir_x = -1;
+		game->player->dir_y = 0;
+	}
+	game->player->x = width;
+	game->player->y = height;
+	game->player->plane_x = 0;
+	game->player->plane_y = 0.66; // 수정필요
+}
 
 static void parse_map_line(t_game *game, int height)
 {
@@ -169,9 +193,9 @@ static void parse_map_line(t_game *game, int height)
 		{
 			if (game->map->player_cnt > 0)
 				ft_error("Error\nMultiple players\n", game);
-			game->map->map[height][i] = '0';
 			game->map->player_cnt++;
-			// parse_player(game, game->map->line[i], height, i);
+			game->map->map[height][i] = '0';
+			parse_player(game, game->map->line[i], height, i); // 수정 필요
 		}
 		else
 			game->map->map[height][i] = game->map->line[i];

@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAG = -Wall -Wextra -Werror -g -fsanitize=address
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 

@@ -39,6 +39,7 @@ enum e_key {
 
 typedef struct s_player
 {
+	int		dir;
 	double	x;
 	double	y;
 	double	dir_x;
