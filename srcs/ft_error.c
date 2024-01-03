@@ -26,10 +26,6 @@ void	free_game_one(t_game *game)
 		free(game->map->path);
 	if (game->map->width)
 		free(game->map->width);
-	if (game->time)
-		free(game->time);
-	if (game->player)
-		free(game->player);
 	free_game_two(game, -1);
 	free_mlx(game);
 	free(game);

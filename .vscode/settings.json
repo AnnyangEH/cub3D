@@ -22,6 +22,9 @@
 		"locale": "c",
 		"memory": "c",
 		"new": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"__cxx_version": "c",
+		"functional": "c",
+		"type_traits": "c"
 	}
 }

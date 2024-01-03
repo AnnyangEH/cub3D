@@ -78,15 +78,15 @@ typedef struct s_time
 
 typedef struct s_game
 {
-	void			*ptr;
+	char			*ptr;
 	void			*win;
 	void			*addr;
 	int				bpp;
 	int				endian;
 	int				size_l;
-	t_time			*time;
+	t_time			time;
 	t_map			*map;
-	t_player		*player;
+	t_player		player;
 	t_imgs			imgs[4];
 	t_imgs			img;
 }					t_game;

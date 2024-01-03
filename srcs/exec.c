@@ -5,11 +5,11 @@ int	exec(t_game *game)
 	for (int x = 0; x < 1000; x++)
 	{
 		double	cameraX = 2 * x / 1000.0 - 1;
-		double	rayDirX = game->player->dir_x + game->player->plane_x * cameraX;
-		double	rayDirY = game->player->dir_y + game->player->plane_y * cameraX;
+		double	rayDirX = game->player.dir_x + game->player.plane_x * cameraX;
+		double	rayDirY = game->player.dir_y + game->player.plane_y * cameraX;
 
-		int	mapX = (int)game->player->x;
-		int	mapY = (int)game->player->y;
+		int	mapX = (int)game->player.x;
+		int	mapY = (int)game->player.y;
 
 		double	sideDistX;
 		double	sideDistY;
@@ -27,22 +27,22 @@ int	exec(t_game *game)
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (game->player->x - mapX) * deltaDistX;
+			sideDistX = (game->player.x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - game->player->x) * deltaDistX;
+			sideDistX = (mapX + 1.0 - game->player.x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (game->player->y - mapY) * deltaDistY;
+			sideDistY = (game->player.y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - game->player->y) * deltaDistY;
+			sideDistY = (mapY + 1.0 - game->player.y) * deltaDistY;
 		}
 
 		while (!hit)
@@ -60,14 +60,14 @@ int	exec(t_game *game)
 				side = 1;
 			}
 
-			if (game->map->map[mapX][mapY] > 0)
+			if (game->map->map[mapY][mapX] == '1')
 				hit = 1;
 		}
 
 		if (!side)
-			perpWallDist = (mapX - game->player->x + (1 - stepX) / 2) / rayDirX;
+			perpWallDist = (mapX - game->player.x + (1 - stepX) / 2) / rayDirX;
 		else
-			perpWallDist = (mapY - game->player->y + (1 - stepY) / 2) / rayDirY;
+			perpWallDist = (mapY - game->player.y + (1 - stepY) / 2) / rayDirY;
 
 		int	lineHeight = (int)(1000 / perpWallDist);
 
@@ -79,14 +79,10 @@ int	exec(t_game *game)
 			drawEnd = 1000;
 
 		int	color;
-		if (game->map->map[mapX][mapY] == 1)
+		if (game->map->map[mapY][mapX] == '1')
 			color = create_trgb(0, 200, 120, 255);
-		else if (game->map->map[mapX][mapY] == 2)
+		else if (game->map->map[mapY][mapX] == '0')
 			color = create_trgb(0, 1000, 2000, 3000);
-		else if (game->map->map[mapX][mapY] == 3)
-			color = create_trgb(0, 200, 1000, 80);
-		else if (game->map->map[mapX][mapY] == 4)
-			color = create_trgb(0, 400, 2500, 1100);
 		else
 			color = create_trgb(0, 0, 0, 0);
 

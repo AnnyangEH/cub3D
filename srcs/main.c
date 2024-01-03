@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 	//print_all(game); // for debug
 	mlx_hook(game->win, 17, 0, exit_hook, game);
 	mlx_key_hook(game->win, press_key, game);
-	mlx_loop_hook(game->win, exec, game);
+	mlx_loop_hook(game->ptr, exec, game);
 	mlx_loop(game->ptr);
 	free_game_one(game); // free all
 	return (SUCCESS);

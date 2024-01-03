@@ -156,28 +156,28 @@ void	parse_player(t_game *game, char c, int height, int width)
 {
 	if (c == 'N')
 	{
-		game->player->dir_x = 0;
-		game->player->dir_y = 1;
+		game->player.dir_x = 0;
+		game->player.dir_y = -1;
 	}
 	else if (c == 'S')
 	{
-		game->player->dir_x = 0;
-		game->player->dir_y = -1;
+		game->player.dir_x = 0;
+		game->player.dir_y = 1;
 	}
 	else if (c == 'E')
 	{
-		game->player->dir_x = 1;
-		game->player->dir_y = 0;
+		game->player.dir_x = 1;
+		game->player.dir_y = 0;
 	}
 	else if (c == 'W')
 	{
-		game->player->dir_x = -1;
-		game->player->dir_y = 0;
+		game->player.dir_x = -1;
+		game->player.dir_y = 0;
 	}
-	game->player->x = width;
-	game->player->y = height;
-	game->player->plane_x = 0;
-	game->player->plane_y = 0.66; // 수정필요
+	game->player.x = width + 0.5;
+	game->player.y = height + 0.5;
+	game->player.plane_x = game->player.dir_y * (-0.66);
+	game->player.plane_y = game->player.dir_x * 0.66;
 }
 
 static void parse_map_line(t_game *game, int height)
@@ -240,7 +240,7 @@ void	parse_map(t_game *game)
 // 	int	size;
 
 // 	size = 64;
-// 	game->imgs[i].ptr = mlx_xpm_file_to_image(game->imgs[i].ptr, game->imgs[i].path, \
+// 	game->imgs[i].ptr = mlx_xpm_file_to_image(game->, game->imgs[i].path, \
 // 									&size, &size);
 // 	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, &game->imgs[i].bpp, \
 // 								&game->imgs[i].size_l, &game->imgs[i].endian);
