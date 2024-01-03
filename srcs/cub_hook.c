@@ -14,7 +14,7 @@ void	close_win(t_game *game)
 
 int	exit_hook(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_window(game->ptr, game->win);
 	exit(0);
 }
 

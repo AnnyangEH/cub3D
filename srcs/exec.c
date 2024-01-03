@@ -103,6 +103,6 @@ int	exec(t_game *game)
 				my_mlx_pixel_put(game, x, i, create_trgb(0, 48, 85, 2));
 		}
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
+	mlx_put_image_to_window(game->ptr, game->win, game->img.ptr, 0, 0);
 	return (0);
 }

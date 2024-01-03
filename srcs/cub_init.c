@@ -2,7 +2,6 @@
 
 static int	init_game(t_game *game, char *path);
 static int	init_mlx(t_game *game);
-static int	init_img(t_game *game, t_imgs *img, int width, int height);
 static int	init_time(t_game *game);
 // static int	init_cast(t_game *game);
 
@@ -37,31 +36,15 @@ static int	init_game(t_game *game, char *path)
 
 static int	init_mlx(t_game *game)
 {
-	int	i;
-
-	game->mlx = mlx_init();
-	if (!game->mlx)
+	game->ptr = mlx_init();
+	if (!game->ptr)
 		return (FAILURE);
-	game->win = mlx_new_window(game->mlx, 1280, 720, "cub3D");
+	game->win = mlx_new_window(game->ptr, 1280, 720, "cub3D");
 	if (!game->win)
 		return (FAILURE);
-	init_img(game, &game->img, 64, 64);
-	i = -1;
-	while (++i < 4)
-		if (init_img(game, &game->imgs[i], 64, 64))
-			return (FAILURE);
-	return (SUCCESS);
-}
-
-static int	init_img(t_game *game, t_imgs *img, int width, int height)
-{
-	img->ptr = mlx_new_image(game->mlx, width, height);
-	if (!img->ptr)
-		return (FAILURE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->size_l,
-			&img->endian);
-	if (!img->addr)
-		return (FAILURE);
+	game->img.ptr = mlx_new_image(game->ptr, 1280, 720);
+	game->img.addr = mlx_get_data_addr(game->ptr, &game->bpp, &game->size_l,
+			&game->endian);
 	return (SUCCESS);
 }
 

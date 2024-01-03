@@ -26,6 +26,10 @@ void	free_game_one(t_game *game)
 		free(game->map->path);
 	if (game->map->width)
 		free(game->map->width);
+	if (game->time)
+		free(game->time);
+	if (game->player)
+		free(game->player);
 	free_game_two(game, -1);
 	free_mlx(game);
 	free(game);
@@ -38,7 +42,7 @@ static void	free_game_two(t_game *game, int i)
 		if (game->imgs[i].path)
 			free(game->imgs[i].path);
 		if (game->imgs[i].ptr)
-			mlx_destroy_image(game->mlx, game->imgs[i].ptr);
+			mlx_destroy_image(game->ptr, game->imgs[i].ptr);
 	}
 	if (game->map->map)
 	{
@@ -53,11 +57,10 @@ static void	free_game_two(t_game *game, int i)
 
 static void	free_mlx(t_game *game)
 {
-	if (game->mlx)
+	if (game->ptr)
 	{
 		if (game->win)
-			mlx_destroy_window(game->mlx, game->win);
-		mlx_destroy_image(game->mlx, game->img.ptr);
-		free(game->mlx);
+			mlx_destroy_window(game->ptr, game->win);
+		free(game->ptr);
 	}
 }

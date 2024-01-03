@@ -13,6 +13,15 @@
 		"initializer_list": "c",
 		"unordered_map": "c",
 		"utility": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"\\": "c",
+		"ios": "c",
+		"cstdio": "c",
+		"cstdlib": "c",
+		"cwchar": "c",
+		"locale": "c",
+		"memory": "c",
+		"new": "c",
+		"__locale": "c"
 	}
 }
