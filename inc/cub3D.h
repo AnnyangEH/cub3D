@@ -79,6 +79,7 @@ typedef struct s_time
 typedef struct s_game
 {
 	char			*ptr;
+	void			*img_ptr;
 	void			*win;
 	void			*addr;
 	int				bpp;
