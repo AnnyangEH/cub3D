@@ -80,6 +80,7 @@ typedef struct s_imgs
 typedef struct s_game
 {
 	char			*ptr;
+	void			*img_ptr;
 	void			*win;
 	void			*addr;
 	int				bpp;
@@ -88,7 +89,6 @@ typedef struct s_game
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[4];
-	t_imgs			img;
 	t_time			time;
 }					t_game;
 
