@@ -81,22 +81,20 @@ int	exec(t_game *game)
 		int	color;
 		if (game->map->map[mapY][mapX] == '1')
 			color = create_trgb(0, 200, 120, 255);
-		else if (game->map->map[mapY][mapX] == '0')
-			color = create_trgb(0, 1000, 2000, 3000);
 		else
 			color = create_trgb(0, 0, 0, 0);
 
 		if (side == 1)
-			color = color / 2;
+			color /= 2;
 
 		for (int i = 0; i <= 1000; i++)
 		{
 			if (i >= drawStart && i <= drawEnd)
 				my_mlx_pixel_put(game, x, i, color);
 			else if (i < drawStart)
-				my_mlx_pixel_put(game, x, i, create_trgb(200, 12, 125, 255));
+				my_mlx_pixel_put(game, x, i, create_trgb(0, game->map->color[1][0], game->map->color[1][1], game->map->color[1][2]));
 			else if (i > drawEnd)
-				my_mlx_pixel_put(game, x, i, create_trgb(0, 48, 85, 2));
+				my_mlx_pixel_put(game, x, i, create_trgb(0, game->map->color[0][0], game->map->color[0][1], game->map->color[0][2]));
 		}
 	}
 	mlx_put_image_to_window(game->ptr, game->win, game->img.ptr, 0, 0);

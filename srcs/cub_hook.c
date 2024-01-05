@@ -60,7 +60,7 @@ int	press_key(int key, t_game *game)
 	}
 
 
-	if (key == KEY_RIGHT)
+	if (key == KEY_LEFT)
 	{
 		double	oldDirX = game->player.dir_x;
 		game->player.dir_x = game->player.dir_x * cos(rot_speed * -1) - game->player.dir_y * sin(rot_speed * -1);
@@ -70,7 +70,7 @@ int	press_key(int key, t_game *game)
 		game->player.plane_y = oldPlaneX * sin(rot_speed * -1) + game->player.plane_y * cos(rot_speed * -1);
 	}
 
-	if (key == KEY_LEFT)
+	if (key == KEY_RIGHT)
 	{
 		double	oldDirX = game->player.dir_x;
 		game->player.dir_x = game->player.dir_x * cos(rot_speed) - game->player.dir_y * sin(rot_speed);
