@@ -77,12 +77,6 @@ typedef struct s_imgs
 	int		endian;
 }				t_imgs;
 
-typedef struct s_time
-{
-	long long	curr_time;
-	long long	old_time;
-}				t_time;
-
 typedef struct s_game
 {
 	char			*ptr;
@@ -91,13 +85,11 @@ typedef struct s_game
 	int				bpp;
 	int				endian;
 	int				size_l;
-	t_time			time;
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[4];
 	t_imgs			img;
 	t_time			time;
-	t_ray			ray;
 }					t_game;
 
 //util functions
