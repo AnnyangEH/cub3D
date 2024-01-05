@@ -271,7 +271,7 @@ static void	load_img(t_game *game)
 static void	init_imgs(t_game *game, int i)
 {
 
-	game->imgs[i].ptr = mlx_xpm_file_to_image(game->ptr,	 game->imgs[i].path, \
+	game->imgs[i].ptr = mlx_xpm_file_to_image(game->ptr, game->imgs[i].path, \
 									&game->imgs[i].width, &game->imgs[i].height);
 	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, &game->imgs[i].bpp, \
 								&game->imgs[i].size_l, &game->imgs[i].endian);
