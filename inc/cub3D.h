@@ -77,35 +77,11 @@ typedef struct s_imgs
 	int		endian;
 }				t_imgs;
 
-<<<<<<< HEAD
-typedef struct s_ray
-{
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	double	step_x;
-	double	step_y;
-	int		hit;
-	int		side;
-}				t_ray;
-=======
 typedef struct s_time
 {
 	long long	curr_time;
 	long long	old_time;
 }				t_time;
->>>>>>> hysung
 
 typedef struct s_game
 {
