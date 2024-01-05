@@ -9,6 +9,7 @@
 # include "unistd.h"
 # include "stdio.h"
 # include "math.h"
+# include <sys/time.h>
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -31,6 +32,8 @@ enum e_key {
 	KEY_D = 2,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
+	KEY_DOWN = 125, 
+	KEY_UP = 126,
 	KEY_ESC = 53,
 	KEY_PRESS = 2,
 };
@@ -43,9 +46,13 @@ typedef struct s_time
 
 typedef struct s_player
 {
+	int		dir;
 	double	x;
 	double	y;
-	double	dir;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }				t_player;
 
 typedef struct s_map
@@ -70,6 +77,7 @@ typedef struct s_imgs
 	int		endian;
 }				t_imgs;
 
+<<<<<<< HEAD
 typedef struct s_ray
 {
 	double	pos_x;
@@ -91,15 +99,23 @@ typedef struct s_ray
 	int		hit;
 	int		side;
 }				t_ray;
+=======
+typedef struct s_time
+{
+	long long	curr_time;
+	long long	old_time;
+}				t_time;
+>>>>>>> hysung
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*win;
 	char			*ptr;
-	int				bit_per_pixel;
+	void			*win;
+	void			*addr;
+	int				bpp;
 	int				endian;
 	int				size_l;
+	t_time			time;
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[4];
@@ -137,4 +153,19 @@ void	parse(t_game *game);
 //checking functions
 void	check_map(t_game *game);
 
+//hook
+int		press_key(int key, t_game *game);
+void	set_hook(t_game *game);
+void	close_win(t_game *game);
+int		exit_hook(t_game *game);
+
+//mlx
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+int		create_trgb(int t, int r, int g, int b);
+
+//time
+long long	get_time(void);
+
+//exec
+int		exec(t_game *game);
 #endif

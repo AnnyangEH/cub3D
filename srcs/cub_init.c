@@ -2,7 +2,7 @@
 
 static int	init_game(t_game *game, char *path);
 static int	init_mlx(t_game *game);
-static int	init_img(t_game *game, t_imgs *img, int width, int height);
+static int	init_time(t_game *game);
 // static int	init_cast(t_game *game);
 
 void	ft_init(int ac, char **av, t_game *game)
@@ -15,10 +15,15 @@ void	ft_init(int ac, char **av, t_game *game)
 		ft_error("Error\nFailed to initialize map\n", game);
 	if (init_mlx(game))
 		ft_error_exit("Error\nFailed to initialize mlx\n", game);
+<<<<<<< HEAD
 	// if (player_init(game)
 	// 	ft_error_exit("Error\nFailed to initialize player\n", game);
 	// if (init_cast(game))
 	// 	ft_error_exit("Error\nFailed to initialize raycasting\n", game);
+=======
+	if (init_time(game))
+		ft_error_exit("Error\nFailed to initalize time\n", game);
+>>>>>>> hysung
 }
 
 static int	init_game(t_game *game, char *path)
@@ -39,24 +44,21 @@ static int	init_game(t_game *game, char *path)
 
 static int	init_mlx(t_game *game)
 {
-	int	i;
-
-	game->mlx = mlx_init();
-	if (!game->mlx)
+	game->ptr = mlx_init();
+	if (!game->ptr)
 		return (FAILURE);
-	game->win = mlx_new_window(game->mlx, 1280, 720, "cub3D");
+	game->win = mlx_new_window(game->ptr, 1000, 1000, "cub3D");
 	if (!game->win)
 		return (FAILURE);
-	init_img(game, &game->img, 64, 64);
-	i = -1;
-	while (++i < 4)
-		if (init_img(game, &game->imgs[i], 64, 64))
-			return (FAILURE);
+	game->img.ptr = mlx_new_image(game->ptr, 1000, 1000);
+	game->img.addr = mlx_get_data_addr(game->img.ptr, &game->bpp, &game->size_l,
+			&game->endian);
 	return (SUCCESS);
 }
 
-static int	init_img(t_game *game, t_imgs *img, int width, int height)
+static int	init_time(t_game *game)
 {
+<<<<<<< HEAD
 	img->ptr = mlx_new_image(game->mlx, width, height);
 	if (!img->ptr)
 		return (FAILURE);
@@ -64,11 +66,9 @@ static int	init_img(t_game *game, t_imgs *img, int width, int height)
 			&img->endian);
 	if (!img->addr)
 		return (FAILURE);
+=======
+	game->time.curr_time = get_time();
+	game->time.old_time = game->time.curr_time;
+>>>>>>> hysung
 	return (SUCCESS);
 }
-
-// static int	init_cast(t_game *game)
-// {
-// 	// raycasting variables initialization
-// 	return (SUCCESS);
-// }

@@ -191,9 +191,33 @@ void init_map_two(t_game *game)
 	ft_memset(game->map->map, 0, sizeof(char *) * (game->map->height + 1));
 }
 
-// void	parse_player(t_game *game, char c, int height, int width)
-// {
-// }
+void	parse_player(t_game *game, char c, int height, int width)
+{
+	if (c == 'N')
+	{
+		game->player.dir_x = 0;
+		game->player.dir_y = -1;
+	}
+	else if (c == 'S')
+	{
+		game->player.dir_x = 0;
+		game->player.dir_y = 1;
+	}
+	else if (c == 'E')
+	{
+		game->player.dir_x = 1;
+		game->player.dir_y = 0;
+	}
+	else if (c == 'W')
+	{
+		game->player.dir_x = -1;
+		game->player.dir_y = 0;
+	}
+	game->player.x = width + 0.5;
+	game->player.y = height + 0.5;
+	game->player.plane_x = game->player.dir_y * (-0.66);
+	game->player.plane_y = game->player.dir_x * 0.66;
+}
 
 static void parse_map_line(t_game *game, int height)
 {
@@ -208,9 +232,9 @@ static void parse_map_line(t_game *game, int height)
 		{
 			if (game->map->player_cnt > 0)
 				ft_error("Error\nMultiple players\n", game);
-			game->map->map[height][i] = '0';
 			game->map->player_cnt++;
-			// parse_player(game, game->map->line[i], height, i);
+			game->map->map[height][i] = '0';
+			parse_player(game, game->map->line[i], height, i); // 수정 필요
 		}
 		else
 			game->map->map[height][i] = game->map->line[i];
@@ -241,6 +265,26 @@ void	parse_map(t_game *game)
 	game->map->map[height] = NULL;
 }
 
+// static void	get_img(t_game *game)
+// {
+// 	int		i;
+
+// 	i = -1;
+// 	while (++i < 4)
+// 		init_imgs(game, i);
+// }
+
+// static void	init_imgs(t_game *game, int i)
+// {
+// 	int	size;
+
+// 	size = 64;
+// 	game->imgs[i].ptr = mlx_xpm_file_to_image(game->, game->imgs[i].path, \
+// 									&size, &size);
+// 	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, &game->imgs[i].bpp, \
+// 								&game->imgs[i].size_l, &game->imgs[i].endian);
+// }
+
 void	parse(t_game *game)
 {
 	game->map->fd = open(game->map->path, O_RDONLY);
@@ -249,6 +293,7 @@ void	parse(t_game *game)
 	parse_token(game);
 	parse_map(game);
 	check_map(game);
+	//get_img(game);
 	if (close(game->map->fd) == -1)
 		ft_error("Error\nFailed to close file\n", game);
 }
