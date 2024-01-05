@@ -24,7 +24,7 @@ int	press_key(int key, t_game *game)
 	game->time.curr_time = get_time();
 	double	fr_time = (game->time.curr_time - game->time.old_time) / 1000.0;
 
-	double	move_speed = fr_time * 3.0;
+	double	move_speed = fr_time * 5.0;
 	double	rot_speed = fr_time;
 
 	if (key == KEY_W)

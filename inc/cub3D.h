@@ -73,6 +73,8 @@ typedef struct s_imgs
 	void	*addr;	//image address
 	char	*path;	//image path(file name)
 	int		bpp;	//bit per pixel
+	int		width;
+	int		height;
 	int		size_l;
 	int		endian;
 }				t_imgs;
