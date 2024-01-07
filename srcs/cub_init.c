@@ -24,7 +24,6 @@ static int	init_game(t_game *game, char *path)
 	ft_memset(game, 0, sizeof(t_game));
 	game->map = malloc(sizeof(t_map));
 	ft_memset(game->map, 0, sizeof(t_map));
-	ft_memset(game->map->color, -1, sizeof(int) * 6);
 	if (!game->map)
 		return (FAILURE);
 	game->map->path = ft_strdup(path);
