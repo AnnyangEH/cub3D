@@ -40,9 +40,9 @@ static int	init_mlx(t_game *game)
 	game->win = mlx_new_window(game->ptr, 1000, 1000, "cub3D");
 	if (!game->win)
 		return (FAILURE);
-	game->img.ptr = mlx_new_image(game->ptr, 1000, 1000);
-	game->img.addr = mlx_get_data_addr(game->img.ptr, &game->img.bpp, &game->img.size_l,
-			&game->img.endian);
+	game->img_ptr = mlx_new_image(game->ptr, 1000, 1000);
+	game->addr = mlx_get_data_addr(game->img_ptr, &game->bpp, &game->size_l,
+			&game->endian);
 	return (SUCCESS);
 }
 

@@ -97,6 +97,6 @@ int	exec(t_game *game)
 				my_mlx_pixel_put(game, x, i, create_trgb(0, game->map->color[0][0], game->map->color[0][1], game->map->color[0][2]));
 		}
 	}
-	mlx_put_image_to_window(game->ptr, game->win, game->img.ptr, 0, 0);
+	mlx_put_image_to_window(game->ptr, game->win, game->img_ptr, 0, 0);
 	return (0);
 }
