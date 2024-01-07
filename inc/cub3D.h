@@ -91,7 +91,6 @@ typedef struct s_game
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[4];
-	t_time			time;
 }					t_game;
 
 //util functions
