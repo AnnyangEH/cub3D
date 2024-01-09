@@ -2,9 +2,6 @@
 
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
-	int	size;
-
-	size = 64;
 	(*i) += 3; // skip imgs
 	while (ft_iswhitespace(line[*i]) && line[*i]) // skip whitespace
 		(*i)++;
@@ -15,14 +12,6 @@ void	get_img_path(t_game *game, char *line, int *i, int flag)
 		ft_error("Error\nFailed to allocate imgs path\n", game);
 	if (game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] == '\n')
 		game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] = '\0';
-	game->imgs[flag].ptr = mlx_xpm_file_to_image(game->mlx, game->imgs[flag].path,
-			&size, &size);
-	if (!game->imgs[flag].ptr)
-		ft_error("Error\nFailed to get imgs address\n", game);
-	game->imgs[flag].addr = mlx_get_data_addr(game->imgs[flag].ptr,
-			&game->imgs[flag].bpp, &game->imgs[flag].size_l, &game->imgs[flag].endian);
-	if (!game->imgs[flag].addr)
-		ft_error("Error\nFailed to get imgs address\n", game);
 }
 
 void	free_split(char **split)
@@ -35,36 +24,6 @@ void	free_split(char **split)
 	free(split);
 }
 
-static void	is_valid_color(t_game *game, int flag)
-{
-	int	i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (game->map->color[flag][i] < 0 || game->map->color[flag][i] > 255)
-			ft_error("Error\nInvalid color value\n", game);
-		i++;
-	}
-}
-
-static void	count_comma(t_game *game, char *line, int *i)
-{
-	int	j;
-	int	cnt;
-
-	cnt = 0;
-	j = *i;
-	while (line[j])
-	{
-		if (line[j] == ',')
-			cnt++;
-		j++;
-	}
-	if (cnt != 2)
-		ft_error("Error\nInvalid color count\n", game);
-}
-
 void	get_img_color(t_game *game, char *line, int *i, int flag)
 {
 	int		j;
@@ -74,7 +33,6 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	(*i)++;
 	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
-	count_comma(game, line, i);
 	if (line[*i] == '\n')
 		return ;
 	temp = ft_split(line + *i, ',');
@@ -83,9 +41,12 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	while (temp[j] && j < 3)
 	{
 		game->map->color[flag][j] = ft_catoi(temp[j]);
+		if ((ft_catoi(temp[j]) == -1) || (ft_catoi(temp[j]) > 255 || ft_catoi(temp[j]) < 0))
+			ft_error("Error\nInvalid color value\n", game);
 		j++;
 	}
-	is_valid_color(game, flag);
+	if (temp[j])
+		ft_error("Error\nInvalid color count it must be three\n", game);
 	free_split(temp);
 }
 
@@ -125,7 +86,7 @@ int check_imgs(t_game *game, char *line)
 	return (FALSE);
 }
 
-void	parse_token(t_game *game)
+void	parse_imgs(t_game *game)
 {
 	int i;
 
@@ -284,16 +245,34 @@ void	parse_map(t_game *game)
 // 	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, &game->imgs[i].bpp, \
 // 								&game->imgs[i].size_l, &game->imgs[i].endian);
 // }
+// static void	make_temp_buffer(t_game *game)
+// {
+// 	int i;
+
+// 	game->map->temp = malloc(sizeof(char *) * game->map->height);
+// 	if (!game->map->temp)
+// 		ft_error("Error\nFailed to allocate temp map\n", game);
+
+// 	i = 0;
+// 	while (i < game->map->height)
+// 	{
+// 		game->map->temp[i] = ft_strdup(game->map->map[i]); // Assuming you have strdup function
+// 		if (!game->map->temp[i])
+// 			ft_error("Error\nFailed to allocate temp map\n", game);
+// 		i++;
+// 	}
+// }
 
 void	parse(t_game *game)
 {
 	game->map->fd = open(game->map->path, O_RDONLY);
 	if (game->map->fd == -1)
 		ft_error("Error\nFailed to open file\n", game);
-	parse_token(game);
+	parse_imgs(game);
 	parse_map(game);
 	check_map(game);
 	//get_img(game);
 	if (close(game->map->fd) == -1)
 		ft_error("Error\nFailed to close file\n", game);
+	// make_temp_buffer(game);
 }

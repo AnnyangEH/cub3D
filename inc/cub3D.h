@@ -1,8 +1,11 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include "define.h"
+#include "struct.h"
+#include "gnl.h"
 # include "../mlx/mlx.h"
-# include "get_next_line.h"
+
 # include "time.h"
 # include "fcntl.h"
 # include "stdlib.h"
@@ -11,120 +14,6 @@
 # include "math.h"
 # include <sys/time.h>
 
-# define SUCCESS 0
-# define FAILURE 1
-
-# define TRUE 1
-# define FALSE 0
-
-# define FLOOR 0
-# define CEILING 1
-
-# define NO 0
-# define SO 1
-# define WE 2
-# define EA 3
-
-enum e_key {
-	KEY_W = 13,
-	KEY_A = 0,
-	KEY_S = 1,
-	KEY_D = 2,
-	KEY_LEFT = 123,
-	KEY_RIGHT = 124,
-	KEY_DOWN = 125, 
-	KEY_UP = 126,
-	KEY_ESC = 53,
-	KEY_PRESS = 2,
-};
-
-typedef struct s_time
-{
-	long long	curr_time;
-	long long	old_time;
-}				t_time;
-
-typedef struct s_player
-{
-	int		dir;
-	double	x;
-	double	y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-}				t_player;
-
-typedef struct s_map
-{
-	char		**map;
-	char		*path; //map file path
-	char		*line;
-	int			color[2][3]; //floor, color rgb
-	int			*width; //map width
-	int			height; //map height
-	int			player_cnt;
-	int			fd;
-}				t_map;
-
-typedef struct s_imgs
-{
-	void	*ptr;	//image identifier
-	void	*addr;	//image address
-	char	*path;	//image path(file name)
-	int		bpp;	//bit per pixel
-	int		size_l;
-	int		endian;
-}				t_imgs;
-
-<<<<<<< HEAD
-typedef struct s_ray
-{
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	double	step_x;
-	double	step_y;
-	int		hit;
-	int		side;
-}				t_ray;
-=======
-typedef struct s_time
-{
-	long long	curr_time;
-	long long	old_time;
-}				t_time;
->>>>>>> hysung
-
-typedef struct s_game
-{
-	char			*ptr;
-	void			*win;
-	void			*addr;
-	int				bpp;
-	int				endian;
-	int				size_l;
-	t_time			time;
-	t_map			*map;
-	t_player		player;
-	t_imgs			imgs[4];
-	t_imgs			img;
-	t_time			time;
-	t_ray			ray;
-}					t_game;
-
-//util functions
 int		ft_strlen(char *s);
 int		ft_strncmp(char *s1, char *s2, int n);
 void	ft_putstr_fd(char *s, int fd);
@@ -138,6 +27,7 @@ int		ft_isdigit(int c);
 char	**ft_split(char const *s, char c);
 int		ft_catoi(const char *str);
 int		ft_isempty(char *line);
+void    *ft_memcpy(void *dest, const void *src, size_t n);
 
 //init functions
 void	ft_init(int ac, char **av, t_game *game);
@@ -168,4 +58,5 @@ long long	get_time(void);
 
 //exec
 int		exec(t_game *game);
+
 #endif

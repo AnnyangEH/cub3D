@@ -1,104 +1,123 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/07 22:18:48 by suhbaek           #+#    #+#             */
+/*   Updated: 2024/01/10 04:02:57 by suhbaek          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3D.h"
 
-int	exec(t_game *game)
+void dda(t_game *game, int x)
 {
-	for (int x = 0; x < 1000; x++)
-	{
-		double	cameraX = 2 * x / 1000.0 - 1;
-		double	rayDirX = game->player.dir_x + game->player.plane_x * cameraX;
-		double	rayDirY = game->player.dir_y + game->player.plane_y * cameraX;
-
-		int	mapX = (int)game->player.x;
-		int	mapY = (int)game->player.y;
-
-		double	sideDistX;
-		double	sideDistY;
-
-		double	deltaDistX = fabs(1 / rayDirX);
-		double	deltaDistY = fabs(1 / rayDirY);
-		double	perpWallDist;
-
-		int	stepX;
-		int	stepY;
-
-		int	hit = 0;
-		int	side;
-
-		if (rayDirX < 0)
+		t_ray ray;
+		
+		ray.cameraX = 2 * x / (double)WIDTH - 1;
+		ray.rayDirX = game->player.dir_x + game->player.plane_x * ray.cameraX;
+		ray.rayDirY = game->player.dir_y + game->player.plane_y * ray.cameraX;
+		ray.mapX = (int)game->player.x;
+		ray.mapY = (int)game->player.y;
+		ray.deltaDistX = fabs(1 / ray.rayDirX);
+		ray.deltaDistY = fabs(1 / ray.rayDirY);
+		ray.hit = 0;
+      //calculate step and initial sideDist
+		if (ray.rayDirX < 0)
 		{
-			stepX = -1;
-			sideDistX = (game->player.x - mapX) * deltaDistX;
+			ray.stepX = -1;
+			ray.sideDistX = (game->player.x - ray.mapX) * ray.deltaDistX;
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - game->player.x) * deltaDistX;
+			ray.stepX = 1;
+			ray.sideDistX = (ray.mapX + 1.0 - game->player.x) * ray.deltaDistX;
 		}
-		if (rayDirY < 0)
+		if (ray.rayDirY < 0)
 		{
-			stepY = -1;
-			sideDistY = (game->player.y - mapY) * deltaDistY;
+			ray.stepY = -1;
+			ray.sideDistY = (game->player.y - ray.mapY) * ray.deltaDistY;
 		}
 		else
 		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - game->player.y) * deltaDistY;
+			ray.stepY = 1;
+			ray.sideDistY = (ray.mapY + 1.0 - game->player.y) * ray.deltaDistY;
 		}
+		// DDA SETTING TILL HERE.
 
-		while (!hit)
+		while (!ray.hit)
 		{
-			if (sideDistX < sideDistY)
+			if (ray.sideDistX < ray.sideDistY)
 			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
+				ray.sideDistX += ray.deltaDistX;
+				ray.mapX += ray.stepX;
+				ray.side = 0;
 			}
 			else
 			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
+				ray.sideDistY += ray.deltaDistY;
+				ray.mapY += ray.stepY;
+				ray.side = 1;
 			}
 
-			if (game->map->map[mapY][mapX] == '1')
-				hit = 1;
+			if (game->map->map[ray.mapY][ray.mapX] == '1')
+				ray.hit = 1;
 		}
 
-		if (!side)
-			perpWallDist = (mapX - game->player.x + (1 - stepX) / 2) / rayDirX;
+		if (!ray.side)
+			ray.perpWallDist = (ray.mapX - game->player.x + (1 - ray.stepX) / 2) / ray.rayDirX;
 		else
-			perpWallDist = (mapY - game->player.y + (1 - stepY) / 2) / rayDirY;
+			ray.perpWallDist = (ray.mapY - game->player.y + (1 - ray.stepY) / 2) / ray.rayDirY;
+		ray.lineHeight = (int)(WIDTH / ray.perpWallDist);
+		ray.drawStart = (ray.lineHeight * -1) / 2 + WIDTH / 2;
+		if (ray.drawStart < 0)
+			ray.drawStart = 0;
+		ray.drawEnd = ray.lineHeight / 2 + WIDTH / 2;
+		if (ray.drawEnd >= WIDTH)
+			ray.drawEnd = WIDTH - 1;
+}
 
-		int	lineHeight = (int)(1000 / perpWallDist);
+void render(t_game *game, int x)
+{
+	t_ray ray;
 
-		int	drawStart = (lineHeight * -1) / 2 + 1000 / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		int	drawEnd = lineHeight / 2 + 1000 / 2;
-		if (drawEnd >= 1000)
-			drawEnd = 1000;
-
-		int	color;
-		if (game->map->map[mapY][mapX] == '1')
-			color = create_trgb(0, 200, 120, 255);
-		else if (game->map->map[mapY][mapX] == '0')
-			color = create_trgb(0, 1000, 2000, 3000);
+		if (game->map->map[ray.mapY][ray.mapX] == '1')
+			ray.color = create_trgb(0, 200, 120, 255);
 		else
-			color = create_trgb(0, 0, 0, 0);
-
-		if (side == 1)
-			color = color / 2;
-
-		for (int i = 0; i <= 1000; i++)
+			ray.color = create_trgb(0, 0, 0, 0);
+		if (ray.side == 1)
+			ray.color /= 2;
+		for (int i = 0; i <= WIDTH; i++)
 		{
-			if (i >= drawStart && i <= drawEnd)
-				my_mlx_pixel_put(game, x, i, color);
-			else if (i < drawStart)
-				my_mlx_pixel_put(game, x, i, create_trgb(200, 12, 125, 255));
-			else if (i > drawEnd)
-				my_mlx_pixel_put(game, x, i, create_trgb(0, 48, 85, 2));
+			if (i >= ray.drawStart && i <= ray.drawEnd)
+				my_mlx_pixel_put(game, x, i, ray.color);
+			else if (i < ray.drawStart)
+				my_mlx_pixel_put(game, x, i, create_trgb(0, game->map->color[1][0], game->map->color[1][1], game->map->color[1][2]));
+			else if (i > ray.drawEnd)
+				my_mlx_pixel_put(game, x, i, create_trgb(0, game->map->color[0][0], game->map->color[0][1], game->map->color[0][2]));
 		}
+}
+
+void start_game(t_game *game)
+{
+	int x;
+
+	x = 0;
+	// copy_map(game->map);
+	while (x < WIDTH)
+	{
+		dda(game, x);
+		render(game, x);
+		x++;
 	}
+}
+
+int	 exec(t_game *game)
+{
+	// mlx_clear_window(game->ptr, game->win);
+	start_game(game);
 	mlx_put_image_to_window(game->ptr, game->win, game->img.ptr, 0, 0);
 	return (0);
 }
