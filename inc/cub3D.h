@@ -79,6 +79,27 @@ typedef struct s_imgs
 	int		endian;
 }				t_imgs;
 
+typedef struct s_ray
+{
+	double	camera;
+	double	ray_x;
+	double	ray_y;
+	int		map_x;
+	int		map_y;
+	double	side_x;
+	double	side_y;
+	double	delta_x;
+	double	delta_y;
+	double	perp_wall;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_h;
+	int		d_start;
+	int		d_end;
+}				t_ray;
+
 typedef struct s_game
 {
 	char			*ptr;
@@ -91,6 +112,7 @@ typedef struct s_game
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[4];
+	t_ray			ray;
 	t_time			time;
 }					t_game;
 
