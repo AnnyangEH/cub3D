@@ -70,7 +70,7 @@ typedef struct s_map
 typedef struct s_imgs
 {
 	void	*ptr;	//image identifier
-	void	*addr;	//image address
+	char	*addr;	//image address
 	char	*path;	//image path(file name)
 	int		bpp;	//bit per pixel
 	int		width;
@@ -84,7 +84,7 @@ typedef struct s_game
 	char			*ptr;
 	void			*img_ptr;
 	void			*win;
-	void			*addr;
+	char			*addr;
 	int				bpp;
 	int				endian;
 	int				size_l;
@@ -118,7 +118,7 @@ void	ft_error_exit(char *str, t_game *game);
 void	free_game_one(t_game *game);
 
 //parsing functions
-void	parse(t_game *game);
+void		parse(t_game *game);
 
 //checking functions
 void	check_map(t_game *game);

@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -O2
+CFLAG = -Wall -Wextra -Werror -O2 -g
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 

@@ -1,5 +1,6 @@
 #include "../inc/cub3D.h"
 
+int	set_wall_dir(t_game *game, int side, int mapX, int mapY);
 int	exec(t_game *game)
 {
 	for (int x = 0; x < 1000; x++)
@@ -77,26 +78,56 @@ int	exec(t_game *game)
 		int	drawEnd = lineHeight / 2 + 1000 / 2;
 		if (drawEnd >= 1000)
 			drawEnd = 1000;
+ //여기부터 텍스
+		double	wallX;
+		int		cps = set_wall_dir(game, side, mapX, mapY);
 
-		int	color;
-		if (game->map->map[mapY][mapX] == '1')
-			color = create_trgb(0, 200, 120, 255);
+		if (!side)
+			wallX = game->player.y + (perpWallDist * rayDirY);
 		else
-			color = create_trgb(0, 0, 0, 0);
+			wallX = game->player.x + (perpWallDist * rayDirX);
+		wallX -= floor((wallX));
+		int	texX = (int)(wallX * (double)game->imgs[cps].width);
+		
+		if (!side && rayDirX > 0)
+			texX = game->imgs[cps].width - texX - 1;
+		if (side == 1 && rayDirY < 0)
+			texX = game->imgs[cps].width - texX - 1;
+		
+		double	step = (double)game->imgs[cps].height / lineHeight;
+		double	texPos = (drawStart - 1000 / 2 + lineHeight / 2) * step;
 
-		if (side == 1)
-			color /= 2;
-
-		for (int i = 0; i <= 1000; i++)
+		for (int y = drawStart; y < drawEnd; y++)
 		{
-			if (i >= drawStart && i <= drawEnd)
-				my_mlx_pixel_put(game, x, i, color);
-			else if (i < drawStart)
-				my_mlx_pixel_put(game, x, i, create_trgb(0, game->map->color[1][0], game->map->color[1][1], game->map->color[1][2]));
-			else if (i > drawEnd)
-				my_mlx_pixel_put(game, x, i, create_trgb(0, game->map->color[0][0], game->map->color[0][1], game->map->color[0][2]));
+			int texY = (int)texPos;
+			// int	texY = (y - drawStart) * game->imgs[cps].height / (drawEnd - drawStart);
+			texPos += step;
+			int	color = *(int *)(game->imgs[cps].addr + (texY * game->imgs[cps].size_l + \
+			texX * (game->imgs[cps].bpp / 8)));
+			if (side == 1)
+				color = (color >> 1) & 8355711;
+			my_mlx_pixel_put(game, x, y, color);
 		}
+		for (int y = 0; y < drawStart; y++)
+			my_mlx_pixel_put(game, x, y, create_trgb(0, game->map->color[1][0], game->map->color[1][1], game->map->color[1][2]));
+		for (int y = drawEnd; y <= 1000; y++)
+			my_mlx_pixel_put(game, x, y, create_trgb(0, game->map->color[0][0], game->map->color[0][1], game->map->color[0][2]));
 	}
 	mlx_put_image_to_window(game->ptr, game->win, game->img_ptr, 0, 0);
 	return (0);
+}
+
+int	set_wall_dir(t_game *game, int side, int mapX, int mapY)
+{
+	int	cps = 0;
+//ㅇㅔ러 고려해야 될까?
+	if (side && (game->player.y - mapY) < 0)//y, north
+		cps = 0;
+	else if (side && (game->player.y - mapY) > 0)//y, south
+		cps = 1;
+if (!side && (game->player.x - mapX) < 0) //x, east
+		cps = 2;
+	else if (!side && (game->player.x - mapX) > 0)//x, west
+		cps = 3;
+	return (cps);
 }
