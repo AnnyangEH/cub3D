@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/10 21:09:26 by eunhcho          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -32,7 +44,7 @@ enum e_key {
 	KEY_D = 2,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
-	KEY_DOWN = 125, 
+	KEY_DOWN = 125,
 	KEY_UP = 126,
 	KEY_ESC = 53,
 	KEY_PRESS = 2,
@@ -58,25 +70,28 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**map;
-	char		*path; //map file path
+	char		*path;
 	char		*line;
-	int			color[2][3]; //floor, color rgb
-	int			*width; //map width
-	int			height; //map height
+	int			color[2][3];
+	int			floor_color;
+	int			ceiling_color;
+	int			*width;
+	int			height;
 	int			player_cnt;
 	int			fd;
 }				t_map;
 
 typedef struct s_imgs
 {
-	void	*ptr;	//image identifier
-	char	*addr;	//image address
-	char	*path;	//image path(file name)
-	int		bpp;	//bit per pixel
+	void	*ptr;
+	char	*addr;
+	char	*path;
+	int		bpp;
 	int		width;
 	int		height;
 	int		size_l;
 	int		endian;
+	int		cnt;
 }				t_imgs;
 
 typedef struct s_ray
@@ -119,7 +134,6 @@ typedef struct s_game
 	t_time			time;
 }					t_game;
 
-//util functions
 int		ft_strlen(char *s);
 int		ft_strncmp(char *s1, char *s2, int n);
 void	ft_putstr_fd(char *s, int fd);
@@ -133,43 +147,37 @@ int		ft_isdigit(int c);
 char	**ft_split(char const *s, char c);
 int		ft_catoi(const char *str);
 int		ft_isempty(char *line);
+double	ft_min(double a, double b);
+void	free_split(char **split);
 
-//init functions
 void	ft_init(int ac, char **av, t_game *game);
 
-//error handling function
 void	ft_error(char *str, t_game *game);
 void	ft_error_exit(char *str, t_game *game);
 void	free_game_one(t_game *game);
 
-//parsing functions
 void		parse(t_game *game);
+void	parse_token(t_game *game);
+void	parse_map(t_game *game);
 
-//checking functions
 void	check_map(t_game *game);
 
-//hook
-int		press_key(int key, t_game *game);
+int		press_key(int key, t_game *game, double move_speed, double rot_speed);
 void	set_hook(t_game *game);
 void	close_win(t_game *game);
 int		exit_hook(t_game *game);
 
-//mlx
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
 
-//time
 long long	get_time(void);
 
-//exec
 int		exec(t_game *game);
 
-//draw
 void	draw_point(t_game *game);
 void	texture(t_game *game);
 void	draw(t_game *game, int x);
 
-//set_ray
 void	set_value(t_game *game, int x);
 void	set_step_side(t_game *game);
 void	hit_side(t_game *game);
