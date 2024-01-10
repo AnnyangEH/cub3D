@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/10 19:59:57 by eunhcho          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -134,6 +146,7 @@ char	**ft_split(char const *s, char c);
 int		ft_catoi(const char *str);
 int		ft_isempty(char *line);
 double	ft_min(double a, double b);
+void	free_split(char **split);
 
 //init functions
 void	ft_init(int ac, char **av, t_game *game);
@@ -145,12 +158,14 @@ void	free_game_one(t_game *game);
 
 //parsing functions
 void		parse(t_game *game);
+void	parse_token(t_game *game);
+void	parse_map(t_game *game);
 
 //checking functions
 void	check_map(t_game *game);
 
 //hook
-int		press_key(int key, t_game *game);
+int		press_key(int key, t_game *game, double move_speed, double rot_speed);
 void	set_hook(t_game *game);
 void	close_win(t_game *game);
 int		exit_hook(t_game *game);

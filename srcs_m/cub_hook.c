@@ -1,10 +1,16 @@
-#include "../inc/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub_hook.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 19:35:22 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/10 20:14:39 by eunhcho          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//void	set_hooks(t_game *game)
-//{
-//	mlx_hook(game->win, KEY_PRESS, 0, &key_press, game);
-//	mlx_hook(game->win, 17, 0, &close_win, game);
-//}
+#include "../inc/cub3D.h"
 
 void	close_win(t_game *game)
 {
@@ -18,10 +24,10 @@ int	exit_hook(t_game *game)
 	exit(0);
 }
 
-int	press_key(int key, t_game *game)
+int	press_key(int key, t_game *game, double move_speed, double rot_speed)
 {
-	double	move_speed = 0.2; //속도 고정
-	double	rot_speed = 0.07; //회전 속도 고정
+	rot_speed = 0.07;
+	move_speed = 0.2;
 
 	if (key == KEY_W)
 	{

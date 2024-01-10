@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/10 19:32:57 by eunhcho          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3D.h"
 
 static int	init_game(t_game *game, char *path);
 static int	init_mlx(t_game *game);
 static int	init_time(t_game *game);
-// static int	init_cast(t_game *game);
 
 void	ft_init(int ac, char **av, t_game *game)
 {
