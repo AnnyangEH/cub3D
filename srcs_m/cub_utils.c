@@ -153,8 +153,6 @@ int	ft_catoi(const char *str)
 		temp = next;
 		str++;
 	}
-	while (ft_iswhitespace(*str))
-		str++;
 	if (*str && (*str != '\n' && ft_isdigit(*str) == FALSE))
 		return (-1);
 	return ((int)temp);
@@ -164,9 +162,12 @@ int	ft_isempty(char *line)
 {
 	int	i;
 
-	i = -1;
-	while (line[++i] && line[i] != '\n')
+	i = 0;
+	while (line[i] && line[i] != '\n')
+	{
 		if (!ft_iswhitespace(line[i]))
 			return (0);
+		i++;
+	}
 	return (1);
 }
