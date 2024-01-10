@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:57:30 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/10 16:05:41 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 21:52:47 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	exec(t_game *game)
 		hit_side(game);
 		draw_point(game);
 		texture(game);
-		draw(game, x);
+		draw(game, x, 0, 0);
 	}
 	mlx_put_image_to_window(game->ptr, game->win, game->img_ptr, 0, 0);
 	return (0);

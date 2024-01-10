@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 20:29:42 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 21:53:03 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ int		exec(t_game *game);
 //draw
 void	draw_point(t_game *game);
 void	texture(t_game *game);
-void	draw(t_game *game, int x);
+void	draw(t_game *game, int x, int y, int color);
 
 //set_ray
 void	set_value(t_game *game, int x);
