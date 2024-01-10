@@ -108,17 +108,14 @@ void	parse_imgs(t_game *game)
 	}
 }
 
-static int	count_height(t_game *game)
+static int	count_height(t_game *game, int fd, int height)
 {
 	int		i;
-	int		fd;
-	int		height;
 	char	*line;
 
 	fd = open(game->map->path, O_RDONLY);
 	if (fd == -1)
 		ft_error("Error\nFailed to open file\n", game);
-	height = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -140,7 +137,7 @@ static int	count_height(t_game *game)
 
 void init_map_two(t_game *game)
 {
-	game->map->height = count_height(game);
+	game->map->height = count_height(game, 0, 0);
 	game->map->player_cnt = 0;
 	game->map->map = malloc(sizeof(char *) * (game->map->height + 1));
 	if (!game->map->map)

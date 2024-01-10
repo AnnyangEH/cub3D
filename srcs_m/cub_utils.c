@@ -162,10 +162,13 @@ int	ft_isempty(char *line)
 {
 	int	i;
 
-	i = -1;
-	while (line[++i] && line[i] != '\n')
+	i = 0;
+	while (line[i] && line[i] != '\n')
+	{
 		if (!ft_iswhitespace(line[i]))
 			return (0);
+		i++;
+	}
 	return (1);
 }
 

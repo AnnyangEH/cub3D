@@ -1,26 +1,26 @@
 NAME = cub3D
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAG = -Wall -Wextra -Werror -O2 -g -fsanitize=address
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
-DIR = ./srcs/
+DIR_M = ./srcs_m/
 
-SRCS =	$(DIR)main.c			\
-		$(DIR)cub_parsing.c		\
-		$(DIR)cub_utils.c		\
-		$(DIR)ft_error.c 		\
-		$(DIR)get_next_line.c	\
-		$(DIR)cub_init.c 		\
-		$(DIR)ft_split.c		\
-		$(DIR)check_map.c		\
-		$(DIR)exec.c			\
-		$(DIR)time.c			\
-		$(DIR)cub_mlx.c			\
-		$(DIR)cub_hook.c		\
-		$(DIR)set_ray.c			\
-		$(DIR)draw.c			
+SRCS =	$(DIR_M)main.c			\
+		$(DIR_M)cub_parsing.c		\
+		$(DIR_M)cub_utils.c		\
+		$(DIR_M)ft_error.c 		\
+		$(DIR_M)get_next_line.c	\
+		$(DIR_M)cub_init.c 		\
+		$(DIR_M)ft_split.c		\
+		$(DIR_M)check_map.c		\
+		$(DIR_M)exec.c			\
+		$(DIR_M)time.c			\
+		$(DIR_M)cub_mlx.c		\
+		$(DIR_M)cub_hook.c		\
+		$(DIR_M)set_ray.c		\
+		$(DIR_M)draw.c			
 
 
 OBJS = $(SRCS:.c=.o)

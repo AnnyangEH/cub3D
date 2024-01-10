@@ -20,8 +20,8 @@ int	exit_hook(t_game *game)
 
 int	press_key(int key, t_game *game)
 {
-	double	move_speed = 0.2;
-	double	rot_speed = 0.07;
+	double	move_speed = 0.2; //속도 고정
+	double	rot_speed = 0.07; //회전 속도 고정
 
 	if (key == KEY_W)
 	{
