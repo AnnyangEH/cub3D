@@ -1,4 +1,4 @@
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 void	set_value(t_game *game, int x)
 {

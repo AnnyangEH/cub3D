@@ -6,11 +6,11 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:01:32 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 21:55:51 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 static int	count_height(t_game *game, int fd, int height)
 {
@@ -98,6 +98,8 @@ static void	parse_map_line(t_game *game, int height)
 			game->map->map[height][i] = '0';
 			parse_player(game, game->map->line[i], height, i);
 		}
+		// bonus sprite part
+		// bonus door part
 		else
 			game->map->map[height][i] = game->map->line[i];
 	}

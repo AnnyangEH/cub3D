@@ -1,4 +1,4 @@
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 long long	get_time(void)
 {

@@ -6,11 +6,11 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:04:07 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 21:32:23 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
@@ -19,6 +19,9 @@ void	get_img_path(t_game *game, char *line, int *i, int flag)
 		(*i)++;
 	if (line[*i] == '\n')
 		return ;
+	game->imgs[flag].cnt++;
+	if (game->imgs[flag].cnt > 1)
+		ft_error("Error\nDup imgs\n", game);
 	game->imgs[flag].path = ft_strdup(line + *i);
 	if (!game->imgs[flag].path)
 		ft_error("Error\nFailed to allocate imgs path\n", game);
@@ -65,8 +68,14 @@ void	check_imgs_data(t_game *game, char *line, int *i)
 		get_img_path(game, line, i, 3);
 	else if (ft_strncmp(line + *i, "DOOR ", 5) == 0)
 		get_img_path(game, line, i, 4);
-	else if (ft_strncmp(line + *i, "MON ", 4) == 0)
-		 (game, line, i, 5);
+	else if (ft_strncmp(line + *i, "M1 ", 3) == 0)
+		get_sprite_img_path(game, line, 5);
+	else if (ft_strncmp(line + *i, "M2 ", 3) == 0)
+		get_sprite_img_path(game, line, 6);
+	else if (ft_strncmp(line + *i, "M3 ", 3) == 0)
+		get_sprite_img_path(game, line, 7);
+	else if (ft_strncmp(line + *i, "M4 ", 3) == 0)
+		get_sprite_img_path(game, line, 8);
 	else if (ft_strncmp(line + *i, "F ", 2) == 0)
 		get_img_color(game, line, i, FLOOR);
 	else if (ft_strncmp(line + *i, "C ", 2) == 0)
@@ -107,10 +116,10 @@ void	parse_token(t_game *game)
 		free(game->map->line);
 	}
 	i = 0;
-	while (i < 4)
+	while (i < 9)
 	{
 		if (!game->imgs[i].path)
-			ft_error("Error\nFailed to get imgs address\n", game);
+			ft_error("Error\nOne or more imgs are missing\n", game);
 		i++;
 	}
 }

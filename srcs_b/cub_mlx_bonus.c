@@ -1,4 +1,4 @@
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 {

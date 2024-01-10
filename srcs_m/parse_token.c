@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:11:00 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 21:27:00 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	parse_token(t_game *game)
 	while (i < 4)
 	{
 		if (!game->imgs[i].path)
-			ft_error("Error\nFailed to get imgs address\n", game);
+			ft_error("Error\nOne or more imgs adress is missing\n", game);
 		i++;
 	}
 }

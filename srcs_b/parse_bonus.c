@@ -6,11 +6,11 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:27 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:04:11 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 21:53:58 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 static void	set_color(t_game *game)
 {
@@ -33,7 +33,7 @@ static void	get_img(t_game *game)
 	int		i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 9)
 		init_imgs(game, i);
 }
 
