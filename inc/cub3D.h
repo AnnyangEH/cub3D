@@ -81,15 +81,15 @@ typedef struct s_imgs
 
 typedef struct s_ray
 {
-	double	camera;
-	double	ray_x;
-	double	ray_y;
+	double	cam;
+	double	dir_x;
+	double	dir_y;
 	int		map_x;
 	int		map_y;
 	double	side_x;
 	double	side_y;
-	double	delta_x;
-	double	delta_y;
+	double	dx;
+	double	dy;
 	double	perp_wall;
 	int		step_x;
 	int		step_y;
@@ -98,6 +98,9 @@ typedef struct s_ray
 	int		line_h;
 	int		d_start;
 	int		d_end;
+	int		cps;
+	int		tex_x;
+	int		tex_y;
 }				t_ray;
 
 typedef struct s_game
@@ -160,4 +163,16 @@ long long	get_time(void);
 
 //exec
 int		exec(t_game *game);
+
+//draw
+void	draw_point(t_game *game);
+void	texture(t_game *game);
+void	draw(t_game *game, int x);
+
+//set_ray
+void	set_value(t_game *game, int x);
+void	set_step_side(t_game *game);
+void	hit_side(t_game *game);
+void	set_wall_dir(t_game *game);
+
 #endif
