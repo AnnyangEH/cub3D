@@ -6,13 +6,12 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:11:12 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/08 02:34:01 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/10 22:09:42 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef DEFINE_H
 # define DEFINE_H
-
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -30,7 +29,6 @@
 # define SO 1
 # define WE 2
 # define EA 3
-
 
 # define KEY_A 0
 # define KEY_S 1

@@ -1,24 +1,10 @@
 #include "../inc/cub3D.h"
 
-//void	set_hooks(t_game *game)
-//{
-//	mlx_hook(game->win, KEY_PRESS, 0, &key_press, game);
-//	mlx_hook(game->win, 17, 0, &close_win, game);
-//}
-
 void	close_win(t_game *game)
 {
 	free_game_one(game);
 	exit(0);
 }
-
-// void	reset_game(t_game *game)
-// {
-// 	// mlx_destroy_image(game->ptr, game->img_ptr);
-// 	game->img.ptr = mlx_new_image(game->ptr, WIDTH, HEIGHT);
-// 	game->img.addr = mlx_get_data_addr(game->img.ptr, &game->img.bpp, \
-// 	&game->img.size_l, &game->img.endian);
-// }
 
 int	exit_hook(t_game *game)
 {
@@ -28,12 +14,8 @@ int	exit_hook(t_game *game)
 
 int	press_key(int key, t_game *game)
 {
-	game->time.old_time = game->time.curr_time;
-	game->time.curr_time = get_time();
-	double	fr_time = (game->time.curr_time - game->time.old_time) / 1000.0;
-
-	double	move_speed = fr_time * 5.0;
-	double	rot_speed = fr_time * 3.0;
+	double	move_speed = 0.3;
+	double	rot_speed = 0.2;
 
 	if (key == KEY_W)
 	{

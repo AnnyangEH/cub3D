@@ -18,7 +18,8 @@ SRCS =	$(DIR)main.c			\
 		$(DIR)exec.c			\
 		$(DIR)time.c			\
 		$(DIR)cub_mlx.c			\
-		$(DIR)cub_hook.c			\
+		$(DIR)cub_hook.c		\
+		$(DIR)dda_utils.c 		\
 
 
 OBJS = $(SRCS:.c=.o)

@@ -31,11 +31,17 @@ void    *ft_memcpy(void *dest, const void *src, size_t n);
 
 //init functions
 void	ft_init(int ac, char **av, t_game *game);
+void    init_ray(t_ray *ray, t_game *game, int x);
 
 //error handling function
 void	ft_error(char *str, t_game *game);
 void	ft_error_exit(char *str, t_game *game);
 void	free_game_one(t_game *game);
+
+void	cal_step_and_sidedist(t_ray *ray, t_game *game);
+void	perform_dda(t_ray *ray, t_game *game);
+void	cal_perpwalldist(t_ray *ray, t_game *game);
+void	cal_lineheight(t_ray *ray);
 
 //parsing functions
 void	parse(t_game *game);
