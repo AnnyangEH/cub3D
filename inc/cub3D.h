@@ -133,6 +133,7 @@ int		ft_isdigit(int c);
 char	**ft_split(char const *s, char c);
 int		ft_catoi(const char *str);
 int		ft_isempty(char *line);
+double	ft_min(double a, double b);
 
 //init functions
 void	ft_init(int ac, char **av, t_game *game);

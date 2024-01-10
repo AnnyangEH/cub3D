@@ -50,7 +50,7 @@ void	draw(t_game *game, int x)
 	for (int y = 0; y < game->ray.d_start; y++)
 		my_mlx_pixel_put(game, x, y, create_trgb(0, game->map->color[1][0], \
 					game->map->color[1][1], game->map->color[1][2]));
-	for (int y = game->ray.d_end; y <= 1000; y++)
+	for (int y = game->ray.d_end; y < 1000; y++)
 		my_mlx_pixel_put(game, x, y, create_trgb(0, game->map->color[0][0], \
 					game->map->color[0][1], game->map->color[0][2]));
 }

@@ -168,3 +168,10 @@ int	ft_isempty(char *line)
 			return (0);
 	return (1);
 }
+
+double	ft_min(double a, double b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
