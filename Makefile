@@ -25,6 +25,8 @@ SRCS =	$(DIR_M)main.c			\
 		$(DIR_M)cub_utils1.c	\
 		$(DIR_M)cub_utils2.c	\
 		$(DIR_M)cub_utils3.c	\
+		$(DIR_M)gogosing.c		\
+		$(DIR_M)turn.c			\
 
 
 OBJS = $(SRCS:.c=.o)
