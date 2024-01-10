@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:22 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 20:14:39 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 20:22:05 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	press_key(int key, t_game *game, double move_speed, double rot_speed)
 {
 	rot_speed = 0.07;
 	move_speed = 0.2;
-
 	if (key == KEY_W)
 	{
 		if (game->map->map[(int)game->player.y][(int)(game->player.x + game->player.dir_x * move_speed * 1.3)] == '0')

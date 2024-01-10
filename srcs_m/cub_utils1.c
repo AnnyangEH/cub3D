@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:15:04 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 20:15:29 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 20:19:35 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,3 @@ char	*ft_substr(char *s, unsigned int start, int len)
 	new[i] = '\0';
 	return (new);
 }
-
