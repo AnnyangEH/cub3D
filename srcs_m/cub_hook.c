@@ -25,33 +25,33 @@ int	press_key(int key, t_game *game)
 
 	if (key == KEY_W)
 	{
-		if (game->map->map[(int)game->player.y][(int)(game->player.x + game->player.dir_x * move_speed)] == '0')
+		if (game->map->map[(int)game->player.y][(int)(game->player.x + game->player.dir_x * move_speed * 1.3)] == '0')
 			game->player.x += game->player.dir_x * move_speed;
-		if (game->map->map[(int)(game->player.y + game->player.dir_y * move_speed)][(int)game->player.x] == '0')
+		if (game->map->map[(int)(game->player.y + game->player.dir_y * move_speed * 1.3)][(int)game->player.x] == '0')
 			game->player.y += game->player.dir_y * move_speed;
 	}
 
 	if (key == KEY_S)
 	{
-		if (game->map->map[(int)game->player.y][(int)(game->player.x - game->player.dir_x * move_speed)] == '0')
+		if (game->map->map[(int)game->player.y][(int)(game->player.x - game->player.dir_x * move_speed * 1.3)] == '0')
 			game->player.x -= game->player.dir_x * move_speed;
-		if (game->map->map[(int)(game->player.y - game->player.dir_y * move_speed)][(int)game->player.x] == '0')
+		if (game->map->map[(int)(game->player.y - game->player.dir_y * move_speed * 1.3)][(int)game->player.x] == '0')
 			game->player.y -= game->player.dir_y * move_speed;
 	}
 
 	if (key == KEY_D)
 	{
-		if (game->map->map[(int)(game->player.y + game->player.dir_x * move_speed)][(int)game->player.x] == '0')
+		if (game->map->map[(int)(game->player.y + game->player.dir_x * move_speed * 1.3)][(int)game->player.x] == '0')
 			game->player.y += game->player.dir_x * move_speed;
-		if (game->map->map[(int)game->player.y][(int)(game->player.x - game->player.dir_y * move_speed)] == '0')
+		if (game->map->map[(int)game->player.y][(int)(game->player.x - game->player.dir_y * move_speed * 1.3)] == '0')
 			game->player.x -= game->player.dir_y * move_speed;
 	}
 
 	if (key == KEY_A)
 	{
-		if (game->map->map[(int)(game->player.y - game->player.dir_x * move_speed)][(int)game->player.x] == '0')
+		if (game->map->map[(int)(game->player.y - game->player.dir_x * move_speed * 1.3)][(int)game->player.x] == '0')
 			game->player.y -= game->player.dir_x * move_speed;
-		if (game->map->map[(int)game->player.y][(int)(game->player.x + game->player.dir_y * move_speed)] == '0')
+		if (game->map->map[(int)game->player.y][(int)(game->player.x + game->player.dir_y * move_speed * 1.3)] == '0')
 			game->player.x += game->player.dir_y * move_speed;
 	}
 
