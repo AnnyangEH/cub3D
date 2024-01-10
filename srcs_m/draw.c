@@ -48,9 +48,7 @@ void	draw(t_game *game, int x)
 		my_mlx_pixel_put(game, x, y, color);
 	}
 	for (int y = 0; y < game->ray.d_start; y++)
-		my_mlx_pixel_put(game, x, y, create_trgb(0, game->map->color[1][0], \
-					game->map->color[1][1], game->map->color[1][2]));
+		my_mlx_pixel_put(game, x, y, game->map->ceiling_color);
 	for (int y = game->ray.d_end; y < 1000; y++)
-		my_mlx_pixel_put(game, x, y, create_trgb(0, game->map->color[0][0], \
-					game->map->color[0][1], game->map->color[0][2]));
+		my_mlx_pixel_put(game, x, y, game->map->floor_color);
 }

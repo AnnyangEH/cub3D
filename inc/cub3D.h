@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 19:59:57 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 20:29:42 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ enum e_key {
 	KEY_D = 2,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
-	KEY_DOWN = 125, 
+	KEY_DOWN = 125,
 	KEY_UP = 126,
 	KEY_ESC = 53,
 	KEY_PRESS = 2,
@@ -72,7 +72,9 @@ typedef struct s_map
 	char		**map;
 	char		*path; //map file path
 	char		*line;
-	int			color[2][3]; //floor, color rgb
+	int			color[2][3]; //floor, color rgb'
+	int			floor_color;
+	int			ceiling_color;
 	int			*width; //map width
 	int			height; //map height
 	int			player_cnt;

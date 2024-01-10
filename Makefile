@@ -9,8 +9,6 @@ DIR_M = ./srcs_m/
 
 SRCS =	$(DIR_M)main.c			\
 		$(DIR_M)parse.c			\
-		$(DIR_M)cub_utils1.c	\
-		$(DIR_M)cub_utils2.c	\
 		$(DIR_M)ft_error.c 		\
 		$(DIR_M)get_next_line.c	\
 		$(DIR_M)cub_init.c 		\
@@ -24,6 +22,9 @@ SRCS =	$(DIR_M)main.c			\
 		$(DIR_M)draw.c			\
 		$(DIR_M)parse_token.c	\
 		$(DIR_M)parse_map.c		\
+		$(DIR_M)cub_utils1.c	\
+		$(DIR_M)cub_utils2.c	\
+		$(DIR_M)cub_utils3.c	\
 
 
 OBJS = $(SRCS:.c=.o)
