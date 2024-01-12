@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 18:52:25 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:22:12 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ void	free_game_one(t_game *game);
 void	parse(t_game *game);
 void	parse_token(t_game *game);
 void	parse_map(t_game *game);
-void	
 
 void	check_map(t_game *game);
 
@@ -194,6 +193,7 @@ int		exec(t_game *game);
 void	draw_point(t_game *game);
 void	texture(t_game *game);
 void	draw(t_game *game, int x, int y, int color);
+void	minimap(t_game *game);
 
 void	set_value(t_game *game, int x);
 void	set_step_side(t_game *game);

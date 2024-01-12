@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 21:42:31 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/12 17:07:29 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:20:40 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,15 @@ void	draw(t_game *game, int x, int y, int color)
 			my_mlx_pixel_put(game, x, y, color);
 		}
 		y++;
+	}
+}
+
+void	minimap(t_game *game)
+{
+	int	color = create_trgb(0, 0, 0, 0);
+	for (int x = 0; x < 125; x++)
+	{
+		for (int y = 0; y < 125; y++)
+			my_mlx_pixel_put(game, x, y, color);
 	}
 }
