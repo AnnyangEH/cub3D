@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:32:23 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 18:41:13 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void	check_imgs_data(t_game *game, char *line, int *i)
 	else if (ft_strncmp(line + *i, "DOOR ", 5) == 0)
 		get_img_path(game, line, i, 4);
 	else if (ft_strncmp(line + *i, "M1 ", 3) == 0)
-		get_sprite_img_path(game, line, 5);
+		get_img_path(game, line, i, 5);
 	else if (ft_strncmp(line + *i, "M2 ", 3) == 0)
-		get_sprite_img_path(game, line, 6);
+		get_img_path(game, line, i, 6);
 	else if (ft_strncmp(line + *i, "M3 ", 3) == 0)
-		get_sprite_img_path(game, line, 7);
+		get_img_path(game, line, i, 7);
 	else if (ft_strncmp(line + *i, "M4 ", 3) == 0)
-		get_sprite_img_path(game, line, 8);
+		get_img_path(game, line, i, 8);
 	else if (ft_strncmp(line + *i, "F ", 2) == 0)
 		get_img_color(game, line, i, FLOOR);
 	else if (ft_strncmp(line + *i, "C ", 2) == 0)
