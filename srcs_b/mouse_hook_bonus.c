@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mouse_hook_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 19:32:44 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 16:59:46 by eunhcho          ###   ########.fr       */
+/*   Created: 2024/01/10 22:48:34 by hysung            #+#    #+#             */
+/*   Updated: 2024/01/12 17:00:44 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int	main(int ac, char **av)
+int	mouse_hook(int button, int x, int y, t_game *game)
 {
-	t_game	*game;
-
-	game = malloc(sizeof(t_game));
-	if (!game)
-		ft_error_exit("Error\nFailed to allocate game\n", game);
-	ft_init(ac, av, game);
-	parse(game);
-	mlx_hook(game->win, 17, 0, exit_hook, game);
-	mlx_hook(game->win, KEY_PRESS, 1L << 0, press_key, game);
-	mlx_loop_hook(game->ptr, exec, game);
-	mlx_loop(game->ptr);
-	free_game_one(game);
-	return (SUCCESS);
+	if (button == 1) //mouse mode on
+	{
+		mlx_mouse_hide();
+		mlx_mouse_move(game->win, game->map->width / 2, game->map->height / 2);
+		//mouse 구조체 추가:
+		game->mouse.mode = 1;
+		mlx_mouse_get_pos(game->win, &game->mouse.x, &game->mouse.y);
+	}
+	if (button == 2) //off
+	{
+		mlx_mouse_show();
+		game->mouse.mode = 0;
+	}
 }
