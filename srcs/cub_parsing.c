@@ -4,11 +4,14 @@ static void	init_imgs(t_game *game, int i);
 
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
-	(*i) += 3; // skip imgs
-	while (ft_iswhitespace(line[*i]) && line[*i]) // skip whitespace
+	(*i) += 3;
+	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
 	if (line[*i] == '\n')
 		return ;
+	game->imgs[flag].cnt++;
+	if (game->imgs[flag].cnt > 1)
+		ft_error("Error\nDup imgs\n", game);
 	game->imgs[flag].path = ft_strdup(line + *i);
 	if (!game->imgs[flag].path)
 		ft_error("Error\nFailed to allocate imgs path\n", game);
@@ -110,17 +113,14 @@ void	parse_imgs(t_game *game)
 	}
 }
 
-static int	count_height(t_game *game)
+static int	count_height(t_game *game, int fd, int height)
 {
 	int		i;
-	int		fd;
-	int		height;
 	char	*line;
 
 	fd = open(game->map->path, O_RDONLY);
 	if (fd == -1)
 		ft_error("Error\nFailed to open file\n", game);
-	height = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -140,9 +140,9 @@ static int	count_height(t_game *game)
 	return (height);
 }
 
-void init_map_two(t_game *game)
+void	init_map_two(t_game *game)
 {
-	game->map->height = count_height(game);
+	game->map->height = count_height(game, 0, 0);
 	game->map->player_cnt = 0;
 	game->map->map = malloc(sizeof(char *) * (game->map->height + 1));
 	if (!game->map->map)
@@ -156,33 +156,25 @@ void init_map_two(t_game *game)
 
 void	parse_player(t_game *game, char c, int height, int width)
 {
-	if (c == 'N')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = -1;
-	}
-	else if (c == 'S')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = 1;
-	}
-	else if (c == 'E')
-	{
-		game->player.dir_x = 1;
-		game->player.dir_y = 0;
-	}
-	else if (c == 'W')
-	{
-		game->player.dir_x = -1;
-		game->player.dir_y = 0;
-	}
+	game->map->player_cnt++;
+	game->map->map[height][width] = '0';
 	game->player.x = width + 0.5;
 	game->player.y = height + 0.5;
-	game->player.plane_x = game->player.dir_y * (-0.66);
+	game->player.dir_x = 0.0;
+	game->player.dir_y = 0.0;
+	if (c == 'N')
+		game->player.dir_y = -1.0;
+	else if (c == 'S')
+		game->player.dir_y = 1.0;
+	else if (c == 'W')
+		game->player.dir_x = -1.0;
+	else if (c == 'E')
+		game->player.dir_x = 1.0;
 	game->player.plane_y = game->player.dir_x * 0.66;
+	game->player.plane_x = game->player.dir_y * (-0.66);
 }
 
-static void parse_map_line(t_game *game, int height)
+static void	parse_map_line(t_game *game, int height)
 {
 	int	i;
 
@@ -192,18 +184,13 @@ static void parse_map_line(t_game *game, int height)
 		if (!ft_strchr(" 01NSEW", game->map->line[i]))
 			ft_error("Error\nInvalid map\n", game);
 		else if (ft_strchr("NSEW", game->map->line[i]))
-		{
-			if (game->map->player_cnt > 0)
-				ft_error("Error\nMultiple players\n", game);
-			game->map->player_cnt++;
-			game->map->map[height][i] = '0';
-			parse_player(game, game->map->line[i], height, i); // 수정 필요
-		}
+			parse_player(game, game->map->line[i], height, i);
 		else
 			game->map->map[height][i] = game->map->line[i];
 	}
 	game->map->map[height][i] = '\0';
 }
+
 void	parse_map(t_game *game)
 {
 	int	height;
