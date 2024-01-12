@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 19:14:58 by eunhcho          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
@@ -197,6 +185,7 @@ int		exec(t_game *game);
 void	draw_point(t_game *game);
 void	texture(t_game *game);
 void	draw(t_game *game, int x, int y, int color);
+void	minimap(t_game *game, int x, int y);
 
 void	set_value(t_game *game, int x);
 void	set_step_side(t_game *game);

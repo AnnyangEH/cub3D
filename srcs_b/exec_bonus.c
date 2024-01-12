@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 14:57:30 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/12 21:52:52 by eunhcho          ###   ########.fr       */
+/*   Created: 2024/01/12 21:54:54 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/12 21:55:05 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ int	exec(t_game *game)
 	int	x;
 
 	x = 0;
+	if (game->mouse.mode)
+	{
+		mlx_mouse_get_pos(game->win, &game->mouse.x, &game->mouse.y);
+		if (game->mouse.x > 500)
+			turn_right(game, 0.05);
+		else if (game->mouse.x < 500)
+			turn_left(game, 0.05);
+		mlx_mouse_move(game->win, 500, 500);
+	}
 	while (x < 1000)
 	{
 		set_value(game, x);
@@ -27,6 +36,7 @@ int	exec(t_game *game)
 		draw(game, x, 0, 0);
 		x++;
 	}
+	minimap(game, 0, 0);
 	mlx_put_image_to_window(game->ptr, game->win, game->img_ptr, 0, 0);
 	return (0);
 }
