@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 18:41:13 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:50:38 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	get_img_path(t_game *game, char *line, int *i, int flag)
 		ft_error("Error\nFailed to allocate imgs path\n", game);
 	if (game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] == '\n')
 		game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] = '\0';
+	if (open(game->imgs[flag].path, O_RDONLY) == -1)
+	{
+		printf("%d %s\n", flag, game->imgs[flag].path);
+		ft_error("Error\nWrong img path\n", game);
+	}
 }
 
 void	get_img_color(t_game *game, char *line, int *i, int flag)
@@ -66,7 +71,7 @@ void	check_imgs_data(t_game *game, char *line, int *i)
 		get_img_path(game, line, i, 2);
 	else if (ft_strncmp(line + *i, "EA ", 3) == 0)
 		get_img_path(game, line, i, 3);
-	else if (ft_strncmp(line + *i, "DOOR ", 5) == 0)
+	else if (ft_strncmp(line + *i, "DO ", 3) == 0)
 		get_img_path(game, line, i, 4);
 	else if (ft_strncmp(line + *i, "M1 ", 3) == 0)
 		get_img_path(game, line, i, 5);

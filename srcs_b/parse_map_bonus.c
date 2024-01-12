@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 19:04:28 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:37:52 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ static void	parse_map_line(t_game *game, int height, int i)
 	while (game->map->line[++i] && game->map->line[i] != '\n')
 	{
 		if (!ft_strchr(" 01234NSEW", game->map->line[i]))
-			ft_error("Error\nInvalid map\n", game);
+			ft_error("Error\nInvalid map character\n", game);
 		else if (ft_strchr("NSEW", game->map->line[i]))
 			parse_player(game, game->map->line[i], height, i);
 		else if (ft_strchr("3", game->map->line[i]))
-			ft_error("Error\nInvalid map\n", game);
+			ft_error("Error\nInvalid map open door\n", game);
 		else
 			game->map->map[height][i] = game->map->line[i];
 	}
