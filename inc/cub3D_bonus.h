@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 16:59:43 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 17:14:14 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,11 +176,18 @@ int		exec(t_game *game);
 
 void	draw_point(t_game *game);
 void	texture(t_game *game);
-void	draw(t_game *game, int x);
+void	draw(t_game *game, int x, int y, int color);
 
 void	set_value(t_game *game, int x);
 void	set_step_side(t_game *game);
 void	hit_side(t_game *game);
 void	set_wall_dir(t_game *game);
+
+void	go_up(t_game *game, double move_speed);
+void	go_down(t_game *game, double move_speed);
+void	go_right(t_game *game, double move_speed);
+void	go_left(t_game *game, double move_speed);
+void	turn_right(t_game *game, double rot_speed);
+void	turn_left(t_game *game, double rot_speed);
 
 #endif
