@@ -1,5 +1,7 @@
 #include "../inc/cub3D.h"
 
+static void	init_imgs(t_game *game, int i);
+
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
 	(*i) += 3; // skip imgs
@@ -226,42 +228,22 @@ void	parse_map(t_game *game)
 	game->map->map[height] = NULL;
 }
 
-// static void	get_img(t_game *game)
-// {
-// 	int		i;
+static void	get_img(t_game *game)
+{
+	int		i;
 
-// 	i = -1;
-// 	while (++i < 4)
-// 		init_imgs(game, i);
-// }
+	i = -1;
+	while (++i < 4)
+		init_imgs(game, i);
+}
 
-// static void	init_imgs(t_game *game, int i)
-// {
-// 	int	size;
-
-// 	size = 64;
-// 	game->imgs[i].ptr = mlx_xpm_file_to_image(game->, game->imgs[i].path, \
-// 									&size, &size);
-// 	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, &game->imgs[i].bpp, \
-// 								&game->imgs[i].size_l, &game->imgs[i].endian);
-// }
-// static void	make_temp_buffer(t_game *game)
-// {
-// 	int i;
-
-// 	game->map->temp = malloc(sizeof(char *) * game->map->height);
-// 	if (!game->map->temp)
-// 		ft_error("Error\nFailed to allocate temp map\n", game);
-
-// 	i = 0;
-// 	while (i < game->map->height)
-// 	{
-// 		game->map->temp[i] = ft_strdup(game->map->map[i]); // Assuming you have strdup function
-// 		if (!game->map->temp[i])
-// 			ft_error("Error\nFailed to allocate temp map\n", game);
-// 		i++;
-// 	}
-// }
+static void	init_imgs(t_game *game, int i)
+{
+	game->imgs[i].ptr = mlx_xpm_file_to_image(game->ptr, \
+	game->imgs[i].path, &game->imgs[i].width, &game->imgs[i].height);
+	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, \
+	&game->imgs[i].bpp, &game->imgs[i].size_l, &game->imgs[i].endian);
+}
 
 void	parse(t_game *game)
 {
@@ -271,8 +253,7 @@ void	parse(t_game *game)
 	parse_imgs(game);
 	parse_map(game);
 	check_map(game);
-	//get_img(game);
+	get_img(game);
 	if (close(game->map->fd) == -1)
 		ft_error("Error\nFailed to close file\n", game);
-	// make_temp_buffer(game);
 }
