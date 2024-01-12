@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:27:00 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:47:27 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	get_img_path(t_game *game, char *line, int *i, int flag)
 		ft_error("Error\nFailed to allocate imgs path\n", game);
 	if (game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] == '\n')
 		game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] = '\0';
+	if (open(game->imgs[flag].path, O_RDONLY) == -1)
+		ft_error("Error\nWrong img path\n", game);
 }
 
 void	get_img_color(t_game *game, char *line, int *i, int flag)

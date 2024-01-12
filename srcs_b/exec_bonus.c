@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:13 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 18:37:55 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/12 21:19:08 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,11 @@ int	exec(t_game *game)
 	if (game->mouse.mode)
 	{
 		mlx_mouse_get_pos(game->win, &game->mouse.x, &game->mouse.y);
-		if (game->mouse.x > *game->map->width / 2)
-		{
-			turn_right(game, 0.07);
-		}
-		else if (game->mouse.x < *game->map->width / 2)
-		{
-			turn_left(game, 0.07);
-		}
-		mlx_mouse_move(game->win, *game->map->width / 2, game->map->height / 2);
+		if (game->mouse.x > 500)
+			turn_right(game, 0.05);
+		else if (game->mouse.x < 500)
+			turn_left(game, 0.05);
+		mlx_mouse_move(game->win, 500, 500);
 	}
 	while (x < 1000)
 	{
@@ -40,6 +36,7 @@ int	exec(t_game *game)
 		draw(game, x, 0, 0);
 		x++;
 	}
+	minimap(game, 0, 0);
 	mlx_put_image_to_window(game->ptr, game->win, game->img_ptr, 0, 0);
 	return (0);
 }

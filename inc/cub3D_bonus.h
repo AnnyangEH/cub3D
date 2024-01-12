@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 19:22:12 by hysung           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
@@ -36,6 +24,9 @@
 # define SO 1
 # define WE 2
 # define EA 3
+
+# define OPEN 1
+# define CLOSE 0
 
 enum e_key {
 	KEY_W = 13,
@@ -134,6 +125,7 @@ typedef struct s_game
 	int				bpp;
 	int				endian;
 	int				size_l;
+	int				door_cnt;
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[9];
@@ -193,11 +185,18 @@ int		exec(t_game *game);
 void	draw_point(t_game *game);
 void	texture(t_game *game);
 void	draw(t_game *game, int x, int y, int color);
-void	minimap(t_game *game);
+void	minimap(t_game *game, int x, int y);
 
 void	set_value(t_game *game, int x);
 void	set_step_side(t_game *game);
 void	hit_side(t_game *game);
 void	set_wall_dir(t_game *game);
+
+void	go_up(t_game *game, double move_speed);
+void	go_down(t_game *game, double move_speed);
+void	go_right(t_game *game, double move_speed);
+void	go_left(t_game *game, double move_speed);
+void	turn_right(t_game *game, double rot_speed);
+void	turn_left(t_game *game, double rot_speed);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 21:42:31 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/12 19:20:40 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/12 21:52:28 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,30 @@ void	draw(t_game *game, int x, int y, int color)
 	}
 }
 
-void	minimap(t_game *game)
+void	minimap(t_game *game, int x, int y)
 {
-	int	color = create_trgb(0, 0, 0, 0);
-	for (int x = 0; x < 125; x++)
+	int	xx;
+	int	yy;
+
+	x = -1;
+	while (++x < 300)
 	{
-		for (int y = 0; y < 125; y++)
-			my_mlx_pixel_put(game, x, y, color);
+		y = -1;
+		while (++y < 300)
+		{
+			yy = y * game->map->height / 300;
+			xx = x * game->map->width[yy] / 300;
+			if (game->map->map[yy][xx] == '0')
+				my_mlx_pixel_put(game, x, y, create_trgb(0, 255, 255, 255));
+			else if (xx >= game->map->width[yy] || \
+				game->map->map[yy][xx] == ' ' || game->map->map[yy][xx] == '1')
+				my_mlx_pixel_put(game, x, y, create_trgb(0, 0, 0, 0));
+			else if (game->map->map[yy][xx] == '2')
+				my_mlx_pixel_put(game, x, y, create_trgb(0, 15, 20, 210));
+			else if (game->map->map[yy][xx] == '4')
+				my_mlx_pixel_put(game, x, y, create_trgb(0, 200, 50, 200));
+			if (xx == (int)game->player.x && yy == (int)game->player.y)
+				my_mlx_pixel_put(game, x, y, create_trgb(0, 10, 230, 10));
+		}
 	}
 }
