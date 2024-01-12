@@ -48,6 +48,7 @@ SRCS_B =	$(DIR_B)main_bonus.c		\
 		$(DIR_B)cub_utils1_bonus.c		\
 		$(DIR_B)cub_utils2_bonus.c		\
 		$(DIR_B)cub_utils3_bonus.c		\
+		$(DIR_B)mouse_hook_bonus.c		\
 
 OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
