@@ -1,13 +1,15 @@
 NAME = cub3D
+BONUS_NAME = cub3D_bonus
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -O2 -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O2 -g -fsanitize=address
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
 DIR_M = ./srcs_m/
+DIR_B = ./srcs_b/
 
-SRCS =	$(DIR_M)main.c			\
+SRCS_M =	$(DIR_M)main.c		\
 		$(DIR_M)parse.c			\
 		$(DIR_M)ft_error.c 		\
 		$(DIR_M)get_next_line.c	\
@@ -28,26 +30,53 @@ SRCS =	$(DIR_M)main.c			\
 		$(DIR_M)gogosing.c		\
 		$(DIR_M)turn.c			\
 
+SRCS_B =	$(DIR_B)main_bonus.c		\
+		$(DIR_M)parse_bonus.c			\
+		$(DIR_B)ft_error_bonus.c 		\
+		$(DIR_B)get_next_line_bonus.c	\
+		$(DIR_B)cub_init_bonus.c 		\
+		$(DIR_B)ft_split_bonus.c		\
+		$(DIR_B)check_map_bonus.c		\
+		$(DIR_B)exec_bonus.c			\
+		$(DIR_B)time_bonus.c			\
+		$(DIR_B)cub_mlx_bonus.c			\
+		$(DIR_B)cub_hook_bonus.c		\
+		$(DIR_B)set_ray_bonus.c			\
+		$(DIR_B)draw_bonus.c			\
+		$(DIR_B)parse_token_bonus.c		\
+		$(DIR_B)parse_map_bonus.c		\
+		$(DIR_B)cub_utils1_bonus.c		\
+		$(DIR_B)cub_utils2_bonus.c		\
+		$(DIR_B)cub_utils3_bonus.c		\
 
-OBJS = $(SRCS:.c=.o)
+OBJS_M = $(SRCS_M:.c=.o)
+OBJS_B = $(SRCS_B:.c=.o)
+
+.PHONY: all clean fclean re bonus
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+bonus: $(BONUS_NAME)
+
+ifeq ($(filter bonus,$(MAKECMDGOALS)),bonus)
+$(BONUS_NAME): $(OBJS_B)
 	$(MAKE) -C ./mlx/
-	$(CC) $(CFLAG) -I./inc $(OBJS) -o $(NAME) $(MLX_FLAG)
+	$(CC) $(CFLAGS) -I./inc $(OBJS_B) -o $(BONUS_NAME) $(MLX_FLAG)
+else
+$(NAME): $(OBJS_M)
+	$(MAKE) -C ./mlx/
+	$(CC) $(CFLAGS) -I./inc $(OBJS_M) -o $(NAME) $(MLX_FLAG)
+endif
 
 %.o: %.c
-	$(CC) $(CFLAG) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I./inc
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS_M) $(OBJS_B)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 re:
 	make fclean
 	make all
-
-.PHONY: all clean fclean re

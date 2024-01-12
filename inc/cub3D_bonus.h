@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 16:50:42 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 16:50:47 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../mlx/mlx.h"
 # include "get_next_line.h"
@@ -129,7 +129,7 @@ typedef struct s_game
 	int				size_l;
 	t_map			*map;
 	t_player		player;
-	t_imgs			imgs[4];
+	t_imgs			imgs[9];
 	t_ray			ray;
 	t_time			time;
 }					t_game;
@@ -156,9 +156,9 @@ void	ft_error(char *str, t_game *game);
 void	ft_error_exit(char *str, t_game *game);
 void	free_game_one(t_game *game);
 
-void		parse(t_game *game);
-void		parse_token(t_game *game);
-void		parse_map(t_game *game);
+void	parse(t_game *game);
+void	parse_token(t_game *game);
+void	parse_map(t_game *game);
 
 void	check_map(t_game *game);
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_token.c                                      :+:      :+:    :+:   */
+/*   parse_token_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:27:00 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 21:32:23 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
@@ -66,6 +66,16 @@ void	check_imgs_data(t_game *game, char *line, int *i)
 		get_img_path(game, line, i, 2);
 	else if (ft_strncmp(line + *i, "EA ", 3) == 0)
 		get_img_path(game, line, i, 3);
+	else if (ft_strncmp(line + *i, "DOOR ", 5) == 0)
+		get_img_path(game, line, i, 4);
+	else if (ft_strncmp(line + *i, "M1 ", 3) == 0)
+		get_sprite_img_path(game, line, 5);
+	else if (ft_strncmp(line + *i, "M2 ", 3) == 0)
+		get_sprite_img_path(game, line, 6);
+	else if (ft_strncmp(line + *i, "M3 ", 3) == 0)
+		get_sprite_img_path(game, line, 7);
+	else if (ft_strncmp(line + *i, "M4 ", 3) == 0)
+		get_sprite_img_path(game, line, 8);
 	else if (ft_strncmp(line + *i, "F ", 2) == 0)
 		get_img_color(game, line, i, FLOOR);
 	else if (ft_strncmp(line + *i, "C ", 2) == 0)
@@ -83,7 +93,7 @@ int	check_imgs(t_game *game, char *line)
 		i++;
 	if (line[i] == '\n')
 		return (FALSE);
-	else if (ft_strchr("NSWEFC", line[i]))
+	else if (ft_strchr("NSWEFCDM", line[i]))
 		check_imgs_data(game, line, &i);
 	else if (ft_isdigit(line[i]))
 		return (TRUE);
@@ -106,10 +116,10 @@ void	parse_token(t_game *game)
 		free(game->map->line);
 	}
 	i = 0;
-	while (i < 4)
+	while (i < 9)
 	{
 		if (!game->imgs[i].path)
-			ft_error("Error\nOne or more imgs adress is missing\n", game);
+			ft_error("Error\nOne or more imgs are missing\n", game);
 		i++;
 	}
 }

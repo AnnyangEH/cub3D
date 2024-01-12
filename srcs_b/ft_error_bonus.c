@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_error_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:22:40 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:22:46 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/10 21:21:48 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 static void	free_game_two(t_game *game, int i);
 static void	free_mlx(t_game *game);
@@ -45,7 +45,7 @@ void	free_game_one(t_game *game)
 
 static void	free_game_two(t_game *game, int i)
 {
-	while (++i < 4)
+	while (++i < 9)
 	{
 		if (game->imgs[i].path)
 			free(game->imgs[i].path);
