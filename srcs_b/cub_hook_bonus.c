@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:22 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 17:07:53 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 23:57:34 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ int	exit_hook(t_game *game)
 {
 	mlx_destroy_window(game->ptr, game->win);
 	exit(0);
+}
+
+void	open_door(t_game *game)
+{
+	if (game->map->map[(int)(game->player.y + game->player.dir_y)]\
+			[(int)(game->player.x + game->player.dir_x)] == '2')
+		game->map->map[(int)(game->player.y + game->player.dir_y)]\
+				[(int)(game->player.x + game->player.dir_x)] = '3';
+	if (game->map->map[(int)(game->player.y + game->player.dir_y)]\
+			[(int)(game->player.x + game->player.dir_x)] == '3')
+		game->map->map[(int)(game->player.y + game->player.dir_y)]\
+				[(int)(game->player.x + game->player.dir_x)] = '2';
+	printf("asdfa");
+	printf("%c ", game->map->map[(int)(game->player.y + game->player.dir_y)][(int)(game->player.x + game->player.dir_x)]);
 }
 
 int	press_key(int key, t_game *game, double move_speed, double rot_speed)
@@ -42,5 +56,7 @@ int	press_key(int key, t_game *game, double move_speed, double rot_speed)
 		turn_right(game, rot_speed);
 	if (key == KEY_ESC)
 		exit_hook(game);
+	if (key == KEY_SPACE)
+		open_door(game);
 	return (0);
 }
