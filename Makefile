@@ -31,7 +31,7 @@ SRCS_M =	$(DIR_M)main.c		\
 		$(DIR_M)turn.c			\
 
 SRCS_B =	$(DIR_B)main_bonus.c		\
-		$(DIR_M)parse_bonus.c			\
+		$(DIR_B)parse_bonus.c			\
 		$(DIR_B)ft_error_bonus.c 		\
 		$(DIR_B)get_next_line_bonus.c	\
 		$(DIR_B)cub_init_bonus.c 		\
@@ -49,6 +49,8 @@ SRCS_B =	$(DIR_B)main_bonus.c		\
 		$(DIR_B)cub_utils2_bonus.c		\
 		$(DIR_B)cub_utils3_bonus.c		\
 		$(DIR_B)mouse_hook_bonus.c		\
+		$(DIR_B)turn_bonus.c			\
+		$(DIR_B)gogosing_bonus.c		\
 
 OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 16:59:43 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 18:52:25 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,13 @@ typedef struct s_ray
 	int		tex_y;
 }				t_ray;
 
+typedef struct s_mouse
+{
+	int	x;
+	int	y;
+	int	mode;
+}				t_mouse;
+
 typedef struct s_game
 {
 	char			*ptr;
@@ -131,6 +138,7 @@ typedef struct s_game
 	t_player		player;
 	t_imgs			imgs[9];
 	t_ray			ray;
+	t_mouse			mouse;
 	t_time			time;
 }					t_game;
 
@@ -159,6 +167,7 @@ void	free_game_one(t_game *game);
 void	parse(t_game *game);
 void	parse_token(t_game *game);
 void	parse_map(t_game *game);
+void	
 
 void	check_map(t_game *game);
 
@@ -166,6 +175,14 @@ int		press_key(int key, t_game *game, double move_speed, double rot_speed);
 void	set_hook(t_game *game);
 void	close_win(t_game *game);
 int		exit_hook(t_game *game);
+int		mouse_hook(int button, int x, int y, t_game *game);
+
+void	go_up(t_game *game, double move_speed);
+void	go_down(t_game *game, double move_speed);
+void	go_right(t_game *game, double move_speed);
+void	go_left(t_game *game, double move_speed);
+void	turn_left(t_game *game, double rot_speed);
+void	turn_right(t_game *game, double rot_speed);
 
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
@@ -176,7 +193,7 @@ int		exec(t_game *game);
 
 void	draw_point(t_game *game);
 void	texture(t_game *game);
-void	draw(t_game *game, int x);
+void	draw(t_game *game, int x, int y, int color);
 
 void	set_value(t_game *game, int x);
 void	set_step_side(t_game *game);

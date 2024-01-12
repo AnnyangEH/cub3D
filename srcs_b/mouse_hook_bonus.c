@@ -6,25 +6,26 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 22:48:34 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/12 17:01:58 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 18:43:37 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 int	mouse_hook(int button, int x, int y, t_game *game)
 {
-	if (button == 1) //mouse mode on
+	(void)x;
+	(void)y;
+	if (button == 1)
 	{
 		mlx_mouse_hide();
-		mlx_mouse_move(game->win, game->map->width / 2, game->map->height / 2);
-		//mouse 구조체 추가:
+		mlx_mouse_move(game->win, *game->map->width / 2, game->map->height / 2);
 		game->mouse.mode = 1;
-		mlx_mouse_get_pos(game->win, &game->mouse.x, &game->mouse.y);
 	}
-	if (button == 2) //off
+	if (button == 2)
 	{
 		mlx_mouse_show();
 		game->mouse.mode = 0;
 	}
+	return (0);
 }
