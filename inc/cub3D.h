@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 16:48:10 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 16:50:42 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,8 @@ void	ft_error_exit(char *str, t_game *game);
 void	free_game_one(t_game *game);
 
 void		parse(t_game *game);
-void	parse_token(t_game *game);
-void	parse_map(t_game *game);
+void		parse_token(t_game *game);
+void		parse_map(t_game *game);
 
 void	check_map(t_game *game);
 

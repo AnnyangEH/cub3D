@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_ray.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hysung <hysung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 21:29:41 by hysung            #+#    #+#             */
+/*   Updated: 2024/01/10 21:41:14 by hysung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3D.h"
 
 void	set_value(t_game *game, int x)
@@ -23,7 +35,7 @@ void	set_step_side(t_game *game)
 	{
 		game->ray.step_x = 1;
 		game->ray.side_x = (game->ray.map_x + 1.0 - game->player.x) * \
-						   game->ray.dx;
+							game->ray.dx;
 	}
 	if (game->ray.dir_y < 0)
 	{
@@ -34,7 +46,7 @@ void	set_step_side(t_game *game)
 	{
 		game->ray.step_y = 1;
 		game->ray.side_y = (game->ray.map_y + 1.0 - game->player.y) * \
-						   game->ray.dy;
+							game->ray.dy;
 	}
 }
 
@@ -67,13 +79,12 @@ void	hit_side(t_game *game)
 
 void	set_wall_dir(t_game *game)
 {
-//ㅇㅔ러 고려해야 될까? ㄱㅣ본값?
-	if (game->ray.side && (game->player.y - game->ray.map_y) < 0)//y, north
+	if (game->ray.side && (game->player.y - game->ray.map_y) < 0)
 		game->ray.cps = 0;
-	else if (game->ray.side && (game->player.y - game->ray.map_y) > 0)//y, south
+	else if (game->ray.side && (game->player.y - game->ray.map_y) > 0)
 		game->ray.cps = 1;
-	if (!game->ray.side && (game->player.x - game->ray.map_x) < 0)//x, west
+	else if (!game->ray.side && (game->player.x - game->ray.map_x) < 0)
 		game->ray.cps = 2;
-	else if (!game->ray.side && (game->player.x - game->ray.map_x) > 0)//x, east
+	else if (!game->ray.side && (game->player.x - game->ray.map_x) > 0)
 		game->ray.cps = 3;
 }
