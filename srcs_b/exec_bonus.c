@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 17:05:13 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 18:37:55 by hysung           ###   ########.fr       */
+/*   Created: 2024/01/10 14:57:30 by hysung            #+#    #+#             */
+/*   Updated: 2024/01/12 21:52:52 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,6 @@ int	exec(t_game *game)
 	int	x;
 
 	x = 0;
-	if (game->mouse.mode)
-	{
-		mlx_mouse_get_pos(game->win, &game->mouse.x, &game->mouse.y);
-		if (game->mouse.x > *game->map->width / 2)
-		{
-			turn_right(game, 0.07);
-		}
-		else if (game->mouse.x < *game->map->width / 2)
-		{
-			turn_left(game, 0.07);
-		}
-		mlx_mouse_move(game->win, *game->map->width / 2, game->map->height / 2);
-	}
 	while (x < 1000)
 	{
 		set_value(game, x);
