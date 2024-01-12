@@ -4,9 +4,9 @@ WE ./imgs/WE.xpm
 EA ./imgs/EA.xpm
 DOOR ./imgs/DOOR.xpm
 M1 ./imgs/MONSTER1.xpm
-M2 ./imgs/MONSTER1.xpm
-M3 ./imgs/MONSTER1.xpm
-M4 ./imgs/MONSTER1.xpm
+M2 ./imgs/MONSTER2.xpm
+M3 ./imgs/MONSTER3.xpm
+M4 ./imgs/MONSTER4.xpm
 
 F 181,214,163
 C 214,230,240

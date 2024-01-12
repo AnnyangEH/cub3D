@@ -1,7 +1,8 @@
 NAME = cub3D
+BONUS_NAME = cub3D_bonus
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -O2 -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O2 -g -fsanitize=address
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
@@ -49,23 +50,31 @@ SRCS_B =	$(DIR_B)main_bonus.c		\
 OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
 
+.PHONY: all clean fclean re bonus
+
 all: $(NAME)
 
+bonus: $(BONUS_NAME)
+
+ifeq ($(filter bonus,$(MAKECMDGOALS)),bonus)
+$(BONUS_NAME): $(OBJS_B)
+	$(MAKE) -C ./mlx/
+	$(CC) $(CFLAGS) -I./inc $(OBJS_B) -o $(BONUS_NAME) $(MLX_FLAG)
+else
 $(NAME): $(OBJS_M)
 	$(MAKE) -C ./mlx/
-	$(CC) $(CFLAG) -I./inc $(OBJS_M) -o $(NAME) $(MLX_FLAG)
+	$(CC) $(CFLAGS) -I./inc $(OBJS_M) -o $(NAME) $(MLX_FLAG)
+endif
 
 %.o: %.c
-	$(CC) $(CFLAG) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I./inc
 
 clean:
-	rm -f $(OBJS_M)
+	rm -f $(OBJS_M) $(OBJS_B)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 re:
 	make fclean
 	make all
-
-.PHONY: all clean fclean re
