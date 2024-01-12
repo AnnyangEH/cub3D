@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:57:34 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:53:16 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 17:20:23 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ void	check_map(t_game *game)
 	char	**map;
 
 	map = game->map->map;
+	if (game->map->player_cnt != 1)
+		ft_error("Error\nInvalid player count\n", game);
 	check_cell(game, 0, 0, map);
 }

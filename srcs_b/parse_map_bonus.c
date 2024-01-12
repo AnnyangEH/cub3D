@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 17:10:46 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 18:15:02 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,33 @@ void	init_map_two(t_game *game)
 
 void	parse_player(t_game *game, char c, int height, int width)
 {
-	if (c == 'N')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = -1;
-	}
-	else if (c == 'S')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = 1;
-	}
-	else if (c == 'E')
-	{
-		game->player.dir_x = 1;
-		game->player.dir_y = 0;
-	}
-	else if (c == 'W')
-	{
-		game->player.dir_x = -1;
-		game->player.dir_y = 0;
-	}
+	game->map->player_cnt++;
+	game->map->map[height][width] = '0';
 	game->player.x = width + 0.5;
 	game->player.y = height + 0.5;
-	game->player.plane_x = game->player.dir_y * (-0.66);
+	game->player.dir_x = 0.0;
+	game->player.dir_y = 0.0;
+	if (c == 'N')
+		game->player.dir_y = -1.0;
+	else if (c == 'S')
+		game->player.dir_y = 1.0;
+	else if (c == 'W')
+		game->player.dir_x = -1.0;
+	else if (c == 'E')
+		game->player.dir_x = 1.0;
 	game->player.plane_y = game->player.dir_x * 0.66;
+	game->player.plane_x = game->player.dir_y * (-0.66);
+}
+
+static void	parse_door(t_game *game, int height, int width)
+{
+	if (game->door_cnt >= 20)
+		ft_error("Error\nToo many doors\n", game);
+	game->map->map[height][i] = '1';
+	game->door[game->door_cnt].x = width;
+	game->door[game->door_cnt].y = height;
+	game->door[game->door_cnt].is_open = CLOSE;
+	game->door_cnt++;
 }
 
 static void	parse_map_line(t_game *game, int height)
@@ -91,19 +94,11 @@ static void	parse_map_line(t_game *game, int height)
 		if (!ft_strchr(" 0123NSEW", game->map->line[i]))
 			ft_error("Error\nInvalid map\n", game);
 		else if (ft_strchr("NSEW", game->map->line[i]))
-		{
-			if (game->map->player_cnt > 0)
-				ft_error("Error\nMultiple players\n", game);
-			game->map->player_cnt++;
-			game->map->map[height][i] = '0';
 			parse_player(game, game->map->line[i], height, i);
-		}
 		else if (ft_strchr("2", game->map->line[i]))
-		{
-			game->map->map[height][i] = '0';
-			game->sprite->cnt++;
-		}
-		// bonus sprite part
+			parse_door(game, height, i);
+		else if (ft_strchr("3", game->map->line[i]))
+			parse_sprite(game, height, i);
 		else
 			game->map->map[height][i] = game->map->line[i];
 	}

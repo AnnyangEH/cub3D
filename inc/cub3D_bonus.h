@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 17:14:14 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 17:57:45 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define SO 1
 # define WE 2
 # define EA 3
+
+# define OPEN 1
+# define CLOSE 0
 
 enum e_key {
 	KEY_W = 13,
@@ -118,6 +121,13 @@ typedef struct s_ray
 	int		tex_y;
 }				t_ray;
 
+typedef struct s_door
+{
+	int	x;
+	int	y;
+	int	is_open;
+}				t_door;
+
 typedef struct s_game
 {
 	char			*ptr;
@@ -127,9 +137,11 @@ typedef struct s_game
 	int				bpp;
 	int				endian;
 	int				size_l;
+	int				door_cnt;
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[9];
+	t_door			doors[20];
 	t_ray			ray;
 	t_time			time;
 }					t_game;
