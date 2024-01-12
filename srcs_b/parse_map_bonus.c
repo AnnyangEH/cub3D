@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 18:33:20 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:04:28 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,14 @@ void	parse_player(t_game *game, char c, int height, int width)
 	game->player.plane_x = game->player.dir_y * (-0.66);
 }
 
-static void	parse_sprite(t_game *game, int height, int width)
+static void	parse_map_line(t_game *game, int height, int i)
 {
-}
-
-static void	parse_map_line(t_game *game, int height)
-{
-	int	i;
-
-	i = -1;
 	while (game->map->line[++i] && game->map->line[i] != '\n')
 	{
 		if (!ft_strchr(" 01234NSEW", game->map->line[i]))
 			ft_error("Error\nInvalid map\n", game);
 		else if (ft_strchr("NSEW", game->map->line[i]))
 			parse_player(game, game->map->line[i], height, i);
-		else if (ft_strchr("2", game->map->line[i]))
-			parse_door(game, height, i);
 		else if (ft_strchr("3", game->map->line[i]))
 			ft_error("Error\nInvalid map\n", game);
 		else
@@ -114,7 +105,7 @@ void	parse_map(t_game *game)
 			ft_error("Error\nInvalid map\n", game);
 		game->map->width[height] = width;
 		game->map->map[height] = malloc(sizeof(char) * (width + 1));
-		parse_map_line(game, height);
+		parse_map_line(game, height, -1);
 		free(game->map->line);
 		game->map->line = get_next_line(game->map->fd);
 		height++;

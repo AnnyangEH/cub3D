@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 17:57:45 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:04:41 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,6 @@ typedef struct s_ray
 	int		tex_y;
 }				t_ray;
 
-typedef struct s_door
-{
-	int	x;
-	int	y;
-	int	is_open;
-}				t_door;
-
 typedef struct s_game
 {
 	char			*ptr;
@@ -141,7 +134,6 @@ typedef struct s_game
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[9];
-	t_door			doors[20];
 	t_ray			ray;
 	t_time			time;
 }					t_game;
