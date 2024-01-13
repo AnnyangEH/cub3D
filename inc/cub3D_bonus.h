@@ -139,7 +139,6 @@ int		ft_strlen(char *s);
 int		ft_strncmp(char *s1, char *s2, int n);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(char *str);
-char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, int len);
 void	ft_memset(void *b, int c, size_t len);
 int		ft_strchr(char *s, int c);
@@ -153,9 +152,7 @@ void	free_split(char **split);
 
 void	ft_init(int ac, char **av, t_game *game);
 
-void	ft_error(char *str, t_game *game);
-void	ft_error_exit(char *str, t_game *game);
-void	free_game_one(t_game *game);
+void	ft_free(char *str, t_game *game, int i);
 
 void	parse(t_game *game);
 void	parse_token(t_game *game);

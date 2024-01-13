@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:22 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 15:39:47 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 21:58:00 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	close_win(t_game *game)
 {
-	free_game_one(game);
+	ft_free(0, game);
 	exit(0);
 }
 
@@ -26,15 +26,21 @@ int	exit_hook(t_game *game)
 
 void	open_door(t_game *game)
 {
-	if (game->map->map[(int)(game->player.y + game->player.dir_y)][(int)(game->player.x + game->player.dir_x)] == '2')
-		game->map->map[(int)(game->player.y + game->player.dir_y)][(int)(game->player.x + game->player.dir_x)] = '3';
-	if (game->map->map[(int)(game->player.y + game->player.dir_y)][(int)(game->player.x + game->player.dir_x)] == '3')
-		game->map->map[(int)(game->player.y + game->player.dir_y)][(int)(game->player.x + game->player.dir_x)] = '2';
+	if (game->map->map[(int)(game->player.y + game->player.dir_y)]\
+			[(int)(game->player.x + game->player.dir_x)] == '2')
+		game->map->map[(int)(game->player.y + game->player.dir_y)]\
+				[(int)(game->player.x + game->player.dir_x)] = '3';
+	else if (game->map->map[(int)(game->player.y + game->player.dir_y)]\
+			[(int)(game->player.x + game->player.dir_x)] == '3')
+		game->map->map[(int)(game->player.y + game->player.dir_y)]\
+				[(int)(game->player.x + game->player.dir_x)] = '2';
+	printf("asdfa");
+	printf("%c ", game->map->map[(int)(game->player.y + game->player.dir_y)][(int)(game->player.x + game->player.dir_x)]);
 }
 
 int	press_key(int key, t_game *game, double move_speed, double rot_speed)
 {
-	rot_speed = 0.07;
+	rot_speed = 0.05;
 	move_speed = 0.2;
 	if (key == KEY_W)
 		go_up(game, move_speed);

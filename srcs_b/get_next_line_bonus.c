@@ -5,74 +5,130 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 20:21:58 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:17:58 by eunhcho          ###   ########.fr       */
+/*   Created: 2024/01/13 17:10:10 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/13 19:41:22 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D_bonus.h"
 
-static char	*ft_util(t_info *info)
-{
-	info->idx = 0;
-	while (info->line[info->idx] != '\n' && info->line[info->idx] != '\0')
-		info->idx++;
-	if (info->line[info->idx] == '\0')
-		return (NULL);
-	info->ret = ft_substr(info->line, info->idx + 1, \
-				ft_strlen(info->line) - info->idx);
-	if (!info->ret)
-		return (NULL);
-	if (!info->ret[0])
-	{
-		free(info->ret);
-		info->ret = NULL;
-		return (NULL);
-	}
-	info->line[info->idx + 1] = '\0';
-	return (info->ret);
-}
-
-static char	*ft_read_line(t_info *info)
-{
-	info->idx = 1;
-	while (info->idx)
-	{
-		info->idx = read(info->fd, info->buf, BUFFER_SIZE);
-		if (info->idx == -1)
-			return (NULL);
-		else if (info->idx == 0)
-			break ;
-		info->buf[info->idx] = '\0';
-		if (!info->save)
-			info->save = ft_strdup("");
-		info->ret = info->save;
-		info->save = ft_strjoin(info->ret, info->buf);
-		if (!info->save)
-			return (NULL);
-		free(info->ret);
-		info->ret = NULL;
-		if (ft_strchr(info->buf, '\n'))
-			break ;
-	}
-	return (info->save);
-}
+static char	*ft_handle_buffer(t_fdlist *firlist, t_fdlist *uselist, \
+t_buffer *usebuffer);
+static char	*ft_remain_buffer(t_fdlist *uselist, t_buffer *usebuffer, \
+size_t i, size_t j);
+static char	*ft_make_buffer(t_fdlist *firlist, t_fdlist *uselist, \
+t_buffer *usebuffer, ssize_t len);
 
 char	*get_next_line(int fd)
 {
-	static t_info	info;
+	static t_fdlist	firlist = {0, 0, 0, 0};
+	t_fdlist		*uselist;
 
-	info.fd = fd;
-	if (read(fd, NULL, 0) == -1)
-		return (NULL);
-	info.buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!info.buf)
-		return (NULL);
-	info.line = ft_read_line(&info);
-	free(info.buf);
-	info.buf = NULL;
-	if (!info.line)
-		return (NULL);
-	info.save = ft_util(&info);
-	return (info.line);
+	uselist = firlist.next;
+	while (uselist && uselist->fdnumber != fd)
+		uselist = uselist->next;
+	if (!uselist)
+	{
+		uselist = (t_fdlist *)malloc(sizeof(t_fdlist));
+		if (!uselist)
+			return (0);
+		uselist->buflist = (t_buffer *)malloc(sizeof(t_buffer));
+		if (uselist->buflist == 0)
+			return (ft_gnlfree_all(&firlist, 0));
+		uselist->next = firlist.next;
+		firlist.next = uselist;
+		uselist->fdnumber = fd;
+		uselist->strlen = 0;
+		ft_bzero(uselist->buflist, sizeof(t_buffer));
+	}
+	if (ft_make_buffer(&firlist, uselist, uselist->buflist, BUFFER_SIZE))
+		return (ft_handle_buffer(&firlist, uselist, uselist->buflist));
+	else
+		return (0);
+}
+
+static char	*ft_handle_buffer(t_fdlist *firlist, t_fdlist *uselist, \
+t_buffer *usebuffer)
+{
+	char		*str_return;
+	size_t		i;
+	size_t		j;
+
+	str_return = (char *)malloc(uselist->strlen + 1);
+	if (!str_return)
+		return (ft_gnlfree_all(firlist, 0));
+	i = 0;
+	while (usebuffer->next)
+	{
+		usebuffer = usebuffer->next;
+		j = 0;
+		while (i < uselist->strlen && (usebuffer->buffer)[j])
+			str_return[i++] = (usebuffer->buffer)[j++];
+	}
+	str_return[i] = '\0';
+	if ((usebuffer->buffer)[j] == '\0')
+	{
+		ft_gnlfree_use(firlist, uselist, 0);
+		return (str_return);
+	}
+	else if (ft_remain_buffer(uselist, usebuffer, i, j) == 0)
+		return (ft_gnlfree_all(firlist, str_return));
+	return (str_return);
+}
+/* make return string */
+/* if remaining string = 0 -> use struct free & return str_return */
+
+static char	*ft_remain_buffer(t_fdlist *uselist, t_buffer *usebuffer, \
+size_t i, size_t j)
+{
+	t_buffer	*remain;
+	t_buffer	*temp;
+
+	remain = (t_buffer *)malloc(sizeof(t_buffer));
+	if (!remain)
+		return (0);
+	remain->next = 0;
+	i = 0;
+	while ((usebuffer->buffer)[j])
+		(remain->buffer)[i++] = (usebuffer->buffer)[j++];
+	(remain->buffer)[i] = '\0';
+	while (uselist->buflist->next)
+	{
+		temp = uselist->buflist->next;
+		uselist->buflist->next = temp->next;
+		free(temp);
+	}
+	uselist->buflist->next = remain;
+	uselist->strlen = ft_strchrindex(remain->buffer, '\n') + 1;
+	if (uselist->strlen == 0)
+		uselist->strlen = ft_strlen(remain->buffer);
+	return (remain->buffer);
+}
+
+static char	*ft_make_buffer(t_fdlist *firlist, t_fdlist *uselist, \
+t_buffer *usebuffer, ssize_t len)
+{
+	ssize_t		lastindex;
+
+	if (usebuffer->next)
+		usebuffer = usebuffer->next;
+	lastindex = ft_strchrindex(usebuffer->buffer, '\n');
+	while (len == BUFFER_SIZE && lastindex == -1)
+	{
+		usebuffer->next = (t_buffer *)malloc(sizeof(t_buffer));
+		if (usebuffer->next == 0)
+			return (ft_gnlfree_all(firlist, 0));
+		usebuffer = usebuffer->next;
+		usebuffer->next = 0;
+		len = read(uselist->fdnumber, usebuffer->buffer, BUFFER_SIZE);
+		if (len == -1 || (len == 0 && uselist->strlen == 0))
+			return (ft_gnlfree_use(firlist, uselist, 0));
+		(usebuffer->buffer)[len] = '\0';
+		lastindex = ft_strchrindex(usebuffer->buffer, '\n');
+		if (lastindex == -1)
+			uselist->strlen += len;
+		else
+			uselist->strlen += lastindex + 1;
+	}
+	return (usebuffer->buffer);
 }
