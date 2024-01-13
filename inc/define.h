@@ -6,7 +6,7 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:11:12 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/10 22:09:42 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/13 10:06:18 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@
 # define KEY_DOWN 125 
 # define KEY_UP 126
 # define KEY_ESC 53
+
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.05
 
 # define KEY_PRESS 2 //??
 

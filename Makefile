@@ -20,6 +20,7 @@ SRCS =	$(DIR)main.c			\
 		$(DIR)cub_mlx.c			\
 		$(DIR)cub_hook.c		\
 		$(DIR)dda_utils.c 		\
+		$(DIR)player.c			\
 
 
 OBJS = $(SRCS:.c=.o)

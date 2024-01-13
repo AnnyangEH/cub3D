@@ -54,6 +54,9 @@ int		press_key(int key, t_game *game);
 void	set_hook(t_game *game);
 void	close_win(t_game *game);
 int		exit_hook(t_game *game);
+void	move_up_down(t_game *game, int key);
+void	move_side(t_game *game, int key);
+void	rotate(t_player *player, int direction);
 
 //mlx
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
