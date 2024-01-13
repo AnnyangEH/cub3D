@@ -46,7 +46,8 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	while (temp[j] && j < 3)
 	{
 		game->map->color[flag][j] = ft_catoi(temp[j]);
-		if ((ft_catoi(temp[j]) == -1) || (ft_catoi(temp[j]) > 255 || ft_catoi(temp[j]) < 0))
+		if ((ft_catoi(temp[j]) == -1) || (ft_catoi(temp[j]) > 255 \
+		|| ft_catoi(temp[j]) < 0))
 			ft_error("Error\nInvalid color value\n", game);
 		j++;
 	}
@@ -73,7 +74,7 @@ void	check_imgs_data(t_game *game, char *line, int *i)
 		ft_error("Error\nInvalid imgs\n", game);
 }
 
-int check_imgs(t_game *game, char *line)
+int	check_imgs(t_game *game, char *line)
 {
 	int	i;
 
