@@ -6,11 +6,11 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:11:12 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/13 12:44:12 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/13 13:08:32 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef DEFINE_H
+#ifndef DEFINE_H
 # define DEFINE_H
 
 # define SUCCESS 0
@@ -44,6 +44,6 @@
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 
-# define KEY_PRESS 2 //??
+# define KEY_PRESS 2
 
 #endif

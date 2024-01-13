@@ -6,7 +6,7 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 09:53:49 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/13 11:39:57 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/13 13:13:02 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void	rotate(t_player *player, int direction)
 	old_dir = player->dir_x;
 	cos_val = cos(ROT_SPEED * direction);
 	sin_val = sin(ROT_SPEED * direction);
-
 	player->dir_x = player->dir_x * cos_val - player->dir_y * sin_val;
 	player->dir_y = old_dir * sin_val + player->dir_y * cos_val;
-
 	old_plane = player->plane_x;
 	player->plane_x = player->plane_x * cos_val - player->plane_y * sin_val;
 	player->plane_y = old_plane * sin_val + player->plane_y * cos_val;
@@ -74,5 +72,3 @@ void	move_up_down(t_game *game, int key)
 			game->player.y -= game->player.dir_y * MOVE_SPEED;
 	}
 }
-
-

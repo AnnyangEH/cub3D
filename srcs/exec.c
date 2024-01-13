@@ -6,7 +6,7 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:18:48 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/13 12:33:44 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/13 13:11:21 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	render(t_game *game, t_ray *ray, int x)
 {
-	set_nsew(game,ray);
-	set_wall(game,ray);
-	draw(game,ray, x, 0);
+	set_nsew(game, ray);
+	set_wall(game, ray);
+	draw(game, ray, x, 0);
 }
 
 void	perform(t_game *game, int x)
@@ -28,7 +28,7 @@ void	perform(t_game *game, int x)
 	perform_dda(&ray, game);
 	cal_perpwalldist(&ray, game);
 	cal_line_height(&ray);
-	render(game,&ray, x);
+	render(game, &ray, x);
 }
 
 void	set_game(t_game *game)

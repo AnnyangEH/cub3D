@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/13 13:06:23 by suhbaek           #+#    #+#             */
+/*   Updated: 2024/01/13 13:14:06 by suhbaek          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "define.h"
-#include "struct.h"
-#include "gnl.h"
+# include "define.h"
+# include "struct.h"
+# include "gnl.h"
 # include "../mlx/mlx.h"
 
 # include "time.h"
@@ -27,11 +39,11 @@ int		ft_isdigit(int c);
 char	**ft_split(char const *s, char c);
 int		ft_catoi(const char *str);
 int		ft_isempty(char *line);
-void    *ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 //init functions
 void	ft_init(int ac, char **av, t_game *game);
-void    init_ray(t_ray *ray, t_game *game, int x);
+void	init_ray(t_ray *ray, t_game *game, int x);
 
 //error handling function
 void	ft_error(char *str, t_game *game);

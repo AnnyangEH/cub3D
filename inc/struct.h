@@ -6,7 +6,7 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:16:01 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/13 12:32:44 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/13 13:13:34 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**map;
-	char		*path; //map file path
+	char		*path;
 	char		*line;
-	int			color[2][3]; //floor, color rgb
-	int			*width; //map width
-	int			height; //map height
+	int			color[2][3];
+	int			*width;
+	int			height;
 	int			player_cnt;
 	int			floor_color;
 	int			ceiling_color;
@@ -40,10 +40,10 @@ typedef struct s_map
 
 typedef struct s_imgs
 {
-	void	*ptr;	//image identifier 
-	void	*addr;	//image address
-	char	*path;	//image path(file name)
-	int		bpp;	//bit per pixel
+	void	*ptr;
+	void	*addr;
+	char	*path;
+	int		bpp;
 	int		size_l;
 	int		endian;
 	int		width;
@@ -67,7 +67,6 @@ typedef struct s_ray
 	double	deltadist_x;
 	double	deltadist_y;
 	double	perpwalldist;
-
 	int		map_x;
 	int		map_y;
 	int		step_x;
@@ -95,8 +94,8 @@ typedef struct s_game
 	t_time			time;
 	t_map			*map;
 	t_player		player;
-	t_imgs			imgs[4]; // 0 : north, 1 : south, 2 : west, 3 : east
-    t_ray           ray;
+	t_imgs			imgs[4];
+	t_ray			ray;
 }					t_game;
 
 #endif
