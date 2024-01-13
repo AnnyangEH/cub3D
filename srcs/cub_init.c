@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/13 12:34:35 by suhbaek          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3D.h"
 
 static int	init_game(t_game *game, char *path);
 static int	init_mlx(t_game *game);
 static int	init_time(t_game *game);
-// static int	init_cast(t_game *game);
 
 void	ft_init(int ac, char **av, t_game *game)
 {
@@ -24,11 +35,8 @@ static int	init_game(t_game *game, char *path)
 	ft_memset(game, 0, sizeof(t_game));
 	game->map = malloc(sizeof(t_map));
 	ft_memset(game->map, 0, sizeof(t_map));
-	// ft_memset(game->ray, 0, sizeof(t_ray));
 	if (!game->map)
 		return (FAILURE);
-	// if (!game->ray)
-	// 	return (FAILURE);
 	game->map->path = ft_strdup(path);
 	if (!game->map->path)
 		return (FAILURE);

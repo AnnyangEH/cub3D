@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:16:01 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/12 18:55:24 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 12:32:44 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_map
 	int			*width; //map width
 	int			height; //map height
 	int			player_cnt;
+	int			floor_color;
+	int			ceiling_color;
 	int			fd;
 }				t_map;
 
@@ -57,33 +59,34 @@ typedef struct s_time
 
 typedef struct s_ray
 {
-	double	cameraX;//calculate ray position and direction
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;//length of ray from current position to next x or y-side
-	double	sideDistY;
-	double	deltaDistX;//length of ray from one x or y-side to next x or y-side
-	double	deltaDistY;
-	double	perpWallDist;
-    
-	int		mapX;//which box of the map we're in
-	int		mapY;
-          
-	int		stepX;//what direction to step in x or y-direction (either +1 or -1)
-	int		stepY;
-    
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	perpwalldist;
+
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		tex_x;
+	int		tex_y;
+	int		tex_num;
 	int		hit;
 	int		side;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 	int		color;
 }				t_ray;
 
 typedef struct s_game
 {
 	char			*ptr;
-	void			*img_ptr;// game img ptr
+	void			*img_ptr;
 	void			*win;
 	void			*addr;
 	int				bpp;
@@ -93,7 +96,7 @@ typedef struct s_game
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[4]; // 0 : north, 1 : south, 2 : west, 3 : east
-    t_ray           *ray;
+    t_ray           ray;
 }					t_game;
 
 #endif

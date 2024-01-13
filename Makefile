@@ -1,15 +1,19 @@
 NAME = cub3D
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -g
+CFLAG = -Wall -Wextra -Werror -g 
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
 DIR = ./srcs/
 
 SRCS =	$(DIR)main.c			\
-		$(DIR)cub_parsing.c		\
-		$(DIR)cub_utils.c		\
+		$(DIR)cub_utils1.c		\
+		$(DIR)cub_utils2.c		\
+		$(DIR)cub_utils3.c		\
+		$(DIR)parse.c			\
+		$(DIR)parse_map.c		\
+		$(DIR)parse_token.c		\
 		$(DIR)ft_error.c 		\
 		$(DIR)get_next_line.c	\
 		$(DIR)cub_init.c 		\
@@ -19,8 +23,9 @@ SRCS =	$(DIR)main.c			\
 		$(DIR)time.c			\
 		$(DIR)cub_mlx.c			\
 		$(DIR)cub_hook.c		\
-		$(DIR)dda_utils.c 		\
 		$(DIR)player.c			\
+		$(DIR)render_utils.c	\
+		$(DIR)perform_utils.c	\
 
 
 OBJS = $(SRCS:.c=.o)

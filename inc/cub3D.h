@@ -41,10 +41,13 @@ void	free_game_one(t_game *game);
 void	cal_step_and_sidedist(t_ray *ray, t_game *game);
 void	perform_dda(t_ray *ray, t_game *game);
 void	cal_perpwalldist(t_ray *ray, t_game *game);
-void	cal_lineheight(t_ray *ray);
+void	cal_line_height(t_ray *ray);
 
 //parsing functions
 void	parse(t_game *game);
+void	parse_token(t_game *game);
+void	parse_map(t_game *game);
+void	free_split(char **split);
 
 //checking functions
 void	check_map(t_game *game);
@@ -67,5 +70,8 @@ long long	get_time(void);
 
 //exec
 int		exec(t_game *game);
+void	set_nsew(t_game *game, t_ray *ray);
+void	set_wall(t_game *game, t_ray *ray);
+void	draw(t_game *game, t_ray *ray, int x, int y);
 
 #endif
