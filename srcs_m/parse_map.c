@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 18:33:51 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 18:12:22 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ static int	count_height(t_game *game, int fd, int height)
 		i = 0;
 		while (line[i] == ' ')
 			++i;
-		if (ft_isdigit(line[i]))
-			height++;
-		if (height > 0 && ft_isdigit(line[i]) == 0)
-			ft_error("Error\nInvalid map character\n", game);
+		if (line[i] == ' ' || line[i] == '\n' || ft_isdigit(line[i]))
+			++height;
 		free(line);
 	}
 	if (close(fd) == -1)
@@ -81,7 +79,7 @@ static void	parse_map_line(t_game *game, int height)
 	while (game->map->line[++i] && game->map->line[i] != '\n')
 	{
 		if (!ft_strchr(" 01NSEW", game->map->line[i]))
-			ft_error("Error\nInvalid map\n", game);
+			ft_error("Error\nInvalid map character\n", game);
 		else if (ft_strchr("NSEW", game->map->line[i]))
 			parse_player(game, game->map->line[i], height, i);
 		else
@@ -103,7 +101,7 @@ void	parse_map(t_game *game)
 		while (game->map->line[width] && game->map->line[width] != '\n')
 			++width;
 		if (ft_isempty(game->map->line))
-			ft_error("Error\nInvalid map\n", game);
+			ft_error("Error\nInvalid map - empty line\n", game);
 		game->map->width[height] = width;
 		game->map->map[height] = malloc(sizeof(char) * (width + 1));
 		parse_map_line(game, height);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gogosing.c                                         :+:      :+:    :+:   */
+/*   gogosing_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hysung <hysung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 22:17:11 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/13 15:37:54 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/13 18:16:47 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 void	go_up(t_game *game, double move_speed)
 {
