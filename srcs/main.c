@@ -6,22 +6,23 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:44 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 15:47:30 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/13 16:00:55 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void leaks(void)
-{
-	system("leaks cub3D");
-}
+// void leaks(void)
+// {
+// 	system("leaks cub3D");
+// }
 
 int	main(int ac, char **av)
 {
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
+	// atexit(leaks);
 	if (!game)
 		ft_error_exit("Error\nFailed to allocate game\n", game);
 	ft_init(ac, av, game);
@@ -31,6 +32,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(game->ptr, exec, game);
 	mlx_loop(game->ptr);
 	free_game_one(game);
-	atexit(leaks);
 	return (SUCCESS);
 }

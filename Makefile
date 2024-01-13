@@ -29,24 +29,55 @@ SRCS =	$(DIR)main.c			\
 
 
 OBJS = $(SRCS:.c=.o)
+RM = rm -f
+all : $(NAME)
+CFLAGS	= -Wall -Wextra -Werror # -g -fsanitize=address
 
-all: $(NAME)
+INC		= includes
 
-$(NAME): $(OBJS)
-	$(MAKE) -C ./mlx/
-	$(CC) $(CFLAG) -I./inc $(OBJS) -o $(NAME) $(MLX_FLAG)
+MLX_DIR	= mlx
 
-%.o: %.c
-	$(CC) $(CFLAG) -c $< -o $@
+DEF_COLOR = \033[0;39m
+GRAY = \033[0;90m
+RED = \033[0;91m
+GREEN = \033[0;92m
+YELLOW = \033[0;93m
+BLUE = \033[0;94m
+MAGENTA = \033[0;95m
+CYAN = \033[0;96m
+WHITE = \033[0;97m
+
+all:		$(NAME)
+
+%.o:		%.c
+			@$(CC) $(CFLAGS) -c $^ -o $@
+			@echo "$(YELLOW)	Compiling		$< $(DEF_COLOR)"
+
+$(NAME):	$(OBJS) $(MLX)
+		@echo "$(YELLOW)	Compiling 		Cub3D..	$(DEF_COLOR)"
+		@$(CC) $(CFLAGS) $(MLX_FLAG) $(OBJS) -o $@
+		@echo "$(GREEN)	     ✨ Cub3D Compiled! ✨ $(DEF_COLOR)"
+
+$(MLX) :
+		@echo "$(YELLOW)	Compiling 		Mlx..	$(DEF_COLOR)"
+		@make -C $(MLX_FLAG)
 
 clean:
-	rm -f $(OBJS)
+			@echo "$(CYAN)	🧹 libft Object Files Cleaned 🧹	$(DEF_COLOR)"
+			@make clean -C $(MLX_DIR)
+			@echo "$(CYAN)	🧹 Minilibx Object Files Cleaned 🧹	$(DEF_COLOR)"	
+			@$(RM) $(OBJS) $(OBJS_BONUS) 
+			@echo "$(CYAN)	🧹 Cub3D Object Files Cleaned 🧹	$(DEF_COLOR)"
 
-fclean: clean
-	rm -f $(NAME)
-
+fclean:		clean
+			@$(RM) $(NAME) 
+			@echo "$(CYAN)	🧹 Cub3D Executable Files Cleaned 🧹	$(DEF_COLOR)"
+			@$(RM) $(MLX)
+			@echo "$(CYAN)	🧹 Libmlx.a Cleaned 🧹	$(DEF_COLOR)"
 re:
-	make fclean
-	make all
+		@echo "$(YELLOW)	Cleaning And Rebuilting Files..	$(DEF_COLOR)"
+		@make fclean
+		@make all
+		@echo "$(GREEN)	🤖 Cleaned And Rebuilt Done! 🤖	$(DEF_COLOR)"
 
-.PHONY: all clean fclean re
+.PHONY : all clean fclean re
