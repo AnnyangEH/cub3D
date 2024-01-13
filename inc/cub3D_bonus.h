@@ -28,6 +28,8 @@
 # define OPEN 1
 # define CLOSE 0
 
+# define S_MAX 10
+
 enum e_key {
 	KEY_W = 13,
 	KEY_A = 0,
@@ -117,6 +119,33 @@ typedef struct s_mouse
 	int	mode;
 }				t_mouse;
 
+typedef struct s_sprite
+{
+	int		x;
+	int		y;
+	int		tex;
+}			t_sprite;
+
+typedef struct s_say
+{
+	double	s_x;
+	double	s_y;
+	double	inv_det;
+	double	trans_x;
+	double	trans_y;
+	int		screen_x;
+	int		s_height;
+	int		dy_start;
+	int		dy_end;
+	int		dx_start;
+	int		dx_end;
+	int		s_width;
+	int		s_height;
+	int		tex_x;
+	int		tex_y;
+	int		d;
+}				t_say;
+
 typedef struct s_game
 {
 	char			*ptr;
@@ -127,6 +156,11 @@ typedef struct s_game
 	int				endian;
 	int				size_l;
 	int				door_cnt;
+	double			z_buffer[1000];
+	t_sprite		sprite[S_NUM];
+	t_say			say;
+	int				s_order[S_NUM];
+	double			s_dist[S_NUM];
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[9];

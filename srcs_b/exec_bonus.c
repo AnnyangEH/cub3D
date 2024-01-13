@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:13 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 21:19:08 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/13 23:05:15 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	exec(t_game *game)
 		draw_point(game);
 		texture(game);
 		draw(game, x, 0, 0);
+		game->z_buffer[x] = game->ray.perp_wall;
+		sort_sprite(game);
 		x++;
 	}
 	minimap(game, 0, 0);
