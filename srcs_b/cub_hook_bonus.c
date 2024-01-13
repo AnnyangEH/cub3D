@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:22 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 23:57:34 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/13 15:42:58 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	open_door(t_game *game)
 			[(int)(game->player.x + game->player.dir_x)] == '2')
 		game->map->map[(int)(game->player.y + game->player.dir_y)]\
 				[(int)(game->player.x + game->player.dir_x)] = '3';
-	if (game->map->map[(int)(game->player.y + game->player.dir_y)]\
+	else if (game->map->map[(int)(game->player.y + game->player.dir_y)]\
 			[(int)(game->player.x + game->player.dir_x)] == '3')
 		game->map->map[(int)(game->player.y + game->player.dir_y)]\
 				[(int)(game->player.x + game->player.dir_x)] = '2';
@@ -40,7 +40,7 @@ void	open_door(t_game *game)
 
 int	press_key(int key, t_game *game, double move_speed, double rot_speed)
 {
-	rot_speed = 0.07;
+	rot_speed = 0.05;
 	move_speed = 0.2;
 	if (key == KEY_W)
 		go_up(game, move_speed);
