@@ -2,7 +2,7 @@ NAME = cub3D
 BONUS_NAME = cub3D_bonus
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O2 -g
+CFLAGS = -Wall -Wextra -Werror -O2 -g -fsanitize=address
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
@@ -15,6 +15,7 @@ SRCS_M =	$(DIR_M)main.c		\
 		$(DIR_M)get_next_line.c	\
 		$(DIR_M)get_next_line_utils.c	\
 		$(DIR_M)cub_init.c 		\
+		$(DIR_M)cub_init2.c		\
 		$(DIR_M)ft_split.c		\
 		$(DIR_M)check_map.c		\
 		$(DIR_M)exec.c			\
@@ -37,6 +38,7 @@ SRCS_B =	$(DIR_B)main_bonus.c		\
 		$(DIR_B)get_next_line_bonus.c	\
 		$(DIR_B)get_next_line_utils_bonus.c	\
 		$(DIR_B)cub_init_bonus.c 		\
+		$(DIR_B)cub_init2_bonus.c		\
 		$(DIR_B)ft_split_bonus.c		\
 		$(DIR_B)check_map_bonus.c		\
 		$(DIR_B)exec_bonus.c			\

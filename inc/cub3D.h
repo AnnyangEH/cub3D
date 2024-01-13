@@ -6,7 +6,11 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/01/13 22:23:43 by hysung           ###   ########.fr       */
+=======
+/*   Updated: 2024/01/13 22:26:31 by eunhcho          ###   ########.fr       */
+>>>>>>> 49e85c86f4abfae46a7db9c1f812b33764530a1c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +156,9 @@ void		check_sep(t_game *game, char *line, int *i);
 
 void		ft_init(int ac, char **av, t_game *game);
 int			init_mlx(t_game *game);
+void		set_color(t_game *game);
+void		init_imgs(t_game *game, int i);
+void		get_img(t_game *game);
 
 void		ft_free(char *str, t_game *game, int i);
 void		ft_error_exit(char *str, t_game *game);

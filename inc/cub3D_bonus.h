@@ -169,66 +169,70 @@ typedef struct s_game
 	t_time			time;
 }					t_game;
 
-int		ft_strlen(char *s);
-int		ft_strncmp(char *s1, char *s2, int n);
-void	ft_putstr_fd(char *s, int fd);
-char	*ft_strdup(char *str);
-char	*ft_substr(char *s, unsigned int start, int len);
-void	ft_memset(void *b, int c, size_t len);
-int		ft_strchr(char *s, int c);
-int		ft_iswhitespace(char c);
-int		ft_isdigit(int c);
-char	**ft_split(char const *s, char c);
-int		ft_catoi(const char *str);
-int		ft_isempty(char *line);
-double	ft_min(double a, double b);
-void	free_split(char **split);
+int			ft_strlen(char *s);
+int			ft_strncmp(char *s1, char *s2, int n);
+void		ft_putstr_fd(char *s, int fd);
+char		*ft_strdup(char *str);
+char		*ft_substr(char *s, unsigned int start, int len);
+void		ft_memset(void *b, int c, size_t len);
+int			ft_strchr(char *s, int c);
+int			ft_iswhitespace(char c);
+int			ft_isdigit(int c);
+char		**ft_split(char const *s, char c);
+int			ft_catoi(const char *str);
+int			ft_isempty(char *line);
+double		ft_min(double a, double b);
+void		free_split(char **split);
 
-void	ft_init(int ac, char **av, t_game *game);
+void		ft_init(int ac, char **av, t_game *game);
+int			init_mlx(t_game *game);
+void		set_color(t_game *game);
+void		init_imgs(t_game *game, int i);
+void		get_img(t_game *game);
 
-void	ft_free(char *str, t_game *game, int i);
+void		ft_free(char *str, t_game *game, int i);
 
-void	parse(t_game *game);
-void	parse_token(t_game *game);
-void	parse_map(t_game *game);
+void		parse(t_game *game);
+void		parse_token(t_game *game);
+void		parse_map(t_game *game);
 
-void	check_map(t_game *game);
+void		check_map(t_game *game);
 
-int		press_key(int key, t_game *game, double move_speed, double rot_speed);
-void	set_hook(t_game *game);
-void	close_win(t_game *game);
-int		exit_hook(t_game *game);
-int		mouse_hook(int button, int x, int y, t_game *game);
+int			press_key(int key, t_game *game, double move_speed, double rot_speed);
+void		set_hook(t_game *game);
+void		close_win(t_game *game);
+int			exit_hook(t_game *game);
+int			mouse_hook(int button, int x, int y, t_game *game);
 
-void	go_up(t_game *game, double move_speed);
-void	go_down(t_game *game, double move_speed);
-void	go_right(t_game *game, double move_speed);
-void	go_left(t_game *game, double move_speed);
-void	turn_left(t_game *game, double rot_speed);
-void	turn_right(t_game *game, double rot_speed);
+void		go_up(t_game *game, double move_speed);
+void		go_down(t_game *game, double move_speed);
+void		go_right(t_game *game, double move_speed);
+void		go_left(t_game *game, double move_speed);
+void		turn_left(t_game *game, double rot_speed);
+void		turn_right(t_game *game, double rot_speed);
 
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
-int		create_trgb(int t, int r, int g, int b);
+void		my_mlx_pixel_put(t_game *game, int x, int y, int color);
+int			create_trgb(int t, int r, int g, int b);
 
 long long	get_time(void);
 
-int		exec(t_game *game);
+int			exec(t_game *game);
 
-void	draw_point(t_game *game);
-void	texture(t_game *game);
-void	draw(t_game *game, int x, int y, int color);
-void	minimap(t_game *game, int x, int y);
+void		draw_point(t_game *game);
+void		texture(t_game *game);
+void		draw(t_game *game, int x, int y, int color);
+void		minimap(t_game *game, int x, int y);
 
-void	set_value(t_game *game, int x);
-void	set_step_side(t_game *game);
-void	hit_side(t_game *game);
-void	set_wall_dir(t_game *game);
+void		set_value(t_game *game, int x);
+void		set_step_side(t_game *game);
+void		hit_side(t_game *game);
+void		set_wall_dir(t_game *game);
 
-void	go_up(t_game *game, double move_speed);
-void	go_down(t_game *game, double move_speed);
-void	go_right(t_game *game, double move_speed);
-void	go_left(t_game *game, double move_speed);
-void	turn_right(t_game *game, double rot_speed);
-void	turn_left(t_game *game, double rot_speed);
+void		go_up(t_game *game, double move_speed);
+void		go_down(t_game *game, double move_speed);
+void		go_right(t_game *game, double move_speed);
+void		go_left(t_game *game, double move_speed);
+void		turn_right(t_game *game, double rot_speed);
+void		turn_left(t_game *game, double rot_speed);
 
 #endif

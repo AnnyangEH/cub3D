@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:57:34 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 20:34:59 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:23:52 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	check_zero(t_game *game, int x, int y, char **map)
 	if (x == 0 || y == 0 || x == game->map->width[y] - 1 \
 	|| y == game->map->height - 1)
 		ft_free("Error\nMap is not surrounded by wall 1\n", game, -1);
-	if (y - 1 >= 0 && x > game->map->width[y - 1])
+	if (y - 1 >= 0 && x > game->map->width[y - 1] - 1)
 		ft_free("Error\nMap is not surrounded by wall 2\n", game, -1);
-	if (y + 1 < game->map->height && x > game->map->width[y + 1])
+	if (y + 1 < game->map->height && x > game->map->width[y + 1] - 1)
 		ft_free("Error\nMap is not surrounded by wall 3\n", game, -1);
 	if (x - 1 >= 0 && y - 1 >= 0)
 	{
@@ -40,7 +40,7 @@ static void	check_cell(t_game *game, int x, int y, char **map)
 		x = 0;
 		while (x < game->map->width[y])
 		{
-			if (map[y][x] == '0' || map[y][x] == '2' || map[y][x] == '4')
+			if (map[y][x] == '0')
 				check_zero(game, x, y, map);
 			x++;
 		}

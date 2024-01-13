@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 20:34:59 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:22:51 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ static int	count_height(t_game *game, int fd, int height)
 		i = 0;
 		while (line[i] == ' ')
 			++i;
-		if (ft_isdigit(line[i]))
-			height++;
-		if (height > 0 && ft_isdigit(line[i]) == 0)
-			ft_free("Error\nInvalid map character\n", game, -1);
+		if (line[i] == ' ' || line[i] == '\n' || ft_isdigit(line[i]))
+			++height;
 		free(line);
 	}
 	if (close(fd) == -1)
@@ -102,7 +100,7 @@ void	parse_map(t_game *game)
 		while (game->map->line[width] && game->map->line[width] != '\n')
 			++width;
 		if (ft_isempty(game->map->line))
-			ft_free("Error\nInvalid map\n", game, -1);
+			ft_free("Error\nInvalid map - empty line\n", game, -1);
 		game->map->width[height] = width;
 		game->map->map[height] = malloc(sizeof(char) * (width + 1));
 		parse_map_line(game, height, -1);
