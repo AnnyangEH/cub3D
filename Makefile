@@ -55,6 +55,7 @@ SRCS_B =	$(DIR_B)main_bonus.c		\
 		$(DIR_B)mouse_hook_bonus.c		\
 		$(DIR_B)turn_bonus.c			\
 		$(DIR_B)gogosing_bonus.c		\
+		$(DIR_B)sprite_bonus.c			\
 
 OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

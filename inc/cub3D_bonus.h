@@ -134,7 +134,6 @@ typedef struct s_say
 	double	trans_x;
 	double	trans_y;
 	int		screen_x;
-	int		s_height;
 	int		dy_start;
 	int		dy_end;
 	int		dx_start;
@@ -157,10 +156,10 @@ typedef struct s_game
 	int				size_l;
 	int				door_cnt;
 	double			z_buffer[1000];
-	t_sprite		sprite[S_NUM];
+	t_sprite		sprite[S_MAX];
 	t_say			say;
-	int				s_order[S_NUM];
-	double			s_dist[S_NUM];
+	int				s_order[S_MAX];
+	double			s_dist[S_MAX];
 	t_map			*map;
 	t_player		player;
 	t_imgs			imgs[9];
@@ -235,4 +234,7 @@ void		go_left(t_game *game, double move_speed);
 void		turn_right(t_game *game, double rot_speed);
 void		turn_left(t_game *game, double rot_speed);
 
+void		sort_sprite(t_game *game);
+void		set_sprite(t_game *game, int i);
+void		draw_sprite(t_game *game, int i);
 #endif
