@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:16:01 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/10 21:46:26 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/12 18:55:24 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ typedef struct s_imgs
 	int		bpp;	//bit per pixel
 	int		size_l;
 	int		endian;
+	int		width;
+	int		height;
+	int		cnt;
 }				t_imgs;
 
 typedef struct s_time

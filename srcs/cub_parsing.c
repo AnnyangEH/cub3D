@@ -1,12 +1,17 @@
 #include "../inc/cub3D.h"
 
+static void	init_imgs(t_game *game, int i);
+
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
-	(*i) += 3; // skip imgs
-	while (ft_iswhitespace(line[*i]) && line[*i]) // skip whitespace
+	(*i) += 3;
+	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
 	if (line[*i] == '\n')
 		return ;
+	game->imgs[flag].cnt++;
+	if (game->imgs[flag].cnt > 1)
+		ft_error("Error\nDup imgs\n", game);
 	game->imgs[flag].path = ft_strdup(line + *i);
 	if (!game->imgs[flag].path)
 		ft_error("Error\nFailed to allocate imgs path\n", game);
@@ -108,17 +113,14 @@ void	parse_imgs(t_game *game)
 	}
 }
 
-static int	count_height(t_game *game)
+static int	count_height(t_game *game, int fd, int height)
 {
 	int		i;
-	int		fd;
-	int		height;
 	char	*line;
 
 	fd = open(game->map->path, O_RDONLY);
 	if (fd == -1)
 		ft_error("Error\nFailed to open file\n", game);
-	height = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -138,9 +140,9 @@ static int	count_height(t_game *game)
 	return (height);
 }
 
-void init_map_two(t_game *game)
+void	init_map_two(t_game *game)
 {
-	game->map->height = count_height(game);
+	game->map->height = count_height(game, 0, 0);
 	game->map->player_cnt = 0;
 	game->map->map = malloc(sizeof(char *) * (game->map->height + 1));
 	if (!game->map->map)
@@ -154,33 +156,25 @@ void init_map_two(t_game *game)
 
 void	parse_player(t_game *game, char c, int height, int width)
 {
-	if (c == 'N')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = -1;
-	}
-	else if (c == 'S')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = 1;
-	}
-	else if (c == 'E')
-	{
-		game->player.dir_x = 1;
-		game->player.dir_y = 0;
-	}
-	else if (c == 'W')
-	{
-		game->player.dir_x = -1;
-		game->player.dir_y = 0;
-	}
+	game->map->player_cnt++;
+	game->map->map[height][width] = '0';
 	game->player.x = width + 0.5;
 	game->player.y = height + 0.5;
-	game->player.plane_x = game->player.dir_y * (-0.66);
+	game->player.dir_x = 0.0;
+	game->player.dir_y = 0.0;
+	if (c == 'N')
+		game->player.dir_y = -1.0;
+	else if (c == 'S')
+		game->player.dir_y = 1.0;
+	else if (c == 'W')
+		game->player.dir_x = -1.0;
+	else if (c == 'E')
+		game->player.dir_x = 1.0;
 	game->player.plane_y = game->player.dir_x * 0.66;
+	game->player.plane_x = game->player.dir_y * (-0.66);
 }
 
-static void parse_map_line(t_game *game, int height)
+static void	parse_map_line(t_game *game, int height)
 {
 	int	i;
 
@@ -190,18 +184,13 @@ static void parse_map_line(t_game *game, int height)
 		if (!ft_strchr(" 01NSEW", game->map->line[i]))
 			ft_error("Error\nInvalid map\n", game);
 		else if (ft_strchr("NSEW", game->map->line[i]))
-		{
-			if (game->map->player_cnt > 0)
-				ft_error("Error\nMultiple players\n", game);
-			game->map->player_cnt++;
-			game->map->map[height][i] = '0';
-			parse_player(game, game->map->line[i], height, i); // 수정 필요
-		}
+			parse_player(game, game->map->line[i], height, i);
 		else
 			game->map->map[height][i] = game->map->line[i];
 	}
 	game->map->map[height][i] = '\0';
 }
+
 void	parse_map(t_game *game)
 {
 	int	height;
@@ -226,42 +215,22 @@ void	parse_map(t_game *game)
 	game->map->map[height] = NULL;
 }
 
-// static void	get_img(t_game *game)
-// {
-// 	int		i;
+static void	get_img(t_game *game)
+{
+	int		i;
 
-// 	i = -1;
-// 	while (++i < 4)
-// 		init_imgs(game, i);
-// }
+	i = -1;
+	while (++i < 4)
+		init_imgs(game, i);
+}
 
-// static void	init_imgs(t_game *game, int i)
-// {
-// 	int	size;
-
-// 	size = 64;
-// 	game->imgs[i].ptr = mlx_xpm_file_to_image(game->, game->imgs[i].path, \
-// 									&size, &size);
-// 	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, &game->imgs[i].bpp, \
-// 								&game->imgs[i].size_l, &game->imgs[i].endian);
-// }
-// static void	make_temp_buffer(t_game *game)
-// {
-// 	int i;
-
-// 	game->map->temp = malloc(sizeof(char *) * game->map->height);
-// 	if (!game->map->temp)
-// 		ft_error("Error\nFailed to allocate temp map\n", game);
-
-// 	i = 0;
-// 	while (i < game->map->height)
-// 	{
-// 		game->map->temp[i] = ft_strdup(game->map->map[i]); // Assuming you have strdup function
-// 		if (!game->map->temp[i])
-// 			ft_error("Error\nFailed to allocate temp map\n", game);
-// 		i++;
-// 	}
-// }
+static void	init_imgs(t_game *game, int i)
+{
+	game->imgs[i].ptr = mlx_xpm_file_to_image(game->ptr, \
+	game->imgs[i].path, &game->imgs[i].width, &game->imgs[i].height);
+	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, \
+	&game->imgs[i].bpp, &game->imgs[i].size_l, &game->imgs[i].endian);
+}
 
 void	parse(t_game *game)
 {
@@ -271,8 +240,7 @@ void	parse(t_game *game)
 	parse_imgs(game);
 	parse_map(game);
 	check_map(game);
-	//get_img(game);
+	get_img(game);
 	if (close(game->map->fd) == -1)
 		ft_error("Error\nFailed to close file\n", game);
-	// make_temp_buffer(game);
 }
