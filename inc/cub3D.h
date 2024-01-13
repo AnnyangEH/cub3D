@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 19:42:16 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 21:39:05 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ double	ft_min(double a, double b);
 void	free_split(char **split);
 
 void	ft_init(int ac, char **av, t_game *game);
+int		init_mlx(t_game *game);
 
 void	ft_error(char *str, t_game *game);
 void	ft_error_exit(char *str, t_game *game);

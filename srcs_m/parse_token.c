@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 19:47:27 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 21:48:41 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	while (temp[j] && j < 3)
 	{
 		game->map->color[flag][j] = ft_catoi(temp[j]);
-		if ((ft_catoi(temp[j]) == -1) || (ft_catoi(temp[j]) > 255 \
-		|| ft_catoi(temp[j]) < 0))
+		if ((ft_catoi(temp[j]) > 255 || ft_catoi(temp[j]) < 0))
 			ft_error("Error\nInvalid color value\n", game);
 		j++;
 	}
@@ -61,13 +60,13 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 void	check_imgs_data(t_game *game, char *line, int *i)
 {
 	if (ft_strncmp(line + *i, "NO ", 3) == 0)
-		get_img_path(game, line, i, 0);
+		get_img_path(game, line, i, NO);
 	else if (ft_strncmp(line + *i, "SO ", 3) == 0)
-		get_img_path(game, line, i, 1);
+		get_img_path(game, line, i, SO);
 	else if (ft_strncmp(line + *i, "WE ", 3) == 0)
-		get_img_path(game, line, i, 2);
+		get_img_path(game, line, i, WE);
 	else if (ft_strncmp(line + *i, "EA ", 3) == 0)
-		get_img_path(game, line, i, 3);
+		get_img_path(game, line, i, EA);
 	else if (ft_strncmp(line + *i, "F ", 2) == 0)
 		get_img_color(game, line, i, FLOOR);
 	else if (ft_strncmp(line + *i, "C ", 2) == 0)

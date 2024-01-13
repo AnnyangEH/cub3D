@@ -6,14 +6,13 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 19:32:57 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 21:38:21 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
 static int	init_game(t_game *game, char *path);
-static int	init_mlx(t_game *game);
 static int	init_time(t_game *game);
 
 void	ft_init(int ac, char **av, t_game *game)
@@ -24,8 +23,6 @@ void	ft_init(int ac, char **av, t_game *game)
 		ft_error_exit("Error\nInvalid file extension\n", game);
 	if (init_game(game, av[1]))
 		ft_error("Error\nFailed to initialize map\n", game);
-	if (init_mlx(game))
-		ft_error_exit("Error\nFailed to initialize mlx\n", game);
 	if (init_time(game))
 		ft_error_exit("Error\nFailed to initalize time\n", game);
 }
@@ -43,7 +40,7 @@ static int	init_game(t_game *game, char *path)
 	return (SUCCESS);
 }
 
-static int	init_mlx(t_game *game)
+int	init_mlx(t_game *game)
 {
 	game->ptr = mlx_init();
 	if (!game->ptr)
