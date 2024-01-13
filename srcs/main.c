@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:44 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 16:59:46 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:47:30 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
+
+void leaks(void)
+{
+	system("leaks cub3D");
+}
 
 int	main(int ac, char **av)
 {
@@ -26,5 +31,6 @@ int	main(int ac, char **av)
 	mlx_loop_hook(game->ptr, exec, game);
 	mlx_loop(game->ptr);
 	free_game_one(game);
+	atexit(leaks);
 	return (SUCCESS);
 }
