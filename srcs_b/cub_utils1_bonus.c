@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:15:04 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 17:08:44 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 19:42:20 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,6 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*new;
-	int		s1_len;
-	int		s2_len;
-
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	new = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (!new)
-		return (0);
-	new[s1_len + s2_len] = 0;
-	while (s2_len--)
-		new[s1_len + s2_len] = s2[s2_len];
-	while (s1_len--)
-		new[s1_len] = s1[s1_len];
-	return (new);
 }
 
 char	*ft_strdup(char *s1)

@@ -139,7 +139,6 @@ int		ft_strlen(char *s);
 int		ft_strncmp(char *s1, char *s2, int n);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(char *str);
-char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, int len);
 void	ft_memset(void *b, int c, size_t len);
 int		ft_strchr(char *s, int c);

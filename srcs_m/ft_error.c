@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:22:40 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/10 21:22:46 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 19:42:44 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	ft_error(char *str, t_game *game)
 {
 	ft_putstr_fd(str, 2);
 	free_game_one(game);
+	free_game_two(game, -1);
+	free_mlx(game);
+	free(game);
 	exit(FAILURE);
 }
 
@@ -38,9 +41,6 @@ void	free_game_one(t_game *game)
 		free(game->map->path);
 	if (game->map->width)
 		free(game->map->width);
-	free_game_two(game, -1);
-	free_mlx(game);
-	free(game);
 }
 
 static void	free_game_two(t_game *game, int i)
@@ -69,6 +69,8 @@ static void	free_mlx(t_game *game)
 	{
 		if (game->win)
 			mlx_destroy_window(game->ptr, game->win);
+		if (game->img_ptr)
+			mlx_destroy_image(game->ptr, game->img_ptr);
 		free(game->ptr);
 	}
 }

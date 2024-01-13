@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:10:10 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 18:13:36 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 19:41:22 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ char	*get_next_line(int fd)
 	else
 		return (0);
 }
-/* struct make & add next of first fdlist */
-/* ft_make_buffer : make t_buffer(linked list), read fd */
-/* ft_handle_buffer : make string to (return, rest in fdlist) */
 
 static char	*ft_handle_buffer(t_fdlist *firlist, t_fdlist *uselist, \
 t_buffer *usebuffer)
@@ -107,7 +104,6 @@ size_t i, size_t j)
 		uselist->strlen = ft_strlen(remain->buffer);
 	return (remain->buffer);
 }
-/* make remaining string in uselist->buflist->next */
 
 static char	*ft_make_buffer(t_fdlist *firlist, t_fdlist *uselist, \
 t_buffer *usebuffer, ssize_t len)
@@ -136,5 +132,3 @@ t_buffer *usebuffer, ssize_t len)
 	}
 	return (usebuffer->buffer);
 }
-/* dynamic allocation error : all fdlist structs free <-> */
-/* read error : current(use) fdlist struct free */
