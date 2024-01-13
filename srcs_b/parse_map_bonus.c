@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 22:56:53 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 23:30:55 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	count_height(t_game *game, int fd, int height)
 			break ;
 		i = 0;
 		while (line[i] == ' ')
-			++i;
-		if (line[i] == ' ' || line[i] == '\n' || ft_isdigit(line[i]))
-			++height;
+			i++;
+		if (ft_isdigit(line[i]))
+			height++;
 		free(line);
 	}
 	if (close(fd) == -1)
