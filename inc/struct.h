@@ -6,7 +6,7 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:16:01 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/13 13:13:34 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:11:33 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_ray
 	double	deltadist_x;
 	double	deltadist_y;
 	double	perpwalldist;
+
 	int		map_x;
 	int		map_y;
 	int		step_x;
