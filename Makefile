@@ -13,6 +13,7 @@ SRCS_M =	$(DIR_M)main.c		\
 		$(DIR_M)parse.c			\
 		$(DIR_M)ft_error.c 		\
 		$(DIR_M)get_next_line.c	\
+		$(DIR_M)get_next_line_utils.c	\
 		$(DIR_M)cub_init.c 		\
 		$(DIR_M)ft_split.c		\
 		$(DIR_M)check_map.c		\
