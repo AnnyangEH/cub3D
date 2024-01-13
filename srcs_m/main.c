@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:44 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 21:45:41 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 21:56:06 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 	atexit(leak);
 	game = malloc(sizeof(t_game));
 	if (!game)
-		ft_error_exit("Error\nFailed to allocate game\n", game);
+		ft_free("Error\nFailed to allocate game\n", game, -1);
 	ft_init(ac, av, game);
 	parse(game);
 	init_mlx(game);
@@ -59,6 +59,6 @@ int	main(int ac, char **av)
 	mlx_hook(game->win, KEY_PRESS, 1L << 0, press_key, game);
 	mlx_loop_hook(game->ptr, exec, game);
 	mlx_loop(game->ptr);
-	free_game_one(game);
+	ft_free(0, game, 0);
 	return (SUCCESS);
 }

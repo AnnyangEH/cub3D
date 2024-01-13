@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 21:38:21 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 21:55:34 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static int	init_time(t_game *game);
 void	ft_init(int ac, char **av, t_game *game)
 {
 	if (ac != 2)
-		ft_error_exit("Error\nInvalid number of arguments\n", game);
+		ft_free("Error\nInvalid number of arguments\n", game, -1);
 	if (ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4))
 		ft_error_exit("Error\nInvalid file extension\n", game);
 	if (init_game(game, av[1]))
-		ft_error("Error\nFailed to initialize map\n", game);
+		ft_free("Error\nFailed to initialize map\n", game, -1);
 	if (init_time(game))
-		ft_error_exit("Error\nFailed to initalize time\n", game);
+		ft_free("Error\nFailed to initalize time\n", game, -1);
 }
 
 static int	init_game(t_game *game, char *path)
@@ -32,6 +32,7 @@ static int	init_game(t_game *game, char *path)
 	ft_memset(game, 0, sizeof(t_game));
 	game->map = malloc(sizeof(t_map));
 	ft_memset(game->map, 0, sizeof(t_map));
+	ft_memset(game->imgs, 0, sizeof(t_imgs) * 4);
 	if (!game->map)
 		return (FAILURE);
 	game->map->path = ft_strdup(path);

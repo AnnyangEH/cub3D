@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 21:39:05 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 21:55:12 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_game
 	t_time			time;
 }					t_game;
 
+<<<<<<< HEAD
 int		ft_strlen(char *s);
 int		ft_strncmp(char *s1, char *s2, int n);
 void	ft_putstr_fd(char *s, int fd);
@@ -176,25 +177,69 @@ void	turn_right(t_game *game, double rot_speed);
 
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
+=======
+int			ft_strlen(char *s);
+int			ft_strncmp(char *s1, char *s2, int n);
+void		ft_putstr_fd(char *s, int fd);
+char		*ft_strdup(char *str);
+char		*ft_substr(char *s, unsigned int start, int len);
+void		ft_memset(void *b, int c, size_t len);
+int			ft_strchr(char *s, int c);
+int			ft_iswhitespace(char c);
+int			ft_isdigit(int c);
+char		**ft_split(char const *s, char c);
+int			ft_catoi(const char *str);
+int			ft_isempty(char *line);
+double		ft_min(double a, double b);
+void		free_split(char **split);
+void		check_sep(t_game *game, char *line, int *i);
+
+void		ft_init(int ac, char **av, t_game *game);
+int			init_mlx(t_game *game);
+
+void		ft_free(char *str, t_game *game, int i);
+void		ft_error_exit(char *str, t_game *game);
+
+void		parse(t_game *game);
+void		parse_token(t_game *game);
+void		parse_map(t_game *game);
+
+void		check_map(t_game *game);
+
+int			press_key(int key, t_game *game, double move_speed, double rot_speed);
+void		set_hook(t_game *game);
+void		close_win(t_game *game);
+int			exit_hook(t_game *game);
+
+void		go_up(t_game *game, double move_speed);
+void		go_down(t_game *game, double move_speed);
+void		go_right(t_game *game, double move_speed);
+void		go_left(t_game *game, double move_speed);
+void		turn_left(t_game *game, double rot_speed);
+void		turn_right(t_game *game, double rot_speed);
+
+void		my_mlx_pixel_put(t_game *game, int x, int y, int color);
+int			create_trgb(int t, int r, int g, int b);
+>>>>>>> 073a400ab39893ccf8dd732e56a3b55a5e58b952
 
 long long	get_time(void);
 
-int		exec(t_game *game);
+int			exec(t_game *game);
 
-void	draw_point(t_game *game);
-void	texture(t_game *game);
-void	draw(t_game *game, int x, int y, int color);
+void		draw_point(t_game *game);
+void		texture(t_game *game);
+void		draw(t_game *game, int x, int y, int color);
 
-void	set_value(t_game *game, int x);
-void	set_step_side(t_game *game);
-void	hit_side(t_game *game);
-void	set_wall_dir(t_game *game);
+void		set_value(t_game *game, int x);
+void		set_step_side(t_game *game);
+void		hit_side(t_game *game);
+void		set_wall_dir(t_game *game);
 
-void	go_up(t_game *game, double move_speed);
-void	go_down(t_game *game, double move_speed);
-void	go_right(t_game *game, double move_speed);
-void	go_left(t_game *game, double move_speed);
-void	turn_right(t_game *game, double rot_speed);
-void	turn_left(t_game *game, double rot_speed);
+void		go_up(t_game *game, double move_speed);
+void		go_down(t_game *game, double move_speed);
+void		go_right(t_game *game, double move_speed);
+void		go_left(t_game *game, double move_speed);
+void		turn_right(t_game *game, double rot_speed);
+void		turn_left(t_game *game, double rot_speed);
 
 #endif
