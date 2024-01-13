@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 22:06:31 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:31:02 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ int	check_imgs(t_game *game, char *line)
 	while (ft_iswhitespace(line[i]) && line[i])
 		i++;
 	if (line[i] == '\n')
-		return (FALSE);
+		return (2);
 	else if (ft_strchr("NSWEFC", line[i]))
 		check_imgs_data(game, line, &i);
 	else if (ft_isdigit(line[i]))
-		return (TRUE);
+		return (1);
 	else
-		ft_free("Error\nInvalid imgs\n", game, -1);
-	return (FALSE);
+		ft_free("Error\nInvalid imgs filename\n", game, -1);
+	return (0);
 }
 
 void	parse_token(t_game *game)
@@ -101,7 +101,12 @@ void	parse_token(t_game *game)
 		game->map->line = get_next_line(game->map->fd);
 		if (!game->map->line)
 			ft_free("Error\nFailed to read file\n", game, -1);
-		if (check_imgs(game, game->map->line) == TRUE)
+		if (check_imgs(game, game->map->line) == 2)
+		{
+			free(game->map->line);
+			continue ;
+		}
+		else if (check_imgs(game, game->map->line) == 1)
 			break ;
 		free(game->map->line);
 	}

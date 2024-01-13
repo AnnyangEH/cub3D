@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/cub3D_bonus.h"
 
 void	ft_free(char *str, t_game *game, int i)
 {
