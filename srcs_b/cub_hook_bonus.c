@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:22 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 21:58:00 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:39:17 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	close_win(t_game *game)
 {
-	ft_free(0, game);
+	ft_free(0, game, -1);
 	exit(0);
 }
 

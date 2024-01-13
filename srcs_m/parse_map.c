@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 20:34:59 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:22:52 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,8 @@ void	parse_player(t_game *game, char c, int height, int width)
 	game->player.plane_x = game->player.dir_y * (-0.66);
 }
 
-static void	parse_map_line(t_game *game, int height)
+static void	parse_map_line(t_game *game, int height, int i)
 {
-	int	i;
-
-	i = -1;
 	while (game->map->line[++i] && game->map->line[i] != '\n')
 	{
 		if (!ft_strchr(" 01NSEW", game->map->line[i]))
@@ -104,7 +101,7 @@ void	parse_map(t_game *game)
 			ft_free("Error\nInvalid map - empty line\n", game, -1);
 		game->map->width[height] = width;
 		game->map->map[height] = malloc(sizeof(char) * (width + 1));
-		parse_map_line(game, height);
+		parse_map_line(game, height, -1);
 		free(game->map->line);
 		game->map->line = get_next_line(game->map->fd);
 		height++;

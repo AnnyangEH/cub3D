@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:57:34 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 22:00:37 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:39:27 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	check_cell(t_game *game, int x, int y, char **map)
 		x = 0;
 		while (x < game->map->width[y])
 		{
-			if (map[y][x] == '0' || map[y][x] == '2' || map[y][x] == '4')
+			if (map[y][x] == '0')
 				check_zero(game, x, y, map);
 			x++;
 		}

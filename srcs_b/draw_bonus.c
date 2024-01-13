@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 21:42:31 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/13 21:58:04 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:48:30 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	minimap(t_game *game, int x, int y)
 		{
 			yy = y * game->map->height / 300;
 			xx = x * game->map->width[yy] / 300;
-			if (game->map->map[yy][xx] == '0' || game->map->map[yy][xx] == '3')
+			if (game->map->map[yy][xx] == '0')
 				my_mlx_pixel_put(game, x, y, create_trgb(0, 255, 255, 255));
 			else if (xx >= game->map->width[yy] || \
 				game->map->map[yy][xx] == ' ' || game->map->map[yy][xx] == '1')

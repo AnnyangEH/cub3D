@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 21:58:07 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:56:53 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ static int	count_height(t_game *game, int fd, int height)
 		i = 0;
 		while (line[i] == ' ')
 			++i;
-		if (ft_isdigit(line[i]))
-			height++;
-		if (height > 0 && ft_isdigit(line[i]) == 0)
-			ft_free("Error\nInvalid map character\n", game, -1);
+		if (line[i] == ' ' || line[i] == '\n' || ft_isdigit(line[i]))
+			++height;
 		free(line);
 	}
 	if (close(fd) == -1)
@@ -73,6 +71,16 @@ void	parse_player(t_game *game, char c, int height, int width)
 	game->player.plane_x = game->player.dir_y * (-0.66);
 }
 
+static void	parse_sprite(t_game *game, int height, int width)
+{
+	game->sprite_cnt++;
+	if (game->sprite_cnt > SPRITE_MAX)
+		ft_free("Error\nToo many sprites in this map\n", game, -1);
+	game->sprite[game->sprite_cnt].x = width + 0.5;
+	game->sprite[game->sprite_cnt].y = height + 0.5;
+	game->map->map[height][width] = game->map->line[width];
+}
+
 static void	parse_map_line(t_game *game, int height, int i)
 {
 	while (game->map->line[++i] && game->map->line[i] != '\n')
@@ -83,6 +91,8 @@ static void	parse_map_line(t_game *game, int height, int i)
 			parse_player(game, game->map->line[i], height, i);
 		else if (ft_strchr("3", game->map->line[i]))
 			ft_free("Error\nInvalid map open door\n", game, -1);
+		else if (ft_strchr("4", game->map->line[i]))
+			parse_sprite(game, height, i);
 		else
 			game->map->map[height][i] = game->map->line[i];
 	}
@@ -102,7 +112,7 @@ void	parse_map(t_game *game)
 		while (game->map->line[width] && game->map->line[width] != '\n')
 			++width;
 		if (ft_isempty(game->map->line))
-			ft_free("Error\nInvalid map\n", game, -1);
+			ft_free("Error\nInvalid map - empty line\n", game, -1);
 		game->map->width[height] = width;
 		game->map->map[height] = malloc(sizeof(char) * (width + 1));
 		parse_map_line(game, height, -1);
