@@ -39,6 +39,7 @@ enum e_key {
 	KEY_UP = 126,
 	KEY_ESC = 53,
 	KEY_PRESS = 2,
+	KEY_SPACE = 49,
 };
 
 typedef struct s_time

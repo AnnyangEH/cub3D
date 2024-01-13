@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 21:42:31 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/12 21:52:28 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/13 15:31:42 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void	texture(t_game *game)
 		wall = game->player.x + (game->ray.perp_wall * game->ray.dir_x);
 	wall -= floor((wall));
 	game->ray.tex_x = (int)(wall * (double)game->imgs[game->ray.cps].width);
-	if (!game->ray.side && game->ray.dir_x > 0)
-		game->ray.tex_x = game->imgs[game->ray.cps].width - game->ray.tex_x - 1;
-	if (game->ray.side == 1 && game->ray.dir_y < 0)
-		game->ray.tex_x = game->imgs[game->ray.cps].width - game->ray.tex_x - 1;
+	game->ray.tex_x = game->imgs[game->ray.cps].width - game->ray.tex_x - 1;
 }
 
 void	draw(t_game *game, int x, int y, int color)
@@ -82,7 +79,7 @@ void	minimap(t_game *game, int x, int y)
 		{
 			yy = y * game->map->height / 300;
 			xx = x * game->map->width[yy] / 300;
-			if (game->map->map[yy][xx] == '0')
+			if (game->map->map[yy][xx] == '0' || game->map->map[yy][xx] == '3')
 				my_mlx_pixel_put(game, x, y, create_trgb(0, 255, 255, 255));
 			else if (xx >= game->map->width[yy] || \
 				game->map->map[yy][xx] == ' ' || game->map->map[yy][xx] == '1')

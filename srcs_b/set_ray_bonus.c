@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:03:04 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 21:48:14 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/12 23:50:29 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ void	hit_side(t_game *game)
 			game->ray.map_y += game->ray.step_y;
 			game->ray.side = 1;
 		}
-		if (game->map->map[game->ray.map_y][game->ray.map_x] == '1')
+		if (game->map->map[game->ray.map_y][game->ray.map_x] == '1' || \
+				game->map->map[game->ray.map_y][game->ray.map_x] == '2' || \
+				game->map->map[game->ray.map_y][game->ray.map_x] == '4')
 			game->ray.hit = 1;
 	}
 	if (!game->ray.side)
@@ -87,4 +89,6 @@ void	set_wall_dir(t_game *game)
 		game->ray.cps = 2;
 	else if (!game->ray.side && (game->player.x - game->ray.map_x) > 0)
 		game->ray.cps = 3;
+	if (game->map->map[game->ray.map_y][game->ray.map_x] == '2')
+		game->ray.cps = 4;
 }
