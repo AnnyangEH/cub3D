@@ -6,7 +6,7 @@
 /*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:55:21 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/13 12:35:59 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/13 13:04:26 by suhbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	set_wall(t_game *game, t_ray *ray)
 
 void	set_nsew(t_game *game, t_ray *ray)
 {
-	if (!ray->side && game->player.y - ray->map_y > 0)
+	if (ray->side && game->player.y - ray->map_y > 0)
 		ray->tex_num = 0;
-	else if (!ray->side && game->player.y - ray->map_y < 0)
+	else if (ray->side && game->player.y - ray->map_y < 0)
 		ray->tex_num = 1;
-	else if (ray->side && game->player.x - ray->map_x > 0)
+	else if (!ray->side && game->player.x - ray->map_x > 0)
 		ray->tex_num = 2;
-	else if (ray->side && game->player.x - ray->map_x < 0)
+	else if (!ray->side && game->player.x - ray->map_x < 0)
 		ray->tex_num = 3;
 }
 
