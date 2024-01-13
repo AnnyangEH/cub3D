@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/12 19:43:19 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 20:34:59 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static int	init_time(t_game *game);
 void	ft_init(int ac, char **av, t_game *game)
 {
 	if (ac != 2)
-		ft_error_exit("Error\nInvalid number of arguments\n", game);
+		ft_free("Error\nInvalid number of arguments\n", game, -1);
 	if (ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4))
-		ft_error_exit("Error\nInvalid file extension\n", game);
+		ft_free("Error\nInvalid file extension\n", game, -1);
 	if (init_game(game, av[1]))
-		ft_error("Error\nFailed to initialize map\n", game);
+		ft_free("Error\nFailed to initialize map\n", game, -1);
 	if (init_mlx(game))
-		ft_error_exit("Error\nFailed to initialize mlx\n", game);
+		ft_free("Error\nFailed to initialize mlx\n", game, -1);
 	if (init_time(game))
-		ft_error_exit("Error\nFailed to initalize time\n", game);
+		ft_free("Error\nFailed to initalize time\n", game, -1);
 }
 
 static int	init_game(t_game *game, char *path)

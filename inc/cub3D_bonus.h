@@ -152,9 +152,7 @@ void	free_split(char **split);
 
 void	ft_init(int ac, char **av, t_game *game);
 
-void	ft_error(char *str, t_game *game);
-void	ft_error_exit(char *str, t_game *game);
-void	free_game_one(t_game *game);
+void	ft_free(char *str, t_game *game, int i);
 
 void	parse(t_game *game);
 void	parse_token(t_game *game);
