@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:57:34 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 21:55:25 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:05:35 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	check_zero(t_game *game, int x, int y, char **map)
 {
 	if (x == 0 || y == 0 || x == game->map->width[y] - 1 \
 	|| y == game->map->height - 1)
-		ft_error("Error\nMap is not surrounded by wall 1\n", game);
+		ft_free("Error\nMap is not surrounded by wall 1\n", game, -1);
 	if (y - 1 >= 0 && x > game->map->width[y - 1] - 1)
-		ft_error("Error\nMap is not surrounded by wall 2\n", game);
+		ft_free("Error\nMap is not surrounded by wall 2\n", game, -1);
 	if (y + 1 < game->map->height && x > game->map->width[y + 1] - 1)
-		ft_error("Error\nMap is not surrounded by wall 3\n", game);
+		ft_free("Error\nMap is not surrounded by wall 3\n", game, -1);
 	if (x - 1 >= 0 && y - 1 >= 0)
 	{
 		if (map[y][x - 1] == ' ' || map[y - 1][x] == ' ')

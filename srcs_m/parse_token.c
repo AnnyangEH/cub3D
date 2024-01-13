@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 21:56:11 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:06:31 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 		(*i)++;
 	if (line[*i] == '\n')
 		return ;
-	check_sep(game, line, i);
 	temp = ft_split(line + *i, ',');
 	if (!temp)
 		ft_free("Error\nFailed to split color string\n", game, -1);
@@ -49,7 +48,7 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	{
 		game->map->color[flag][j] = ft_catoi(temp[j]);
 		if ((ft_catoi(temp[j]) > 255 || ft_catoi(temp[j]) < 0))
-			ft_error("Error\nInvalid color value\n", game);
+			ft_free("Error\nInvalid color value\n", game, -1);
 		j++;
 	}
 	if (temp[j])
