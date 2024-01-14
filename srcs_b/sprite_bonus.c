@@ -6,7 +6,7 @@
 /*   By: hysung <hysung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 23:21:00 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/14 00:04:29 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/14 17:39:39 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	sort_sprite(t_game *game)
 	int			i;
 
 	i = -1;
-	while (++i < S_MAX && game->sprite[i])
+	while (++i < game->s_num)
 	{
 		game->s_dist[i] = ((game->player.x - game->sprite[i].x) * \
-			(game->player.x - game->sprite[i].x) + \(game->player.y - \
-			game->sprite[i].y) * (game->player.y - game->sprite[i].Y));
+			(game->player.x - game->sprite[i].x) + (game->player.y - \
+			game->sprite[i].y) * (game->player.y - game->sprite[i].y));
 	}
 	i = -1;
-	while (++i < S_MAX && game->sprite[i])
+	while (++i < game->s_num)
 	{
 		set_sprite(game, i);
 		draw_sprite(game, i);
@@ -32,19 +32,22 @@ void	sort_sprite(t_game *game)
 }
 
 void	draw_sprite(t_game *game, int i)
-{		
+{
+	(void)i;
 	for (int st = game->say.dx_start; st < game->say.dx_end; st++)
 	{
 		game->say.tex_x = (int)(256 * (st - (-1 * game->say.s_width / 2 + \
-						game->say.screen_x)) * game->imgs[].tex_width / game->say.s_width) / 256;
+	game->say.screen_x)) * game->imgs[5].width / game->say.s_width) / 256;
 		if (game->say.trans_y > 0 && st > 0 && st < 1000 && \
 				game->say.trans_y < game->z_buffer[st])
 		{
 			for (int y = game->say.dy_start; y < game->say.dy_end; y++)
 			{
 				game->say.d = y * 256 - 128000 + game->say.s_height * 128;
-				game->say.tex_y = ((d * texHeight) / game->say.s_height) / 256;
-				int	color = *(int *)(game->imgs[].addr + game->say.tex_y * game->imgs[].size_l + game->say.tex_x * (game->imgs[].bpp / 8));
+				game->say.tex_y = ((game->say.d * game->imgs[5].height) / \
+						game->say.s_height) / 256;
+				int	color = *(int *)(game->imgs[5].addr + game->say.tex_y * \
+				game->imgs[5].size_l + game->say.tex_x * (game->imgs[5].bpp / 8));
 				if ((color & 0x00FFFFFF) != 0)
 					my_mlx_pixel_put(game, st, y, color);;
 			}

@@ -156,6 +156,7 @@ typedef struct s_game
 	int				size_l;
 	int				door_cnt;
 	double			z_buffer[1000];
+	int				s_num;
 	t_sprite		sprite[S_MAX];
 	t_say			say;
 	int				s_order[S_MAX];
