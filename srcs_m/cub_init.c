@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 21:55:34 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 22:01:02 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_init(int ac, char **av, t_game *game)
 	if (ac != 2)
 		ft_free("Error\nInvalid number of arguments\n", game, -1);
 	if (ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4))
-		ft_error_exit("Error\nInvalid file extension\n", game);
+		ft_free_exit("Error\nInvalid file extension\n", game);
 	if (init_game(game, av[1]))
 		ft_free("Error\nFailed to initialize map\n", game, -1);
 	if (init_time(game))

@@ -12,7 +12,7 @@
 
 #include "../inc/cub3D.h"
 
-void	ft_error_exit(char *str, t_game *game)
+void	ft_free_exit(char *str, t_game *game)
 {
 	ft_putstr_fd(str, 2);
 	free(game);

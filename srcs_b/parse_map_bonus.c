@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 22:22:51 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/13 23:30:55 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	count_height(t_game *game, int fd, int height)
 			break ;
 		i = 0;
 		while (line[i] == ' ')
-			++i;
-		if (line[i] == ' ' || line[i] == '\n' || ft_isdigit(line[i]))
-			++height;
+			i++;
+		if (ft_isdigit(line[i]))
+			height++;
 		free(line);
 	}
 	if (close(fd) == -1)
@@ -71,6 +71,16 @@ void	parse_player(t_game *game, char c, int height, int width)
 	game->player.plane_x = game->player.dir_y * (-0.66);
 }
 
+static void	parse_sprite(t_game *game, int height, int width)
+{
+	game->sprite_cnt++;
+	if (game->sprite_cnt > SPRITE_MAX)
+		ft_free("Error\nToo many sprites in this map\n", game, -1);
+	game->sprite[game->sprite_cnt].x = width + 0.5;
+	game->sprite[game->sprite_cnt].y = height + 0.5;
+	game->map->map[height][width] = game->map->line[width];
+}
+
 static void	parse_map_line(t_game *game, int height, int i)
 {
 	while (game->map->line[++i] && game->map->line[i] != '\n')
@@ -81,6 +91,8 @@ static void	parse_map_line(t_game *game, int height, int i)
 			parse_player(game, game->map->line[i], height, i);
 		else if (ft_strchr("3", game->map->line[i]))
 			ft_free("Error\nInvalid map open door\n", game, -1);
+		else if (ft_strchr("4", game->map->line[i]))
+			parse_sprite(game, height, i);
 		else
 			game->map->map[height][i] = game->map->line[i];
 	}
