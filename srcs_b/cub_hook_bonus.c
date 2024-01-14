@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:22 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 22:39:17 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/14 22:12:38 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ int	exit_hook(t_game *game)
 
 void	open_door(t_game *game)
 {
-	if (game->map->map[(int)(game->player.y + game->player.dir_y)]\
+	if (game->map->map[(int)(game->player.y + game->player.dir_y)] \
 			[(int)(game->player.x + game->player.dir_x)] == '2')
-		game->map->map[(int)(game->player.y + game->player.dir_y)]\
+		game->map->map[(int)(game->player.y + game->player.dir_y)] \
 				[(int)(game->player.x + game->player.dir_x)] = '3';
-	else if (game->map->map[(int)(game->player.y + game->player.dir_y)]\
+	else if (game->map->map[(int)(game->player.y + game->player.dir_y)] \
 			[(int)(game->player.x + game->player.dir_x)] == '3')
-		game->map->map[(int)(game->player.y + game->player.dir_y)]\
+		game->map->map[(int)(game->player.y + game->player.dir_y)] \
 				[(int)(game->player.x + game->player.dir_x)] = '2';
-	printf("asdfa");
-	printf("%c ", game->map->map[(int)(game->player.y + game->player.dir_y)][(int)(game->player.x + game->player.dir_x)]);
 }
 
 int	press_key(int key, t_game *game, double move_speed, double rot_speed)

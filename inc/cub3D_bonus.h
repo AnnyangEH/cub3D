@@ -156,7 +156,7 @@ typedef struct s_game
 	int				size_l;
 	int				door_cnt;
 	double			z_buffer[1000];
-	int				s_num;
+	int				s_cnt;
 	t_sprite		sprite[S_MAX];
 	t_say			say;
 	int				s_order[S_MAX];
@@ -221,7 +221,7 @@ int			exec(t_game *game);
 void		draw_point(t_game *game);
 void		texture(t_game *game);
 void		draw(t_game *game, int x, int y, int color);
-void		minimap(t_game *game, int x, int y);
+void		minimap(t_game *game, int x, int y, int yy);
 
 void		set_value(t_game *game, int x);
 void		set_step_side(t_game *game);
@@ -237,5 +237,5 @@ void		turn_left(t_game *game, double rot_speed);
 
 void		sort_sprite(t_game *game);
 void		set_sprite(t_game *game, int i);
-void		draw_sprite(t_game *game, int i);
+void		draw_sprite(t_game *game, t_imgs *sp_img, int x, int y);
 #endif

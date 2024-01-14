@@ -6,7 +6,7 @@
 /*   By: hysung <hysung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 23:21:00 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/14 17:39:39 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/14 22:18:42 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,52 @@
 
 void	sort_sprite(t_game *game)
 {
-	int			i;
+	int				i;
+	struct timeval	time;
+	t_imgs			*sp_img;
 
 	i = -1;
-	while (++i < game->s_num)
+	while (++i < game->s_cnt)
 	{
 		game->s_dist[i] = ((game->player.x - game->sprite[i].x) * \
 			(game->player.x - game->sprite[i].x) + (game->player.y - \
 			game->sprite[i].y) * (game->player.y - game->sprite[i].y));
 	}
 	i = -1;
-	while (++i < game->s_num)
+	gettimeofday(&time, 0);
+	sp_img = &(game->imgs[5 + (time.tv_usec % 0x80000) / 0x20000]);
+	while (++i < game->s_cnt)
 	{
 		set_sprite(game, i);
-		draw_sprite(game, i);
+		draw_sprite(game, sp_img, game->say.dx_start, game->say.dy_start);
 	}
 }
 
-void	draw_sprite(t_game *game, int i)
+void	draw_sprite(t_game *game, t_imgs *sp_img, int x, int y)
 {
-	(void)i;
-	for (int st = game->say.dx_start; st < game->say.dx_end; st++)
+	int	color;
+
+	while (x < game->say.dx_end)
 	{
-		game->say.tex_x = (int)(256 * (st - (-1 * game->say.s_width / 2 + \
-	game->say.screen_x)) * game->imgs[5].width / game->say.s_width) / 256;
-		if (game->say.trans_y > 0 && st > 0 && st < 1000 && \
-				game->say.trans_y < game->z_buffer[st])
+		game->say.tex_x = (int)(256 * (x - (-game->say.s_width / 2 + \
+	game->say.screen_x)) * sp_img->width / game->say.s_width) / 256;
+		if (game->say.trans_y > 0 && x > 0 && x < 1000 && \
+				game->say.trans_y < game->z_buffer[x])
 		{
-			for (int y = game->say.dy_start; y < game->say.dy_end; y++)
+			y = game->say.dy_start;
+			while (y < game->say.dy_end)
 			{
 				game->say.d = y * 256 - 128000 + game->say.s_height * 128;
-				game->say.tex_y = ((game->say.d * game->imgs[5].height) / \
+				game->say.tex_y = ((game->say.d * sp_img->height) / \
 						game->say.s_height) / 256;
-				int	color = *(int *)(game->imgs[5].addr + game->say.tex_y * \
-				game->imgs[5].size_l + game->say.tex_x * (game->imgs[5].bpp / 8));
+				color = *(int *)(sp_img->addr + game->say.tex_y * \
+				sp_img->size_l + game->say.tex_x * (sp_img->bpp / 8));
 				if ((color & 0x00FFFFFF) != 0)
-					my_mlx_pixel_put(game, st, y, color);;
+					my_mlx_pixel_put(game, x, y, color);
+				y++;
 			}
 		}
-
+		x++;
 	}
 }
 
@@ -64,7 +71,7 @@ void	set_sprite(t_game *game, int i)
 			game->player.dir_x * game->player.plane_y);
 	game->say.trans_x = game->say.inv_det * (game->player.dir_y * \
 			game->say.s_x - game->player.dir_x * game->say.s_y);
-	game->say.trans_y = game->say.inv_det * (-1 * game->player.plane_y * \
+	game->say.trans_y = game->say.inv_det * (-game->player.plane_y * \
 			game->say.s_x + game->player.plane_x * game->say.s_y);
 	game->say.screen_x = (int)(500 * (1 + game->say.trans_x / \
 				game->say.trans_y));
@@ -76,7 +83,7 @@ void	set_sprite(t_game *game, int i)
 	if (game->say.dy_end >= 1000)
 		game->say.dy_end = 1000;
 	game->say.s_width = abs((int)(1000 / game->say.trans_y));
-	game->say.dx_start = -1 * game->say.s_width / 2 + game->say.screen_x;
+	game->say.dx_start = -game->say.s_width / 2 + game->say.screen_x;
 	if (game->say.dx_start < 0)
 		game->say.dx_start = 0;
 	game->say.dx_end = game->say.s_width / 2 + game->say.screen_x;

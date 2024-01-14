@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 22:17:11 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/13 18:16:47 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/14 22:08:46 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	go_up(t_game *game, double move_speed)
 void	go_down(t_game *game, double move_speed)
 {
 	if (game->map->map[(int)game->player.y][(int)(game->player.x - \
-				game->player.dir_x * move_speed * 1.3)] == '0' || 
+				game->player.dir_x * move_speed * 1.3)] == '0' || \
 			game->map->map[(int)game->player.y][(int)(game->player.x - \
 				game->player.dir_x * move_speed * 1.3)] == '3')
 		game->player.x -= game->player.dir_x * move_speed;

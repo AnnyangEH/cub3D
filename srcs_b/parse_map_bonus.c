@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 23:30:55 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/14 19:34:05 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ void	parse_player(t_game *game, char c, int height, int width)
 
 static void	parse_sprite(t_game *game, int height, int width)
 {
-	game->sprite_cnt++;
-	if (game->sprite_cnt > SPRITE_MAX)
+	game->s_cnt++;
+	if (game->s_cnt > S_MAX)
 		ft_free("Error\nToo many sprites in this map\n", game, -1);
-	game->sprite[game->sprite_cnt].x = width + 0.5;
-	game->sprite[game->sprite_cnt].y = height + 0.5;
+	game->sprite[game->s_cnt].x = width + 0.5;
+	game->sprite[game->s_cnt].y = height + 0.5;
 	game->map->map[height][width] = game->map->line[width];
 }
 
