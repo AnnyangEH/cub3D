@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 17:58:52 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 20:51:10 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void		init_imgs(t_game *game, int i);
 void		get_img(t_game *game);
 
 void		ft_free(char *str, t_game *game, int i);
-void		ft_free_exit(char *str, t_game *game);
+void		ft_free_exit(char *str);
 
 void		parse(t_game *game);
 void		parse_token(t_game *game);

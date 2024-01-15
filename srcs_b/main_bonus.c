@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:44 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 18:14:20 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 20:50:21 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(game.ptr, exec, &game);
 	mlx_loop(game.ptr);
 	ft_free(0, &game, -1);
+	exit(SUCCESS);
 }
