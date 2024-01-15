@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 17:20:01 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 19:20:50 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
+	game->imgs[flag].cnt++;
+	if (game->imgs[flag].cnt > 1)
+		ft_free("Error\nDuplicate img path\n", game, -1);
 	(*i) += 3;
 	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
 	if (line[*i] == '\n')
 		ft_free("Error\nMissing img path\n", game, -1);
-	if (game->imgs[flag].path)
-		free(game->imgs[flag].path);
 	game->imgs[flag].path = ft_strdup(line + *i);
 	if (!game->imgs[flag].path)
 		ft_free("Error\nEmpty img path\n", game, -1);

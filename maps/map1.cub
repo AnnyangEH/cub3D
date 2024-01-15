@@ -1,9 +1,10 @@
 F 181,214,163
-NO ./imgs/NO.xpm
-
-SO ./imgs/SO.xpm
-WE ./imgs/WE.xpm
 C 214,230,240
+NO ./imgs/NO.xpm
+SO ./imgs/SO.xpm
+
+WE ./imgs/WE.xpm
+
 EA ./imgs/EA.xpm
 
         1111111111111111111111111
