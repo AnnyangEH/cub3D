@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 19:20:50 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 19:36:07 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,13 @@ void	parse_token(t_game *game)
 		game->map->line = get_next_line(game->map->fd);
 		if (!game->map->line)
 			ft_free("Error\nFailed to read file\n", game, -1);
-		if (check_imgs(game, game->map->line) == 2)
+		i = check_imgs(game, game->map->line);
+		if (i == 2)
 		{
 			free(game->map->line);
 			continue ;
 		}
-		else if (check_imgs(game, game->map->line) == 1)
+		else if (i == 1)
 			break ;
 		free(game->map->line);
 	}
@@ -126,7 +127,7 @@ void	parse_token(t_game *game)
 	while (i < 9)
 	{
 		if (!game->imgs[i].path)
-			ft_free("Error\nOne or more imgs are missing\n", game, -1);
+			ft_free("Error\nOne or more imgs adress is missing\n", game, -1);
 		i++;
 	}
 }

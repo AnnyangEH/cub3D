@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 19:19:42 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 19:34:11 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,13 @@ void	parse_token(t_game *game)
 		game->map->line = get_next_line(game->map->fd);
 		if (!game->map->line)
 			ft_free("Error\nFailed to read file\n", game, -1);
-		if (check_imgs(game, game->map->line) == 2)
+		i = check_imgs(game, game->map->line);
+		if (i == 2)
 		{
 			free(game->map->line);
 			continue ;
 		}
-		else if (check_imgs(game, game->map->line) == 1)
+		else if (i == 1)
 			break ;
 		free(game->map->line);
 	}
