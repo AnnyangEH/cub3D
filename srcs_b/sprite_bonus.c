@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 23:21:00 by hysung            #+#    #+#             */
-/*   Updated: 2024/01/15 13:23:35 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 14:19:34 by hysung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	set_sprite(t_game *game, int i)
 	game->say.screen_x = (int)(500 * (1 + game->say.trans_x / \
 				game->say.trans_y));
 	game->say.s_height = abs((int)(1000 / game->say.trans_y));
-	game->say.dy_start = -1 * game->say.s_height / 2 + 500;
+	game->say.dy_start = -game->say.s_height / 2 + 500;
 	if (game->say.dy_start < 0)
 		game->say.dy_start = 0;
 	game->say.dy_end = game->say.s_height / 2 + 500;
