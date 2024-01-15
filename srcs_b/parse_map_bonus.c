@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/14 19:34:05 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/15 13:52:35 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	count_height(t_game *game, int fd, int height)
 	return (height);
 }
 
-void	init_map_two(t_game *game)
+static void	init_map_two(t_game *game)
 {
 	game->map->height = count_height(game, 0, 0);
 	game->map->player_cnt = 0;
@@ -51,12 +51,12 @@ void	init_map_two(t_game *game)
 	ft_memset(game->map->map, 0, sizeof(char *) * (game->map->height + 1));
 }
 
-void	parse_player(t_game *game, char c, int height, int width)
+static void	parse_player(t_game *game, char c, int height, int width)
 {
 	game->map->player_cnt++;
 	game->map->map[height][width] = '0';
-	game->player.x = width + 0.5;
-	game->player.y = height + 0.5;
+	game->player.x = width;
+	game->player.y = height;
 	game->player.dir_x = 0.0;
 	game->player.dir_y = 0.0;
 	if (c == 'N')
@@ -69,16 +69,6 @@ void	parse_player(t_game *game, char c, int height, int width)
 		game->player.dir_x = 1.0;
 	game->player.plane_y = game->player.dir_x * 0.66;
 	game->player.plane_x = game->player.dir_y * (-0.66);
-}
-
-static void	parse_sprite(t_game *game, int height, int width)
-{
-	game->s_cnt++;
-	if (game->s_cnt > S_MAX)
-		ft_free("Error\nToo many sprites in this map\n", game, -1);
-	game->sprite[game->s_cnt].x = width + 0.5;
-	game->sprite[game->s_cnt].y = height + 0.5;
-	game->map->map[height][width] = game->map->line[width];
 }
 
 static void	parse_map_line(t_game *game, int height, int i)

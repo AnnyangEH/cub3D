@@ -195,6 +195,7 @@ void		ft_free(char *str, t_game *game, int i);
 void		parse(t_game *game);
 void		parse_token(t_game *game);
 void		parse_map(t_game *game);
+void		parse_sprite(t_game *game, int height, int width);
 
 void		check_map(t_game *game);
 
