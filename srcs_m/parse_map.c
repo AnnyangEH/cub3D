@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 23:32:16 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 14:05:24 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ void	init_map_two(t_game *game)
 	game->map->height = count_height(game, 0, 0);
 	game->map->player_cnt = 0;
 	game->map->map = malloc(sizeof(char *) * (game->map->height + 1));
-	if (!game->map->map)
-		ft_free("Error\nFailed to allocate map\n", game, -1);
 	game->map->width = malloc(sizeof(int) * game->map->height);
-	if (!game->map->width)
-		ft_free("Error\nFailed to allocate map\n", game, -1);
 	ft_memset(game->map->width, 0, sizeof(int) * game->map->height);
 	ft_memset(game->map->map, 0, sizeof(char *) * (game->map->height + 1));
 }

@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 22:18:00 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 14:14:11 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,23 @@ static int	init_game(t_game *game, char *path)
 	ft_memset(game, 0, sizeof(t_game));
 	game->map = malloc(sizeof(t_map));
 	ft_memset(game->map, 0, sizeof(t_map));
-	if (!game->map)
-		return (FAILURE);
 	game->map->path = ft_strdup(path);
 	if (!game->map->path)
 		return (FAILURE);
 	return (SUCCESS);
 }
 
-int	init_mlx(t_game *game)
+void	init_mlx(t_game *game)
 {
 	game->ptr = mlx_init();
 	if (!game->ptr)
-		return (FAILURE);
+		ft_free("Error\nFailed to initialize mlx\n", game, -1);
 	game->win = mlx_new_window(game->ptr, 1000, 1000, "cub3D");
 	if (!game->win)
-		return (FAILURE);
+		ft_free("Error\nFailed to initialize mlx\n", game, -1);
 	game->img_ptr = mlx_new_image(game->ptr, 1000, 1000);
 	game->addr = mlx_get_data_addr(game->img_ptr, &game->bpp, &game->size_l,
 			&game->endian);
-	return (SUCCESS);
 }
 
 static int	init_time(t_game *game)

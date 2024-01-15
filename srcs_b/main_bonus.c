@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:44 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 13:49:38 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 14:04:41 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	main(int ac, char **av)
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
-	if (!game)
-		ft_free("Error\nFailed to allocate game\n", game, -1);
 	ft_init(ac, av, game);
 	parse(game);
 	init_mlx(game);
