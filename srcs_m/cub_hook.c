@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:22 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 15:10:59 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 17:58:15 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	close_win(t_game *game)
 {
-	ft_free(0, game, 0);
+	ft_free(0, game, -1);
 }
 
 int	exit_hook(t_game *game)
 {
-	mlx_destroy_window(game->ptr, game->win);
-	exit(0);
+	ft_free(0, game, -1);
+	return (0);
 }
 
 int	press_key(int key, t_game *game, double move_speed, double rot_speed)

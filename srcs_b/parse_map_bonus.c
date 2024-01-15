@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 14:04:48 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 17:25:20 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	parse_player(t_game *game, char c, int height, int width)
 {
 	game->map->player_cnt++;
 	game->map->map[height][width] = '0';
-	game->player.x = width;
-	game->player.y = height;
+	game->player.x = width + 0.5;
+	game->player.y = height + 0.5;
 	game->player.dir_x = 0.0;
 	game->player.dir_y = 0.0;
 	if (c == 'N')

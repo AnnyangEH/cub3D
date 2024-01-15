@@ -41,7 +41,6 @@ void	ft_free(char *str, t_game *game, int i)
 		free(game->map->map);
 	}
 	free(game->map);
-	free(game);
 	if (str)
 		ft_putstr_fd(str, 2);
 	exit(FAILURE);

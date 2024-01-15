@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:27 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 15:43:15 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 17:25:42 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	parse(t_game *game)
 	init_mlx(game);
 	get_img(game);
 	set_color(game);
-	if (close(game->map->fd) == -1)
+	if (close(game->map->fd == -1))
 		ft_free("Error\nFailed to close file\n", game, -1);
 }

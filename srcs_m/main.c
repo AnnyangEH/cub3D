@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:44 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 15:45:30 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 18:03:31 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int	main(int ac, char **av)
 	mlx_hook(game->win, KEY_PRESS, 1L << 0, press_key, game);
 	mlx_loop_hook(game->ptr, exec, game);
 	mlx_loop(game->ptr);
-	ft_free(0, game, 0);
-	return (SUCCESS);
+	exit(SUCCESS);
 }

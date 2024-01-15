@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 16:00:52 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 18:06:29 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	init_game(t_game *game, char *path)
 	ft_memset(game, 0, sizeof(t_game));
 	game->map = malloc(sizeof(t_map));
 	ft_memset(game->map, 0, sizeof(t_map));
+	ft_memset(game->imgs, 0, sizeof(t_imgs) * 9);
 	game->map->path = ft_strdup(path);
 	if (!game->map->path)
 		return (FAILURE);
