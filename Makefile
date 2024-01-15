@@ -2,7 +2,7 @@ NAME = cub3D
 BONUS_NAME = cub3D_bonus
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O2 -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O2
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
@@ -56,6 +56,7 @@ SRCS_B =	$(DIR_B)main_bonus.c		\
 		$(DIR_B)turn_bonus.c			\
 		$(DIR_B)gogosing_bonus.c		\
 		$(DIR_B)sprite_bonus.c			\
+		$(DIR_B)parse_token_utils_bonus.c		\
 
 OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

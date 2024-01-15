@@ -31,10 +31,7 @@ void	ft_free(char *str, t_game *game, int i)
 	if (game->map->path)
 		free(game->map->path);
 	while (++i < 4)
-	{
-		if (game->imgs[i].path)
-			free(game->imgs[i].path);
-	}
+		free(game->imgs[i].path);
 	if (game->map->map)
 	{
 		i = -1;

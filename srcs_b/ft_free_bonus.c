@@ -20,7 +20,7 @@ void	ft_free(char *str, t_game *game, int i)
 		free(game->map->path);
 	if (game->map->width)
 		free(game->map->width);
-	if (game->map->fd)
+	if (game->map->fd > 0)
 		if (close(game->map->fd) == -1)
 			exit(FAILURE);
 	while (++i < 9)
