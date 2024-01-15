@@ -12,24 +12,32 @@
 
 #include "../inc/cub3D_bonus.h"
 
+void	ft_free_exit(char *str, t_game *game)
+{
+	ft_putstr_fd(str, 2);
+	free(game);
+	exit(FAILURE);
+}
+
 void	ft_free(char *str, t_game *game, int i)
 {
+	if (game->map->fd > 0)
+		if (close(game->map->fd) == -1)
+			exit(FAILURE);
+	if (game->map->width)
+		free(game->map->width);
 	if (game->map->line)
 		free(game->map->line);
 	if (game->map->path)
 		free(game->map->path);
-	if (game->map->width)
-		free(game->map->width);
-	if (game->map->fd > 0)
-		if (close(game->map->fd) == -1)
-			exit(FAILURE);
 	while (++i < 9)
 		free(game->imgs[i].path);
 	if (game->map->map)
 	{
 		i = -1;
 		while (++i < game->map->height)
-			free(game->map->map[i]);
+			if (game->map->map[i])
+				free(game->map->map[i]);
 		free(game->map->map);
 	}
 	free(game->map);

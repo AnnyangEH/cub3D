@@ -25,6 +25,7 @@ SRCS_M =	$(DIR_M)main.c		\
 		$(DIR_M)set_ray.c		\
 		$(DIR_M)draw.c			\
 		$(DIR_M)parse_token.c	\
+		$(DIR_M)parse_token_utils.c	\
 		$(DIR_M)parse_map.c		\
 		$(DIR_M)cub_utils1.c	\
 		$(DIR_M)cub_utils2.c	\

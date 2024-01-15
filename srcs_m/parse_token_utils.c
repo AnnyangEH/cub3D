@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_bonus.c                                      :+:      :+:    :+:   */
+/*   parse_token_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 19:45:27 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 15:43:15 by eunhcho          ###   ########.fr       */
+/*   Created: 2024/01/15 13:51:37 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/15 14:53:51 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D_bonus.h"
+#include "../inc/cub3D.h"
 
-void	parse(t_game *game)
+void	sep_count(t_game *game, char *line, char c)
 {
-	game->map->fd = open(game->map->path, O_RDONLY);
-	if (game->map->fd == -1)
-		ft_free("Error\nFailed to open file\n", game, -1);
-	parse_token(game);
-	parse_map(game);
-	check_map(game);
-	init_mlx(game);
-	get_img(game);
-	set_color(game);
-	if (close(game->map->fd) == -1)
-		ft_free("Error\nFailed to close file\n", game, -1);
+	int	count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == c)
+			count++;
+		i++;
+	}
+	if (count != 2)
+		ft_free("Error\nInvalid color type\n", game, -1);
 }

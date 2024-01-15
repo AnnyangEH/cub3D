@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 14:13:19 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 16:11:35 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ int			ft_catoi(const char *str);
 int			ft_isempty(char *line);
 double		ft_min(double a, double b);
 void		free_split(char **split);
-void		check_sep(t_game *game, char *line, int *i);
 
 void		ft_init(int ac, char **av, t_game *game);
 void		init_mlx(t_game *game);
@@ -161,11 +160,13 @@ void		ft_free_exit(char *str, t_game *game);
 
 void		parse(t_game *game);
 void		parse_token(t_game *game);
+void		sep_count(t_game *game, char *line, char c);
 void		parse_map(t_game *game);
 
 void		check_map(t_game *game);
 
-int			press_key(int key, t_game *game, double move_speed, double rot_speed);
+int			press_key(int key, t_game *game, \
+double move_speed, double rot_speed);
 void		set_hook(t_game *game);
 void		close_win(t_game *game);
 int			exit_hook(t_game *game);

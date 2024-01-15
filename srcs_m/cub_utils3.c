@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:20:08 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 20:47:48 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 14:38:26 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,4 @@ void	free_split(char **split)
 	while (split[i])
 		free(split[i++]);
 	free(split);
-}
-
-void	check_sep(t_game *game, char *line, int *i)
-{
-	int	cnt;
-
-	cnt = 0;
-	while (line[*i] && line[*i] != '\n')
-	{
-		if (line[*i] == ',')
-			cnt++;
-		(*i)++;
-	}
-	if (cnt != 2)
-		ft_free("Error\nInvalid color count it must be three\n", game, -1);
 }

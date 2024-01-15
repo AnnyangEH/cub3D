@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 16:11:42 by eunhcho           #+#    #+#             */
+/*   Updated: 2024/01/15 16:11:54 by eunhcho          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
@@ -191,15 +203,18 @@ void		init_imgs(t_game *game, int i);
 void		get_img(t_game *game);
 
 void		ft_free(char *str, t_game *game, int i);
+void		ft_free_exit(char *str, t_game *game);
 
 void		parse(t_game *game);
 void		parse_token(t_game *game);
+void		sep_count(t_game *game, char *line, char c);
 void		parse_map(t_game *game);
 void		parse_sprite(t_game *game, int height, int width);
 
 void		check_map(t_game *game);
 
-int			press_key(int key, t_game *game, double move_speed, double rot_speed);
+int			press_key(int key, t_game *game, \
+double move_speed, double rot_speed);
 void		set_hook(t_game *game);
 void		close_win(t_game *game);
 int			exit_hook(t_game *game);
