@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/14 19:31:46 by hysung           ###   ########.fr       */
+/*   Updated: 2024/01/15 14:13:19 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void		free_split(char **split);
 void		check_sep(t_game *game, char *line, int *i);
 
 void		ft_init(int ac, char **av, t_game *game);
-int			init_mlx(t_game *game);
+void		init_mlx(t_game *game);
 void		set_color(t_game *game);
 void		init_imgs(t_game *game, int i);
 void		get_img(t_game *game);
