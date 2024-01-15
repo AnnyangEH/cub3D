@@ -6,16 +6,22 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:44 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 21:00:20 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 21:09:52 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+static void	leak(void)
+{
+	system("leaks cub3D");
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
 
+	atexit(leak);
 	ft_init(ac, av, &game);
 	parse(&game);
 	mlx_hook(game.win, 17, 0, exit_hook, &game);
