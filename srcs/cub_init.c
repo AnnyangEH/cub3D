@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/16 10:17:27 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:54:16 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	init_mlx(t_game *game)
 	game->ptr = mlx_init();
 	if (!game->ptr)
 		ft_free("Error\nFailed to initialize mlx\n", game, -1);
-	game->win = mlx_new_window(game->ptr, 1000, 1000, "cub3D");
+	game->win = mlx_new_window(game->ptr, WIDTH, HEIGHT, "cub3D");
 	if (!game->win)
 		ft_free("Error\nFailed to initialize mlx\n", game, -1);
-	game->img_ptr = mlx_new_image(game->ptr, 1000, 1000);
+	game->img_ptr = mlx_new_image(game->ptr, WIDTH, HEIGHT);
 	game->addr = mlx_get_data_addr(game->img_ptr, &game->bpp, &game->size_l,
 			&game->endian);
 }
