@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 12:20:14 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/15 19:34:11 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 void	get_img_path(t_game *game, char *line, int *i, int flag)
 {
+	game->imgs[flag].cnt++;
+	if (game->imgs[flag].cnt > 1)
+		ft_free("Error\nDuplicate img path\n", game, -1);
 	(*i) += 3;
 	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
 	if (line[*i] == '\n')
-		return ;
-	game->imgs[flag].cnt++;
-	if (game->imgs[flag].cnt > 1)
-		ft_error("Error\nDup imgs\n", game);
+		ft_free("Error\nMissing img path\n", game, -1);
+	if (game->imgs[flag].path)
+		free(game->imgs[flag].path);
 	game->imgs[flag].path = ft_strdup(line + *i);
 	if (!game->imgs[flag].path)
-		ft_error("Error\nFailed to allocate imgs path\n", game);
+		ft_free("Error\nEmpty img path\n", game, -1);
 	if (game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] == '\n')
 		game->imgs[flag].path[ft_strlen(game->imgs[flag].path) - 1] = '\0';
 	if (open(game->imgs[flag].path, O_RDONLY) == -1)
-		ft_error("Error\nWrong img path\n", game);
+		ft_free("Error\nWrong img path\n", game, -1);
 }
 
 void	get_img_color(t_game *game, char *line, int *i, int flag)
@@ -41,39 +43,39 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
 	if (line[*i] == '\n')
-		return ;
+		ft_free("Error\nMissing color value\n", game, -1);
+	sep_count(game, line, ',');
 	temp = ft_split(line + *i, ',');
 	if (!temp)
-		ft_error("Error\nFailed to split color string\n", game);
+		ft_free("Error\nFailed to split color string\n", game, -1);
 	while (temp[j] && j < 3)
 	{
 		game->map->color[flag][j] = ft_catoi(temp[j]);
-		if ((ft_catoi(temp[j]) == -1) || (ft_catoi(temp[j]) > 255 \
-		|| ft_catoi(temp[j]) < 0))
-			ft_error("Error\nInvalid color value\n", game);
+		if ((ft_catoi(temp[j]) > 255 || ft_catoi(temp[j]) < 0))
+			ft_free("Error\nInvalid color value\n", game, -1);
 		j++;
 	}
-	if (temp[j])
-		ft_error("Error\nInvalid color count it must be three\n", game);
+	if (temp[j] || j != 3)
+		ft_free("Error\nInvalid color count it must be three\n", game, -1);
 	free_split(temp);
 }
 
 void	check_imgs_data(t_game *game, char *line, int *i)
 {
 	if (ft_strncmp(line + *i, "NO ", 3) == 0)
-		get_img_path(game, line, i, 0);
+		get_img_path(game, line, i, NO);
 	else if (ft_strncmp(line + *i, "SO ", 3) == 0)
-		get_img_path(game, line, i, 1);
+		get_img_path(game, line, i, SO);
 	else if (ft_strncmp(line + *i, "WE ", 3) == 0)
-		get_img_path(game, line, i, 2);
+		get_img_path(game, line, i, WE);
 	else if (ft_strncmp(line + *i, "EA ", 3) == 0)
-		get_img_path(game, line, i, 3);
+		get_img_path(game, line, i, EA);
 	else if (ft_strncmp(line + *i, "F ", 2) == 0)
 		get_img_color(game, line, i, FLOOR);
 	else if (ft_strncmp(line + *i, "C ", 2) == 0)
 		get_img_color(game, line, i, CEILING);
 	else
-		ft_error("Error\nInvalid imgs\n", game);
+		ft_free("Error\nInvalid imgs format\n", game, -1);
 }
 
 int	check_imgs(t_game *game, char *line)
@@ -84,14 +86,14 @@ int	check_imgs(t_game *game, char *line)
 	while (ft_iswhitespace(line[i]) && line[i])
 		i++;
 	if (line[i] == '\n')
-		return (FALSE);
+		return (2);
 	else if (ft_strchr("NSWEFC", line[i]))
 		check_imgs_data(game, line, &i);
 	else if (ft_isdigit(line[i]))
-		return (TRUE);
+		return (1);
 	else
-		ft_error("Error\nInvalid imgs\n", game);
-	return (FALSE);
+		ft_free("Error\nInvalid imgs filename\n", game, -1);
+	return (0);
 }
 
 void	parse_token(t_game *game)
@@ -102,8 +104,14 @@ void	parse_token(t_game *game)
 	{
 		game->map->line = get_next_line(game->map->fd);
 		if (!game->map->line)
-			ft_error("Error\nFailed to read file\n", game);
-		if (check_imgs(game, game->map->line) == TRUE)
+			ft_free("Error\nFailed to read file\n", game, -1);
+		i = check_imgs(game, game->map->line);
+		if (i == 2)
+		{
+			free(game->map->line);
+			continue ;
+		}
+		else if (i == 1)
 			break ;
 		free(game->map->line);
 	}
@@ -111,7 +119,7 @@ void	parse_token(t_game *game)
 	while (i < 4)
 	{
 		if (!game->imgs[i].path)
-			ft_error("Error\nOne or more imgs adress is missing\n", game);
+			ft_free("Error\nOne or more imgs adress is missing\n", game, -1);
 		i++;
 	}
 }

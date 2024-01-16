@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 09:58:11 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/13 11:39:59 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:32:39 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	close_win(t_game *game)
 {
-	free_game_one(game);
-	exit(0);
+	ft_free(0, game, -1);
 }
 
 int	exit_hook(t_game *game)
 {
-	mlx_destroy_window(game->ptr, game->win);
-	exit(0);
+	ft_free(0, game, -1);
+	return (0);
 }
 
 int	press_key(int key, t_game *game)

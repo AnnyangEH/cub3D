@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suhbaek <suhbaek@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:23 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/13 15:08:14 by suhbaek          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:32:00 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ char		**ft_split(char const *s, char c);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		ft_init(int ac, char **av, t_game *game);
 void		init_ray(t_ray *ray, t_game *game, int x);
-void		ft_error(char *str, t_game *game);
-void		ft_error_exit(char *str, t_game *game);
-void		free_game_one(t_game *game);
 void		cal_step_and_sidedist(t_ray *ray, t_game *game);
 void		perform_dda(t_ray *ray, t_game *game);
 void		cal_perpwalldist(t_ray *ray, t_game *game);
@@ -57,7 +54,6 @@ void		parse_token(t_game *game);
 void		parse_map(t_game *game);
 void		free_split(char **split);
 void		check_map(t_game *game);
-void		set_hook(t_game *game);
 void		close_win(t_game *game);
 void		move_up_down(t_game *game, int key);
 void		move_side(t_game *game, int key);
@@ -67,5 +63,11 @@ long long	get_time(void);
 int			exec(t_game *game);
 void		set_nsew(t_game *game, t_ray *ray);
 void		set_wall(t_game *game, t_ray *ray);
-void		draw(t_game *game, t_ray *ray, int x, int y);	
+void		draw(t_game *game, t_ray *ray, int x, int y);
+void		ft_free_exit(char *str);
+void		ft_free(char *str, t_game *game, int i);
+void		sep_count(t_game *game, char *line, char c);
+void		get_img(t_game *game);
+void		set_color(t_game *game);
+void		init_mlx(t_game *game);
 #endif
