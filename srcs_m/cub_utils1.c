@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:15:04 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/13 20:56:16 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/16 10:28:27 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,5 @@ char	*ft_strdup(char *s1)
 		i++;
 	}
 	new[i] = 0;
-	return (new);
-}
-
-char	*ft_substr(char *s, unsigned int start, int len)
-{
-	int		i;
-	int		s_len;
-	char	*new;
-
-	i = 0;
-	if (!s)
-		return (0);
-	s_len = ft_strlen(s) - start;
-	if (s_len < len)
-		len = s_len;
-	new = (char *)malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return (0);
-	while (s[start + i] && i < len)
-	{
-		new[i] = s[start + i];
-		i++;
-	}
-	new[i] = '\0';
 	return (new);
 }

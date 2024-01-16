@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:11:42 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 20:49:35 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/16 10:29:19 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ enum e_key {
 	KEY_D = 2,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
-	KEY_DOWN = 125,
-	KEY_UP = 126,
 	KEY_ESC = 53,
 	KEY_PRESS = 2,
 	KEY_SPACE = 49,
@@ -59,12 +57,10 @@ enum e_key {
 typedef struct s_time
 {
 	long long	curr_time;
-	long long	old_time;
 }				t_time;
 
 typedef struct s_player
 {
-	int		dir;
 	double	x;
 	double	y;
 	double	dir_x;
@@ -166,7 +162,6 @@ typedef struct s_game
 	int				bpp;
 	int				endian;
 	int				size_l;
-	int				door_cnt;
 	double			z_buffer[1000];
 	int				s_cnt;
 	t_sprite		sprite[S_MAX];
@@ -185,7 +180,6 @@ int			ft_strlen(char *s);
 int			ft_strncmp(char *s1, char *s2, int n);
 void		ft_putstr_fd(char *s, int fd);
 char		*ft_strdup(char *str);
-char		*ft_substr(char *s, unsigned int start, int len);
 void		ft_memset(void *b, int c, size_t len);
 int			ft_strchr(char *s, int c);
 int			ft_iswhitespace(char c);
@@ -193,7 +187,6 @@ int			ft_isdigit(int c);
 char		**ft_split(char const *s, char c);
 int			ft_catoi(const char *str);
 int			ft_isempty(char *line);
-double		ft_min(double a, double b);
 void		free_split(char **split);
 
 void		ft_init(int ac, char **av, t_game *game);

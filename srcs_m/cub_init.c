@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 20:50:55 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/16 10:17:27 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ void	init_mlx(t_game *game)
 static int	init_time(t_game *game)
 {
 	game->time.curr_time = get_time();
-	game->time.old_time = game->time.curr_time;
 	return (SUCCESS);
 }

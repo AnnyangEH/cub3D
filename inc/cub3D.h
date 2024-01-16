@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:35:32 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 20:51:10 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/16 10:30:31 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ enum e_key {
 	KEY_D = 2,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
-	KEY_DOWN = 125,
-	KEY_UP = 126,
 	KEY_ESC = 53,
 	KEY_PRESS = 2,
 };
@@ -53,12 +51,10 @@ enum e_key {
 typedef struct s_time
 {
 	long long	curr_time;
-	long long	old_time;
 }				t_time;
 
 typedef struct s_player
 {
-	int		dir;
 	double	x;
 	double	y;
 	double	dir_x;
@@ -138,7 +134,6 @@ int			ft_strlen(char *s);
 int			ft_strncmp(char *s1, char *s2, int n);
 void		ft_putstr_fd(char *s, int fd);
 char		*ft_strdup(char *str);
-char		*ft_substr(char *s, unsigned int start, int len);
 void		ft_memset(void *b, int c, size_t len);
 int			ft_strchr(char *s, int c);
 int			ft_iswhitespace(char c);
@@ -146,7 +141,6 @@ int			ft_isdigit(int c);
 char		**ft_split(char const *s, char c);
 int			ft_catoi(const char *str);
 int			ft_isempty(char *line);
-double		ft_min(double a, double b);
 void		free_split(char **split);
 
 void		ft_init(int ac, char **av, t_game *game);
@@ -162,7 +156,6 @@ void		parse(t_game *game);
 void		parse_token(t_game *game);
 void		sep_count(t_game *game, char *line, char c);
 void		parse_map(t_game *game);
-
 void		check_map(t_game *game);
 
 int			press_key(int key, t_game *game, \
@@ -193,12 +186,5 @@ void		set_value(t_game *game, int x);
 void		set_step_side(t_game *game);
 void		hit_side(t_game *game);
 void		set_wall_dir(t_game *game);
-
-void		go_up(t_game *game, double move_speed);
-void		go_down(t_game *game, double move_speed);
-void		go_right(t_game *game, double move_speed);
-void		go_left(t_game *game, double move_speed);
-void		turn_right(t_game *game, double rot_speed);
-void		turn_left(t_game *game, double rot_speed);
 
 #endif
