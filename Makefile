@@ -4,6 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O2
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
+
 DIR = ./srcs/
 
 RM = rm -f
@@ -18,7 +19,7 @@ SRCS =	$(DIR)main.c			\
 		$(DIR)parse_token_utils.c		\
 		$(DIR)get_next_line.c	\
 		$(DIR)cub_init.c 		\
-		$(DIR)cub_init2.C		\
+		$(DIR)cub_init2.c		\
 		$(DIR)ft_split.c		\
 		$(DIR)check_map.c		\
 		$(DIR)exec.c			\
@@ -34,9 +35,7 @@ SRCS =	$(DIR)main.c			\
 OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 
-INC		= inc
-
-MLX_DIR	= mlx
+MLX_DIR	= ./mlx
 
 DEF_COLOR = \033[0;39m
 GRAY = \033[0;90m
@@ -48,11 +47,11 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-all:		$(NAME)
+all: $(NAME)
 
-%.o:		%.c
-			@$(CC) $(CFLAGS) -I./inc -c $^ -o $@
-			@echo "$(YELLOW)	Compiling		$< $(DEF_COLOR)"
+%.o: %.c
+	@$(CC) $(CFLAGS) -I./inc -c $^ -o $@
+	@echo "$(YELLOW)	Compiling		$< $(DEF_COLOR)"
 
 $(NAME):	$(OBJS) $(MLX)
 		@echo "$(YELLOW)	Compiling 		Cub3D..	$(DEF_COLOR)"
@@ -64,20 +63,17 @@ $(MLX) :
 		@make -C $(MLX_FLAG)
 
 clean:
-			@make clean -C $(MLX_DIR)
-			@echo "$(CYAN)	🧹 Minilibx Object Files Cleaned 🧹	$(DEF_COLOR)"	
 			@$(RM) $(OBJS)
 			@echo "$(CYAN)	🧹 Cub3D Object Files Cleaned 🧹	$(DEF_COLOR)"
+			@make -C $(MLX_DIR) clean
+			@echo "$(CYAN)	🧹 Minilibx Object Files Cleaned 🧹	$(DEF_COLOR)"	
 
-fclean:		clean
-			@$(RM) $(NAME) 
-			@echo "$(CYAN)	🧹 Cub3D Executable Files Cleaned 🧹	$(DEF_COLOR)"
-			@$(RM) $(MLX)
-			@echo "$(CYAN)	🧹 Libmlx.a Cleaned 🧹	$(DEF_COLOR)"
+fclean: clean
+	@$(RM) $(NAME) 
+	@$(RM) $(MLX)
+
 re:
-		@echo "$(YELLOW)	Cleaning And Rebuilting Files..	$(DEF_COLOR)"
 		@make fclean
 		@make all
-		@echo "$(GREEN)	🤖 Cleaned And Rebuilt Done! 🤖	$(DEF_COLOR)"
 
 .PHONY : all clean fclean re
