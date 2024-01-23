@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -O2
+CFLAGS = -Wall -Wextra -Werror -O2
 
 MLX_FLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit -lz
 
@@ -53,14 +53,13 @@ all: $(NAME)
 	@$(CC) $(CFLAGS) -I./inc -c $^ -o $@
 	@echo "$(YELLOW)	Compiling		$< $(DEF_COLOR)"
 
-$(NAME):	$(OBJS) $(MLX)
+$(NAME):	$(OBJS)
+		@echo "$(YELLOW)	Compiling 		Mlx..	$(DEF_COLOR)"
+		@make -C $(MLX_DIR)
+		@echo "$(GREEN)	     ✨ Mlx Compiled! ✨ $(DEF_COLOR)"
 		@echo "$(YELLOW)	Compiling 		Cub3D..	$(DEF_COLOR)"
 		@$(CC) $(CFLAGS) -I./inc $(MLX_FLAG) $(OBJS) -o $@
 		@echo "$(GREEN)	     ✨ Cub3D Compiled! ✨ $(DEF_COLOR)"
-
-$(MLX) :
-		@echo "$(YELLOW)	Compiling 		Mlx..	$(DEF_COLOR)"
-		@make -C $(MLX_FLAG)
 
 clean:
 			@$(RM) $(OBJS)
