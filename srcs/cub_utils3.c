@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:20:08 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/23 15:30:01 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/15 14:38:26 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,4 @@ void	free_split(char **split)
 	while (split[i])
 		free(split[i++]);
 	free(split);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*new;
-	int		s1_len;
-	int		s2_len;
-
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	new = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (!new)
-		return (0);
-	new[s1_len + s2_len] = 0;
-	while (s2_len--)
-		new[s1_len + s2_len] = s2[s2_len];
-	while (s1_len--)
-		new[s1_len] = s1[s1_len];
-	return (new);
 }

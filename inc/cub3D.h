@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:06:23 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/23 15:13:31 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/23 15:45:28 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			create_trgb(int t, int r, int g, int b);
 void		ft_putstr_fd(char *s, int fd);
 char		*ft_strdup(char *str);
 char		*ft_strjoin(char *s1, char *s2);
-char		*ft_substr(char *s, unsigned int start, int len);
+char		*ft_substr(char *s, int start, int len);
 void		ft_memset(void *b, int c, size_t len);
 char		**ft_split(char const *s, char c);
 void		*ft_memcpy(void *dest, const void *src, size_t n);

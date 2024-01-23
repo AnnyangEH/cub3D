@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:34:18 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/23 15:33:29 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/23 15:49:12 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	static int	j = 0;
 	char		**temp;
 
-	(*i)++;
 	game->color_cnt[flag]++;
 	if (game->color_cnt[flag] > 1)
 		ft_free_exit("Error\nDuplicate color\n");
+	(*i)++;
 	while (ft_iswhitespace(line[*i]) && line[*i])
 		(*i)++;
 	if (line[*i] == '\n')
@@ -53,7 +53,7 @@ void	get_img_color(t_game *game, char *line, int *i, int flag)
 	while (temp[j] && j < 3)
 	{
 		game->map->color[flag][j] = ft_catoi(temp[j]);
-		if (game->map->color[flag][j] < 0 || game->map->color[flag][j] > 255)
+		if ((ft_catoi(temp[j]) > 255 || ft_catoi(temp[j]) < 0))
 			ft_free_exit("Error\nInvalid color value\n");
 		j++;
 	}

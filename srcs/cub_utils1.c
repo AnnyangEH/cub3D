@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:15:04 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/16 15:30:21 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/23 15:46:06 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,43 @@ char	*ft_strdup(char *s1)
 	return (new);
 }
 
-char	*ft_substr(char *s, unsigned int start, int len)
+char	*ft_strjoin(char *s1, char *s2)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	size_t	i;
+	char	*new;
+
+	i = 0;
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	new = (char *)malloc(sizeof(char) * ((s1_len + s2_len) + 1));
+	if (!new)
+		return (0);
+	while (s1[i])
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	i = 0;
+	while (s2[i])
+	{
+		new[s1_len + i] = s2[i];
+		i++;
+	}
+	new[s1_len + s2_len] = '\0';
+	return (new);
+}
+
+char	*ft_substr(char *s, int start, int len)
 {
 	int		i;
 	int		s_len;
 	char	*new;
 
 	i = 0;
-	if (!s)
-		return (0);
+	if (ft_strlen(s) < start)
+		return (ft_strdup(""));
 	s_len = ft_strlen(s) - start;
 	if (s_len < len)
 		len = s_len;
