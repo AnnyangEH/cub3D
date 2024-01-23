@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:32:56 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/16 15:54:16 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/23 15:26:35 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_init(int ac, char **av, t_game *game)
 	if (ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4))
 		ft_free_exit("Error\nInvalid file extension\n");
 	if (init_game(game, av[1]))
-		ft_free("Error\nFailed to initialize map\n", game, -1);
+		ft_free_exit("Error\nFailed to initialize map\n");
 	if (init_time(game))
-		ft_free("Error\nFailed to initalize time\n", game, -1);
+		ft_free_exit("Error\nFailed to initalize time\n");
 }
 
 static int	init_game(t_game *game, char *path)
@@ -43,10 +43,10 @@ void	init_mlx(t_game *game)
 {
 	game->ptr = mlx_init();
 	if (!game->ptr)
-		ft_free("Error\nFailed to initialize mlx\n", game, -1);
+		ft_free_exit("Error\nFailed to initialize mlx\n");
 	game->win = mlx_new_window(game->ptr, WIDTH, HEIGHT, "cub3D");
 	if (!game->win)
-		ft_free("Error\nFailed to initialize mlx\n", game, -1);
+		ft_free_exit("Error\nFailed to initialize mlx\n");
 	game->img_ptr = mlx_new_image(game->ptr, WIDTH, HEIGHT);
 	game->addr = mlx_get_data_addr(game->img_ptr, &game->bpp, &game->size_l,
 			&game->endian);

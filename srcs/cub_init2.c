@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 22:25:25 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 19:13:49 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/23 15:12:08 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_imgs(t_game *game, int i)
 	game->imgs[i].ptr = mlx_xpm_file_to_image(game->ptr, \
 	game->imgs[i].path, &game->imgs[i].width, &game->imgs[i].height);
 	if (game->imgs[i].ptr == NULL)
-		ft_free("Error\nInvalid texture path\n", game, -1);
+		ft_free_exit("Error\nInvalid texture path\n");
 	game->imgs[i].addr = mlx_get_data_addr(game->imgs[i].ptr, \
 	&game->imgs[i].bpp, &game->imgs[i].size_l, &game->imgs[i].endian);
 }

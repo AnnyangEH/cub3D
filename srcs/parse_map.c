@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:45:49 by eunhcho           #+#    #+#             */
-/*   Updated: 2024/01/15 17:24:18 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/23 15:12:08 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	count_height(t_game *game, int fd, int height)
 
 	fd = open(game->map->path, O_RDONLY);
 	if (fd == -1)
-		ft_free("Error\nFailed to open file\n", game, -1);
+		ft_free_exit("Error\nFailed to open file\n");
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -33,7 +33,7 @@ static int	count_height(t_game *game, int fd, int height)
 		free(line);
 	}
 	if (close(fd) == -1)
-		ft_free("Error\nFailed to close file\n", game, -1);
+		ft_free_exit("Error\nFailed to close file\n");
 	return (height);
 }
 
@@ -72,7 +72,7 @@ static void	parse_map_line(t_game *game, int height, int i)
 	while (game->map->line[++i] && game->map->line[i] != '\n')
 	{
 		if (!ft_strchr(" 01NSEW", game->map->line[i]))
-			ft_free("Error\nInvalid map character\n", game, -1);
+			ft_free_exit("Error\nInvalid map character\n");
 		else if (ft_strchr("NSEW", game->map->line[i]))
 			parse_player(game, game->map->line[i], height, i);
 		else
@@ -94,7 +94,7 @@ void	parse_map(t_game *game)
 		while (game->map->line[width] && game->map->line[width] != '\n')
 			++width;
 		if (ft_isempty(game->map->line))
-			ft_free("Error\nInvalid map - empty line\n", game, -1);
+			ft_free_exit("Error\nInvalid map - empty line\n");
 		game->map->width[height] = width;
 		game->map->map[height] = malloc(sizeof(char) * (width + 1));
 		parse_map_line(game, height, -1);

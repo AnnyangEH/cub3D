@@ -6,7 +6,7 @@
 /*   By: eunhcho <eunhcho@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 22:16:01 by suhbaek           #+#    #+#             */
-/*   Updated: 2024/01/16 15:33:25 by eunhcho          ###   ########.fr       */
+/*   Updated: 2024/01/23 15:26:32 by eunhcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_game
 	int				bpp;
 	int				endian;
 	int				size_l;
+	int				color_cnt[2];
 	t_time			time;
 	t_map			*map;
 	t_player		player;
